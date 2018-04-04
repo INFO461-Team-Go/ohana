@@ -7,15 +7,15 @@ Make life more productive
 
 As young adults begin to share living spaces away from their parents, household chores and tasks can begin to pile up. Responsibility starts to wean and finger pointing can start to occur. The current methods of house chore and task management within roommates is tedious and performed through inconvenient mediums. 
 
-Anton Zheng: Engineer / Support 
+Anton Zheng: Engineer / Support (AntonZheng)
 
-John Lim: Marketing 
+John Lim: Marketing (johnwjlim)
 
-Harry Barng: Design / Engineer
+Harry Barng: Design / Engineer (harrybarng)
 
-Harshitha Akkaraju: Engineer / Design
+Harshitha Akkaraju: Engineer / Design (akkarh)
 
-Robin Yang: Project Management / Engineer
+Robin Yang: Project Management / Engineer (ryang97-1374021)
 
 TEAM MEETINGS: TUESDAYS 10:30 am - 12 pm 
 
