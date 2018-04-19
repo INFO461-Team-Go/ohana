@@ -11,8 +11,8 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path={constants.routes.signin} component={SignIn} />
-          <Route exact path={constants.routes.signup} component={SignUp} />
-          <Route exact path={constants.routes.channel} component={View} />
+          <Route path={constants.routes.signup} component={SignUp} />
+          <Route path={constants.routes.views} component={View} />
           <Redirect to="/" />
         </Switch>
       </Router>
