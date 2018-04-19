@@ -12,7 +12,7 @@ class App extends Component {
         <Switch>
           <Route exact path={constants.routes.signin} component={SignIn} />
           <Route exact path={constants.routes.signup} component={SignUp} />
-          <Route exact path={constants.routes.channel} component={View} />
+          <Route exact path={constants.routes.views} component={View} />
           <Redirect to="/" />
         </Switch>
       </Router>
