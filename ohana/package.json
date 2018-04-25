@@ -1,0 +1,16 @@
+{
+  "name": "ohana",
+  "version": "1.0.0",
+  "description": "A custom skill for Alexa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Harshitha Akkaraju",
+  "license": "ISC",
+  "dependencies": {
+    "alexa-app": "^4.2.2",
+    "express": "^4.16.3",
+    "firebase": "^4.13.1"
+  }
+}
