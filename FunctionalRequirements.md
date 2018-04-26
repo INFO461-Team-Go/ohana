@@ -275,7 +275,7 @@ A React JS component to render the UI for one of the two main tabs in the webapp
 
 We have modularized the architecture of the web app and the alexa skill based on the database structure illustrated in the following diagram.
 
-![image alt text](image_0.png)
+https://prnt.sc/j45l3t
 
 **Alexa Skill**
 
