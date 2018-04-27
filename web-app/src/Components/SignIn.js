@@ -31,13 +31,23 @@ export default class SignIn extends React.Component {
         evt.preventDefault();
         console.log(this.state.email);
         console.log(this.state.password);
+
+        // firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+        //     .catch(err => this.setState({fberror: err}))
     }
 
     render() {
         return (
             // @TODO: Display warnings when the user enters invalid email / incorrect password
             <div className="container">
-                <h1 className="display-3">Sign In</h1>
+                <h1 className="h1">Sign In</h1>
+                {/* {
+                    this.state.fberror ?
+                        <div className="alert alert-danger">
+                            {this.state.fberror.message}
+                        </div> :
+                            undefined
+                }  */}n 
                 <form onSubmit={evt => this.handleSubmit(evt)}>
                     <div className="form-group">
                         <label htmlFor="email" className="lead">Email</label>

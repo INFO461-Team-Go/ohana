@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Switch, Redirect, Route } from 'react-router-dom';
+
+import './App.css';
+
 import constants from "./Components/Constants";
 import SignIn from "./Components/SignIn";
 import SignUp from "./Components/SignUp";
