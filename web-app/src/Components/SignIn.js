@@ -37,9 +37,6 @@ export default class SignIn extends React.Component {
 
     handleSubmit(evt) {
         evt.preventDefault();
-        console.log(this.state.email);
-        console.log(this.state.password);
-
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
             .catch(err => this.setState({fberror: err}))
     }
@@ -47,28 +44,37 @@ export default class SignIn extends React.Component {
     render() {
         return (
             // @TODO: Display warnings when the user enters invalid email / incorrect password
-            <div className="container">
-                {
-                    this.state.fberror ?
-                        <div className="alert alert-danger">
-                            {this.state.fberror.message}
-                        </div> :
-                            undefined
-                } 
-                <form onSubmit={evt => this.handleSubmit(evt)}>
-                    <div className="form-group">
-                        <label htmlFor="email" className="lead">Email</label>
-                        <input type="email" className="form-control" placeholder="enter your email address" value={this.state.email} onInput={evt => this.setState({ email: evt.target.value })} />
+            <div>
+                <header className="bg-secondary py-1">
+                    <div className="container text-white">
+                        o'hana
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="password" className="lead">Password</label>
-                        <input type="password" className="form-control" placeholder="enter your password" value={this.state.password} onInput={evt => this.setState({ password: evt.target.value })} />
+                </header>
+                <div className="container-fluid my-3">
+                    {
+                        this.state.fberror ?
+                            <div className="alert alert-danger">
+                                {this.state.fberror.message}
+                            </div> :
+                                undefined
+                    }
+                    <div className="container"> 
+                        <form onSubmit={evt => this.handleSubmit(evt)}>
+                            <div className="form-group">
+                                <label htmlFor="email" className="lead">Email</label>
+                                <input type="email" className="form-control" placeholder="enter your email address" value={this.state.email} onInput={evt => this.setState({ email: evt.target.value })} />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="password" className="lead">Password</label>
+                                <input type="password" className="form-control" placeholder="enter your password" value={this.state.password} onInput={evt => this.setState({ password: evt.target.value })} />
+                            </div>
+                            <div className="form-group">
+                                <button type="submit" className="btn btn-primary lead">Sign In</button>
+                            </div>
+                        </form>
+                    <p className="">Don't have an account yet? <Link to={constants.routes.signup} className="text-primary">Get ohana! for Alexa</Link></p>
                     </div>
-                    <div className="form-group">
-                        <button type="submit" className="btn btn-primary lead">Sign In</button>
-                    </div>
-                </form>
-                <p className="lead">Don't have an account yet? <Link to={constants.routes.signup} className="text-primary">Get ohana! for Alexa</Link></p>
+                </div>
             </div>
         )
     }
