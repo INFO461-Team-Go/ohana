@@ -25,7 +25,7 @@ export default class SignIn extends React.Component {
         console.log("signin view mounted");
         this.authUnsub = firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.props.history.push(constants.routes.channel);
+                this.props.history.push(constants.routes.views);
             }
         })
     }
