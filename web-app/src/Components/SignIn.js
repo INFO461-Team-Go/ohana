@@ -8,6 +8,10 @@ import firebase from "firebase/app";
 import constants from "./Constants";
 import "firebase/auth";
 
+const cardStyle = {
+    width: "18rem"
+}
+
 export default class SignIn extends React.Component {
     constructor(props) {
         super(props);
@@ -41,12 +45,14 @@ export default class SignIn extends React.Component {
             .catch(err => this.setState({fberror: err}))
     }
 
+    
+
     render() {
         return (
             // @TODO: Display warnings when the user enters invalid email / incorrect password
             <div>
                 <header className="bg-secondary py-1">
-                    <h4 className="container text-white">
+                    <h4 className="container text-white my-1">
                         o'hana
                     </h4>
                 </header>
@@ -59,7 +65,7 @@ export default class SignIn extends React.Component {
                             </div> :
                                 undefined
                     }
-                    <div className="container py-5 px-sm-5"> 
+                    {/* <div className="container py-5 px-sm-5"> 
                         <div className="container bg-secondary py-5 px-sm-5">
                             <div className="container">
                                 <form onSubmit={evt => this.handleSubmit(evt)}>
@@ -86,6 +92,42 @@ export default class SignIn extends React.Component {
                                     </div>
                                     <p className="row justify-content-center"><Link to={constants.routes.signup} className="text-white">sign up</Link></p>
                                 </form>
+                            </div>
+                        </div>
+                    </div> */}
+                    <div className="container pb-5">
+                        <div className="row justify-content-center">  
+                            <div className="col-md-10 col-lg-8">
+                                <div className="card bg-secondary">
+                                    <div className="card-body mt-md-5 mb-md-3">
+                                        <div className="container p-3">
+                                            <form onSubmit={evt => this.handleSubmit(evt)}>
+                                                <div className="form-group row justify-content-center">
+                                                    <div className="col-md-2">
+                                                        <label htmlFor="email" className="text-white col-form-label">email:</label>
+                                                    </div>
+                                                    <div className="col-md-7">
+                                                        <input type="email" className="form-control" placeholder="enter your email address" value={this.state.email} onInput={evt => this.setState({ email: evt.target.value })}/>
+                                                    </div>
+                                                </div>
+                                                <div className="form-group row justify-content-center">
+                                                    <div className="col-md-2">
+                                                        <label htmlFor="email" className="text-white col-form-label">password:</label>
+                                                    </div>
+                                                    <div className="col-md-7">
+                                                        <input type="password" className="form-control" placeholder="enter your password" value={this.state.password} onInput={evt => this.setState({ password: evt.target.value })}/>
+                                                    </div>
+                                                </div>
+                                                <div className="form-group row justify-content-center mb-0 mt-4 pt-3">
+                                                    <button type="submit" className="btn btn-white w-25 py-0">
+                                                        login
+                                                    </button>
+                                                </div>
+                                                <p className="row justify-content-center mb-0 mt-2"><Link to={constants.routes.signup} className="text-white">sign up</Link></p>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
