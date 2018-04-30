@@ -63,7 +63,7 @@ export default class SignIn extends React.Component {
                         <div className="container bg-secondary py-5 px-sm-5">
                             <div className="container">
                                 <form onSubmit={evt => this.handleSubmit(evt)}>
-                                    <div className="py-md-5 px-md-5 mx-md-5">
+                                    <div className="py-3 py-md-5 px-md-5 mx-md-5">
                                         <div className="form-group row mx-lg-5">
                                             <div className="col-lg-4">
                                                 <label htmlFor="email" className="text-white col-form-label">email:</label>
