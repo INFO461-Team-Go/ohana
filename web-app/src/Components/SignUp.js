@@ -1,17 +1,38 @@
+/**
+ * 
+ */
+
 import React from "react";
 import { Link } from "react-router-dom";
+import firebase from "firebase/app";
+import constants from "./Constants";
 
 export default class SignUp extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
     componentDidMount() {
-        console.log("signup view did mount");
+        this.authUnsub = firebase.auth().onAuthStateChanged(user => {
+            this.setState({ currentUser: user });
+        });
+    }
+
+    componentWillUnmount() {
+        this.authUnsub();
     }
 
     render() {
+        // @TODO: Display warning: Can only sign up through the Alexa App
         return (
             <div className="container">
-                <p>This is the sign up view</p>
-                <button className="btn btn-primary">Sign Up</button>
+                <h1 className="display-3">Sign Up!</h1>
+                <div class="alert alert-info" role="alert">
+                    Make sure you sign up through the Amazon Alexa app!
+                </div>
+                <form>
+                    
+                </form>
             </div>
         )
     }
