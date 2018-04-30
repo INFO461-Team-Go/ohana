@@ -46,11 +46,12 @@ export default class SignIn extends React.Component {
             // @TODO: Display warnings when the user enters invalid email / incorrect password
             <div>
                 <header className="bg-secondary py-1">
-                    <div className="container text-white">
+                    <h4 className="container text-white">
                         o'hana
-                    </div>
+                    </h4>
                 </header>
-                <div className="container-fluid my-3">
+                <div className="container text-white my-3"> Let Alexa Keep Track of Tasks </div>
+                <div className="container my-5">
                     {
                         this.state.fberror ?
                             <div className="alert alert-danger">
@@ -58,21 +59,35 @@ export default class SignIn extends React.Component {
                             </div> :
                                 undefined
                     }
-                    <div className="container"> 
-                        <form onSubmit={evt => this.handleSubmit(evt)}>
-                            <div className="form-group">
-                                <label htmlFor="email" className="lead">Email</label>
-                                <input type="email" className="form-control" placeholder="enter your email address" value={this.state.email} onInput={evt => this.setState({ email: evt.target.value })} />
+                    <div className="container py-5 px-sm-5"> 
+                        <div className="container bg-secondary py-5 px-sm-5">
+                            <div className="container">
+                                <form onSubmit={evt => this.handleSubmit(evt)}>
+                                    <div className="py-3 py-md-5 px-md-5 mx-md-5">
+                                        <div className="form-group row mx-lg-5">
+                                            <div className="col-lg-4">
+                                                <label htmlFor="email" className="text-white col-form-label">email:</label>
+                                            </div>
+                                            <div className="col-lg-8">
+                                                <input type="email" className="form-control" placeholder="enter your email address" value={this.state.email} onInput={evt => this.setState({ email: evt.target.value })}/>
+                                            </div>
+                                        </div>
+                                        <div className="form-group row mx-lg-5">
+                                            <div className="col-lg-4">
+                                                <label htmlFor="password" className="text-white col-form-label">password:</label>
+                                            </div>
+                                            <div className="col-lg-8">
+                                                <input type="password" className="form-control" placeholder="enter your password" value={this.state.password} onInput={evt => this.setState({ password: evt.target.value })} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="form-group row justify-content-center">
+                                        <button type="submit" className="btn btn-white lead px-3">sign in</button>
+                                    </div>
+                                    <p className="row justify-content-center"><Link to={constants.routes.signup} className="text-white">sign up</Link></p>
+                                </form>
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="password" className="lead">Password</label>
-                                <input type="password" className="form-control" placeholder="enter your password" value={this.state.password} onInput={evt => this.setState({ password: evt.target.value })} />
-                            </div>
-                            <div className="form-group">
-                                <button type="submit" className="btn btn-primary lead">Sign In</button>
-                            </div>
-                        </form>
-                    <p className="">Don't have an account yet? <Link to={constants.routes.signup} className="text-primary">Get ohana! for Alexa</Link></p>
+                        </div>
                     </div>
                 </div>
             </div>
