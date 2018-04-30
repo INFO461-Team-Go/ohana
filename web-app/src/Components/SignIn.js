@@ -26,7 +26,7 @@ export default class SignIn extends React.Component {
         //     this.setState({ currentUser: user });
         //     !user ? undefined : this.props.history.push(constants.routes.channel);
         // });
-        console.log("signin view mounted");
+        console.log("sign in view mounted");
         this.authUnsub = firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.props.history.push(constants.routes.views);
@@ -107,7 +107,7 @@ export default class SignIn extends React.Component {
                                                         <label htmlFor="email" className="text-white col-form-label">email:</label>
                                                     </div>
                                                     <div className="col-md-7">
-                                                        <input type="email" className="form-control" placeholder="enter your email address" value={this.state.email} onInput={evt => this.setState({ email: evt.target.value })}/>
+                                                        <input type="email" className="form-control form-control-sm" placeholder="enter your email address" value={this.state.email} onInput={evt => this.setState({ email: evt.target.value })}/>
                                                     </div>
                                                 </div>
                                                 <div className="form-group row justify-content-center">
@@ -115,7 +115,7 @@ export default class SignIn extends React.Component {
                                                         <label htmlFor="email" className="text-white col-form-label">password:</label>
                                                     </div>
                                                     <div className="col-md-7">
-                                                        <input type="password" className="form-control" placeholder="enter your password" value={this.state.password} onInput={evt => this.setState({ password: evt.target.value })}/>
+                                                        <input type="password" className="form-control form-control-sm" placeholder="enter your password" value={this.state.password} onInput={evt => this.setState({ password: evt.target.value })}/>
                                                     </div>
                                                 </div>
                                                 <div className="form-group row justify-content-center mb-0 mt-4 pt-3">
