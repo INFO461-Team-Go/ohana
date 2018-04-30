@@ -1,0 +1,15 @@
+{
+  "name": "ohana-skill",
+  "version": "1.0.0",
+  "description": "Source code for ohana's lambda function",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Harshitha Akkaraju",
+  "license": "ISC",
+  "dependencies": {
+    "ask-sdk-core": "^2.0.2",
+    "ask-sdk-model": "^1.0.2"
+  }
+}
