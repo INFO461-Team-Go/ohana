@@ -39,8 +39,6 @@ export default class SignIn extends React.Component {
             .catch(err => this.setState({fberror: err}))
     }
 
-    
-
     render() {
         return (
             // @TODO: Display warnings when the user enters invalid email / incorrect password
@@ -55,8 +53,8 @@ export default class SignIn extends React.Component {
                 <div className="container my-5">
                     {
                         this.state.fberror ?
-                            <div className="alert alert-danger">
-                                {this.state.fberror.message}
+                            <div className="alert alert-warning">
+                                {"Looks like you mis-typed your email. Please re-enter your email address."}
                             </div> :
                                 undefined
                     }
