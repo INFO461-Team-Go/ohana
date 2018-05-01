@@ -1,5 +1,5 @@
 body{
-    background: linear-gradient(to bottom right, #FFA657, #D278FF);
+    background: linear-gradient(to bottom right, #2B9AB2, #FFA657 80%, #FFA657);
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -88,13 +88,14 @@ h1{
 
 #test{
     position: relative;
-    background-color: #595959;
+    background-color: rgba(89, 89, 89, 0.3);
     width: 50vh;
     height: 34.5vh;
     margin:auto;
     margin-top: 10vh;
     transform: translateY(4vh);
-    outline: rgba(89, 89, 89, 0.5) solid 1.5vh;
+    border: rgba(89, 89, 89, 0.5) solid 1.5vh;
+    border-radius: 7px 70px;
 }
 
 h2{
@@ -145,12 +146,12 @@ h2{
 }
 
 #login{
-    background-color: #FFFFFF;
-    color: #595959;
+    background-color: #FFA657;
+    color: #FFFFFF;
     width: 15vh;
     height: 4vh;
     margin: auto;
-    margin-top: 4.5vh;
+    margin-top: 3vh;
     text-align: center;
     font-size: 3vh;
     font-weight: 400;
@@ -159,6 +160,6 @@ h2{
 
 #signup{
     font-size: 1.5vh;
-    margin-top: 5.5vh;
+    margin-top: 4.5vh;
     text-align: center;
 }

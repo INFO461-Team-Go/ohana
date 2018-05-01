@@ -96,7 +96,21 @@ export default class SignIn extends React.Component {
                             </div>
                         </div>
                     </div> */}
-                    
+                    <div id="test">
+		                <div class="cred">
+                            <div id="uhh"></div>   
+                            <form onSubmit={evt => this.handleSubmit(evt)}> 
+                                <div className="form-group row">
+                                    <label htmlFor="Email" className="col-form-label h2" id="username">Email</label>
+                                    <input type="Email" class="textBox form-control form-control-sm" placeholder="Enter your email address" value={this.state.email} onInput={evt => this.setState({email: evt.target.value})}/>
+                                    <label htmlFor="Password" className="col-form-label h2" id="password">password</label>
+                                    <input type="password" class="textBox form-control form-control-sm" placeholder="Enter your password" value={this.state.password} onInput={evt => this.setState({password: evt.target.value})}/>  
+                                    <h2 id="login">log in</h2>
+                                    <h2 id="signup">Don't have an account? sign up</h2>
+                                </div>
+                            </form>
+		                </div>
+	                </div>  
                 </div>
             </div>
         )
