@@ -65,37 +65,7 @@ export default class SignIn extends React.Component {
                             </div> :
                                 undefined
                     }
-                    {/* <div className="container py-5 px-sm-5"> 
-                        <div className="container bg-secondary py-5 px-sm-5">
-                            <div className="container">
-                                <form onSubmit={evt => this.handleSubmit(evt)}>
-                                    <div className="py-3 py-md-5 px-md-5 mx-md-5">
-                                        <div className="form-group row mx-lg-5">
-                                            <div className="col-lg-4">
-                                                <label htmlFor="email" className="text-white col-form-label">email:</label>
-                                            </div>
-                                            <div className="col-lg-8">
-                                                <input type="email" className="form-control" placeholder="enter your email address" value={this.state.email} onInput={evt => this.setState({ email: evt.target.value })}/>
-                                            </div>
-                                        </div>
-                                        <div className="form-group row mx-lg-5">
-                                            <div className="col-lg-4">
-                                                <label htmlFor="password" className="text-white col-form-label">password:</label>
-                                            </div>
-                                            <div className="col-lg-8">
-                                                <input type="password" className="form-control" placeholder="enter your password" value={this.state.password} onInput={evt => this.setState({ password: evt.target.value })} />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="form-group row justify-content-center">
-                                        <button type="submit" className="btn btn-white lead px-3">sign in</button>
-                                    </div>
-                                    <p className="row justify-content-center"><Link to={constants.routes.signup} className="text-white">sign up</Link></p>
-                                </form>
-                            </div>
-                        </div>
-                    </div> */}
-                    <div className="container pb-5">
+                    {/* <div className="container pb-5">
                         <div className="row justify-content-center">  
                             <div className="col-md-10 col-lg-8">
                                 <div className="card bg-secondary">
@@ -130,7 +100,8 @@ export default class SignIn extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
+                    
                 </div>
             </div>
         )
