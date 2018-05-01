@@ -7,7 +7,7 @@
     margin-top: 10vh;
     transform: translateY(4vh);
     border: rgba(89, 89, 89, 0.5) solid 1.5vh;
-    border-radius: 7px 70px;
+    border-radius: 2vh 13vh;
 }
 
 h2{
@@ -42,11 +42,16 @@ h2{
 }
 
 #slogan{
-    font-weight: 300;
+    font-weight: 200;
     font-size: 3.4vh;
     margin-top: 18vh;
-    margin-left: 3vh;
+    margin-left: 5vh;
     margin-right: 3vh;
+}
+
+#thicker{
+    font-weight: 400;
+    font-size: 4vh;
 }
 
 .textBox{
@@ -71,7 +76,7 @@ h2{
 }
 
 #signup{
-    font-size: 1.5vh;
+    font-size: 1.75vh;
     margin-top: 4.5vh;
     text-align: center;
 }
