@@ -22,11 +22,6 @@ export default class SignIn extends React.Component {
     }
 
     componentDidMount() {
-        // this.authUnsub = firebase.auth().onAuthStateChanged(user => {
-        //     this.setState({ currentUser: user });
-        //     !user ? undefined : this.props.history.push(constants.routes.channel);
-        // });
-        console.log("sign in view mounted");
         this.authUnsub = firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.props.history.push(constants.routes.views);
@@ -36,7 +31,6 @@ export default class SignIn extends React.Component {
 
     componentWillUnmount() {
         this.authUnsub();
-        console.log("login view will unmount");
     }
 
     handleSubmit(evt) {
@@ -53,10 +47,11 @@ export default class SignIn extends React.Component {
             <div>
                 <header className="bg-secondary py-1">
                     <h4 className="container text-white my-1">
-                        o'hana
+                        ohana!
                     </h4>
                 </header>
-                <div className="container text-white my-3"> Let Alexa Keep Track of Tasks </div>
+                <h1 className="container text-white my-3">Sign in</h1>
+                <h5 className="container text-white my-3">Sign in to manage your tasks on ohana!</h5>
                 <div className="container my-5">
                     {
                         this.state.fberror ?
@@ -74,26 +69,26 @@ export default class SignIn extends React.Component {
                                             <form onSubmit={evt => this.handleSubmit(evt)}>
                                                 <div className="form-group row justify-content-center">
                                                     <div className="col-md-2">
-                                                        <label htmlFor="email" className="text-white col-form-label">email:</label>
+                                                        <label htmlFor="Email" className="text-white col-form-label">Email</label>
                                                     </div>
                                                     <div className="col-md-7">
-                                                        <input type="email" className="form-control form-control-sm" placeholder="enter your email address" value={this.state.email} onInput={evt => this.setState({ email: evt.target.value })}/>
+                                                        <input type="Email" className="form-control form-control-sm" placeholder="Enter your email address" value={this.state.email} onInput={evt => this.setState({ email: evt.target.value })}/>
                                                     </div>
                                                 </div>
                                                 <div className="form-group row justify-content-center">
                                                     <div className="col-md-2">
-                                                        <label htmlFor="email" className="text-white col-form-label">password:</label>
+                                                        <label htmlFor="Password" className="text-white col-form-label">Password</label>
                                                     </div>
                                                     <div className="col-md-7">
-                                                        <input type="password" className="form-control form-control-sm" placeholder="enter your password" value={this.state.password} onInput={evt => this.setState({ password: evt.target.value })}/>
+                                                        <input type="password" className="form-control form-control-sm" placeholder="Enter your password" value={this.state.password} onInput={evt => this.setState({ password: evt.target.value })}/>
                                                     </div>
                                                 </div>
                                                 <div className="form-group row justify-content-center mb-0 mt-4 pt-3">
                                                     <button type="submit" className="btn btn-white w-25 py-0">
-                                                        login
+                                                        Sign in
                                                     </button>
                                                 </div>
-                                                <p className="row justify-content-center mb-0 mt-2"><Link to={constants.routes.signup} className="text-white">sign up</Link></p>
+                                                <p className="row justify-content-center mb-0 mt-2"><Link to={constants.routes.signup} className="text-white">Sign up</Link></p>
                                             </form>
                                         </div>
                                     </div>
