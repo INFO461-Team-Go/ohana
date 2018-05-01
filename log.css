@@ -1,0 +1,76 @@
+#test{
+    position: relative;
+    background-color: #595959;
+    width: 50vh;
+    height: 34.5vh;
+    margin:auto;
+    margin-top: 10vh;
+    transform: translateY(4vh);
+    outline: rgba(89, 89, 89, 0.5) solid 1.5vh;
+}
+
+h2{
+    font-family: 'Nunito', sans-serif;
+    font-weight: lighter;
+    color: #FFFFFF;
+}
+
+.cred{
+    position: relative; 
+    font-weight: 200;
+    width: 100%;
+    height: 40%;
+}
+
+#uhh{
+    height:1px;
+}
+
+#username{
+    font-size: 2.7vh;   
+    margin-top: 9%;
+    margin-left: 10%;
+    margin-bottom: 0%;
+}
+
+#password{
+    font-size: 2.7vh;   
+    margin-top: 7%;
+    margin-left: 10%;
+    margin-bottom: 0%;
+}
+
+#slogan{
+    font-weight: 300;
+    font-size: 3.4vh;
+    margin-top: 18vh;
+    margin-left: 3vh;
+    margin-right: 3vh;
+}
+
+.textBox{
+    width: 80%;
+    height: 4vh;
+    background-color: #FFFFFF;
+    margin: auto;
+    border-radius: 1vh;
+}
+
+#login{
+    background-color: #FFFFFF;
+    color: #595959;
+    width: 15vh;
+    height: 4vh;
+    margin: auto;
+    margin-top: 4.5vh;
+    text-align: center;
+    font-size: 3vh;
+    font-weight: 400;
+    border-radius: 1vh;
+}
+
+#signup{
+    font-size: 1.5vh;
+    margin-top: 5.5vh;
+    text-align: center;
+}
