@@ -1,3 +1,7 @@
+/**
+ * Sign Up View for the O'hana App
+ */
+
 import React from "react";
 import { Link } from "react-router-dom";
 import constants from "./Constants"
@@ -53,9 +57,14 @@ export default class SignUp extends React.Component {
             }));
         }
         
+=======
+        this.authUnsub = firebase.auth().onAuthStateChanged(user => {
+            this.setState({ currentUser: user });
+        });
     }
 
     render() {
+        // @TODO: Display warning: Can only sign up through the Alexa App
         return (
             <div className="m-auto card">
                 <div className="card-body p-5 text-center">

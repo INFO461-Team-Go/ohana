@@ -1,5 +1,8 @@
 body{
-background-color: #FFA657;
+    background: linear-gradient(to bottom right, #2B9AB2, #FFA657 80%, #FFA657);
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 /*This is the grey box containing logo, company name, and the user*/
@@ -16,10 +19,10 @@ background-color: #FFA657;
 /*logo circle place holder-- have one circle element in HTML file as a place holder*/
 #logo{
     background-color: #363636;
-    width: 6.1vh;
-    height: 6.1vh;
+    width: 6.3vh;
+    height: 6.3vh;
     border-style: solid;
-    border-width: 0.6vh;
+    border-width: 0.50vh;
     border-color: #FFFFFF;
     border-radius: 50%;
     margin-top: 0px;
@@ -34,7 +37,7 @@ background-color: #FFA657;
     width: 4.6vh;
     height: 4.6vh;
     border-style: solid;
-    border-width: 0.45vh;
+    border-width: 0.35vh;
     border-color: #31c4f3;
     border-radius: 50%;
     margin: auto;
@@ -51,15 +54,18 @@ background-color: #FFA657;
     margin: auto;
 }
 
-/*o'hana!*/
-#logoName{
+h1{
     color: #FFFFFF;
     font-family: 'Quicksand', sans-serif;
-    font-size: 5.1vh;
-    font-weight: 600;
+    font-weight: 300;
+}
+
+/*o'hana!*/
+#logoName{
+    font-size: 4.9vh;
     margin-top: 0px;
     margin-bottom: 0px;
-    line-height: 1.8;
+    line-height: 1.9;
     display: inline-block;
     vertical-align: middle;
     margin-left: 1%;
@@ -74,11 +80,7 @@ background-color: #FFA657;
 }
 
 #greeting{
-    color: #FFFFFF;
-    font-family: 'Quicksand', sans-serif;
     font-size: 2.5vh;
-    font-weight: 600;
-    /*might consider using bootstrap*/
     margin: 0;
     line-height: 1.8;
     float: right;
