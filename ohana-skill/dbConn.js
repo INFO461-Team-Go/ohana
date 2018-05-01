@@ -15,11 +15,15 @@ const config = {
 firebase.initializeApp(config);
 const db = firebase.database();
 
-exports.getTask = function (name) {
+exports.getTask = function(name) {
     db.goOnline();
-    let rootRef = firebase.database().ref();
-    console.log("Here is", name, "'s task");
-    console.log(rootRef);
+    // get person's task from db
+    db.goOffline();
+}
+
+exports.markAsDone = function(name) {
+    db.goOnline();
+    // update person's task on db
     db.goOffline();
 }
 
