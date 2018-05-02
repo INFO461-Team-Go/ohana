@@ -32,6 +32,7 @@ body{
     vertical-align: middle;
 }
 
+/*logo outer-most circle*/
 #logoInner{
     background-color: #363636;
     width: 4.6vh;
@@ -43,6 +44,7 @@ body{
     margin: auto;
 }
 
+/*logo inner-most circle*/
 #logoInnerInner{
     background-color: #363636;
     width: 3.1vh;
@@ -60,7 +62,7 @@ h1{
     font-weight: 300;
 }
 
-/*o'hana!*/
+/*o'hana! style and location*/
 #logoName{
     font-size: 4.9vh;
     margin-top: 0px;
@@ -71,6 +73,7 @@ h1{
     margin-left: 1%;
 }
 
+/*flex container for #greeting*/
 #wrapper{
     display: flex;
     align-items: center;
@@ -79,6 +82,7 @@ h1{
     margin-right: 2%;
 }
 
+/*hello xyz style and location*/
 #greeting{
     font-size: 2.5vh;
     margin: 0;
