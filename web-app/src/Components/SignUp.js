@@ -56,7 +56,7 @@ export default class SignUp extends React.Component {
                 errorMessage: err.message
             }));
         }
-        
+
         this.authUnsub = firebase.auth().onAuthStateChanged(user => {
             this.setState({ currentUser: user });
         });
@@ -65,7 +65,13 @@ export default class SignUp extends React.Component {
     render() {
         // @TODO: Display warning: Can only sign up through the Alexa App
         return (
-            <div className="m-auto card">
+        <div>
+            <header className="bg-secondary py-1">
+                    <h4 className="container text-white my-1">
+                        ohana!
+                    </h4>
+            </header>
+            <div className="container">
                 <div className="card-body p-5 text-center">
                     {this.state.errorMessage ?
                         <div className="alert alert-danger">
@@ -116,12 +122,13 @@ export default class SignUp extends React.Component {
                             }
                         </div>
                         <div className="form-group">
-                            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+                            <button type="submit" class="btn btn-white w-25 py-0">Sign Up</button>
                         </div>
                     </form>
                     <p>Already have an account? <Link to={constants.routes.signin}>Sign In!</Link></p>
                 </div>
             </div>
+        </div>
         );
     }
 }
