@@ -57,7 +57,6 @@ export default class SignUp extends React.Component {
             }));
         }
         
-=======
         this.authUnsub = firebase.auth().onAuthStateChanged(user => {
             this.setState({ currentUser: user });
         });
