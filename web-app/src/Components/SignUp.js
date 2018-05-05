@@ -22,17 +22,24 @@ export default class SignUp extends React.Component {
         this.authUnsub();
     }
 
+    signup() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const auth = firebase.auth();
+        auth.signInWithPopup(provider)
+            .then((result) => {
+                const user = result.user;
+                console.log(result);
+                this.setState({
+                    currUser: user
+                })
+            });
+    }
+
     render() {
-        // @TODO: Display warning: Can only sign up through the Alexa App
         return (
             <div className="container">
-                <h1 className="display-3">Sign Up!</h1>
-                <div class="alert alert-info" role="alert">
-                    Make sure you sign up through the Amazon Alexa app!
-                </div>
-                <form>
-                    
-                </form>
+                <p className="display-3">Sign in with your Google account to enable this skill</p>
+                <img src={require('./images/google-signin.png')} alt="Sign in with Google" aria-label="Sign in with Google" onClick={evt => this.signup(evt)}></img>
             </div>
         )
     }
