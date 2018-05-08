@@ -1,13 +1,6 @@
-body{
-    background: linear-gradient(to bottom right, #2B9AB2, #FFA657 80%, #FFA657);
-    margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
 /*This is the grey box containing logo, company name, and the user*/
 #logoBox{
-    background-color: #595959;
+    background-color: #3f3f3f;
     position: absolute;
     left: 0px;
     top: 0px;
