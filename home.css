@@ -1,0 +1,97 @@
+/*background gradient value*/
+body{
+    background: linear-gradient(to bottom right, #2B9AB2, #FFA657 80%);
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h2{
+    font-family: 'Nunito', sans-serif;
+    font-weight: lighter;
+    color: #FFFFFF;
+}
+
+/*sign in to manage tasks text style and location*/
+.slogan{
+    font-weight: 200;
+    font-size: 7vh;
+    margin-top: 10vh;
+    margin-left: 5vh;
+    margin-right: 3vh;
+}
+
+.subSlogan{
+    margin-top: 0;
+    margin-left: 20vh;
+    font-size: 3.4vh;
+}
+
+/*font modifier for the slogan*/
+.thicker{
+    font-weight: 400;
+    font-size: 8vh;
+}
+
+#threeSteps{
+    margin-left: 50vh
+}
+
+#three{
+    font-size: 5vh;
+}
+
+#flex-container{
+    margin-top: 8vh;
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.steps{
+    height: 30.6vh;
+    width: 50vh;
+    background-color: #000000;
+    margin-left: 3vh;
+    margin-right: 3vh;
+}
+
+.stepWrapper{
+    display: flex;
+    flex-direction: row;
+    background-color: blue;
+}
+
+h3{
+    color: #FFFFFF;
+    font-size: 2vh;
+    margin-left: 1vh;
+}
+
+.numberCircle{
+    width: 3vh;
+    height: 3vh;
+    margin-left: 2vh;
+    background-color: #3f3f3f;
+    border-radius: 50%;
+    text-align: center;
+}
+
+#user{
+    
+}
+
+#task{
+    
+}
+
+#alexa{
+    
+}
+
+#startSignIn{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10vh;
+}
