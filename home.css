@@ -1,0 +1,117 @@
+/*background gradient value*/
+body{
+    background: linear-gradient(to bottom right, #2B9AB2, #FFA657 80%);
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h2{
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    color: #FFFFFF;
+}
+
+/*sign in to manage tasks text style and location*/
+.slogan{
+    font-weight: 200;
+    font-size: 7vh;
+    margin-top: 10vh;
+    margin-left: 5vh;
+    margin-right: 3vh;
+}
+
+.subSlogan{
+    margin-top: 0;
+    margin-left: 25vh;
+    font-size: 3.4vh;
+}
+
+
+#threeSteps{
+    margin-left: 60vh
+}
+
+
+#three{
+    font-size: 5vh;
+}
+
+/*font modifier for the slogan*/
+.thicker{
+    font-weight: 400;
+    font-size: 8vh;
+}
+
+#flex-container{
+    margin-top: 9vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.steps{
+    height: 33vh;
+    width: 45vh;
+    margin-left: 3vh;
+    margin-right: 3vh;
+}
+
+.stepWrapper{
+    margin-top: 2vh;
+    text-align: center;
+}
+
+.imageWrapper{
+    margin: auto;
+    height: 26vh;
+    width: 35vh;
+    background-color: white;
+    border-radius: 5vh;
+    box-shadow: 3px 3px 8px #000000;
+}
+
+h3{
+    font-family: 'Nunito', sans-serif;
+    color: #FFFFFF;
+    font-size: 2vh;
+    margin: auto;
+    margin-left: 1vh;
+}
+
+#user{
+    
+}
+
+#task{
+    
+}
+
+#alexa{
+    
+}
+
+#startSignIn{
+    display: flex;
+    float: right;
+    flex-direction: row;
+    margin: auto;
+    margin-top: 8vh;
+    width:70vh;
+    /*delete this before commiting*/
+    background-color: rgba(0,0,0,0);
+}
+
+#googleSignIn{
+    background-image: url('btn_google_signin_light_normal_web.png');
+    height: 4.82vh;
+    width: 20vh;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#goSignIn{
+    font-size: 5vh;
+    font-weight: 400;
+    margin-right: 0;
+}

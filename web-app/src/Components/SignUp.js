@@ -1,21 +1,34 @@
 /**
- * 
+ * Sign Up View for the O'hana App
  */
 
 import React from "react";
 import { Link } from "react-router-dom";
-import firebase from "firebase/app";
-import constants from "./Constants";
+import constants from "./Constants"
+import firebase from 'firebase/app'
+import 'firebase/auth';
+import 'firebase/database';
 
 export default class SignUp extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
+        //listen for auth change
         this.authUnsub = firebase.auth().onAuthStateChanged(user => {
-            this.setState({ currentUser: user });
+            if(user){
+                this.props.history.push('/channels/view/SignIn')
+            }
         });
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            displayName: "",
+            email: "",
+            pw: "",
+            cpw: "",
+            errorMessage: undefined
+        }
     }
 
     componentWillUnmount() {
@@ -41,6 +54,6 @@ export default class SignUp extends React.Component {
                 <p className="display-3">Sign in with your Google account to enable this skill</p>
                 <img src={require('./images/google-signin.png')} alt="Sign in with Google" aria-label="Sign in with Google" onClick={evt => this.signup(evt)}></img>
             </div>
-        )
+        );
     }
 }

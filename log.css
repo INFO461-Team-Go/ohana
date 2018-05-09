@@ -1,12 +1,14 @@
+/*this is the container that wraps the sign in credentials from username to sign up button*/
 #test{
     position: relative;
-    background-color: #595959;
+    background-color: rgba(89, 89, 89, 0.3);
     width: 50vh;
     height: 34.5vh;
     margin:auto;
     margin-top: 10vh;
     transform: translateY(4vh);
-    outline: rgba(89, 89, 89, 0.5) solid 1.5vh;
+    border: rgba(89, 89, 89, 0.5) solid 1.5vh;
+    border-radius: 2vh 13vh;
 }
 
 h2{
@@ -15,17 +17,18 @@ h2{
     color: #FFFFFF;
 }
 
-.cred{
+/*declares common font elements for credential(#test) box*/ 
+#cred{
     position: relative; 
     font-weight: 200;
-    width: 100%;
-    height: 40%;
 }
 
+/*this is a div workaround inserted, can be ignored*/
 #uhh{
     height:1px;
 }
 
+/*username text style and location*/
 #username{
     font-size: 2.7vh;   
     margin-top: 9%;
@@ -33,6 +36,7 @@ h2{
     margin-bottom: 0%;
 }
 
+/*password text style and location*/
 #password{
     font-size: 2.7vh;   
     margin-top: 7%;
@@ -40,14 +44,22 @@ h2{
     margin-bottom: 0%;
 }
 
+/*sign in to manage tasks text style and location*/
 #slogan{
-    font-weight: 300;
+    font-weight: 200;
     font-size: 3.4vh;
     margin-top: 18vh;
-    margin-left: 3vh;
+    margin-left: 5vh;
     margin-right: 3vh;
 }
 
+/*font modifier for the slogan*/
+#thicker{
+    font-weight: 400;
+    font-size: 4vh;
+}
+
+/*credential console style and location*/
 .textBox{
     width: 80%;
     height: 4vh;
@@ -56,21 +68,23 @@ h2{
     border-radius: 1vh;
 }
 
-#login{
-    background-color: #FFFFFF;
-    color: #595959;
+/*sign in button style and location*/
+#signin{
+    background-color: #FFA657;
+    color: #FFFFFF;
     width: 15vh;
     height: 4vh;
     margin: auto;
-    margin-top: 4.5vh;
+    margin-top: 3vh;
     text-align: center;
     font-size: 3vh;
     font-weight: 400;
     border-radius: 1vh;
 }
 
+/*Don't have an account? text style and location*/
 #signup{
-    font-size: 1.5vh;
-    margin-top: 5.5vh;
+    font-size: 1.8vh;
+    margin-top: 4.5vh;
     text-align: center;
 }

@@ -2,6 +2,7 @@
   "name": "web-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://info461-team-go.github.io/ohana/web-app/build",
   "dependencies": {
     "firebase": "^4.13.1",
     "npm": "^6.0.0",

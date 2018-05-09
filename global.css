@@ -1,13 +1,6 @@
-body{
-    background: linear-gradient(to bottom right, #2B9AB2, #FFA657 80%, #FFA657);
-    margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
 /*This is the grey box containing logo, company name, and the user*/
 #logoBox{
-    background-color: #595959;
+    background-color: #3f3f3f;
     position: absolute;
     left: 0px;
     top: 0px;
@@ -32,6 +25,7 @@ body{
     vertical-align: middle;
 }
 
+/*logo outer-most circle*/
 #logoInner{
     background-color: #363636;
     width: 4.6vh;
@@ -43,6 +37,7 @@ body{
     margin: auto;
 }
 
+/*logo inner-most circle*/
 #logoInnerInner{
     background-color: #363636;
     width: 3.1vh;
@@ -60,7 +55,7 @@ h1{
     font-weight: 300;
 }
 
-/*o'hana!*/
+/*o'hana! style and location*/
 #logoName{
     font-size: 4.9vh;
     margin-top: 0px;
@@ -71,6 +66,7 @@ h1{
     margin-left: 1%;
 }
 
+/*flex container for #greeting*/
 #wrapper{
     display: flex;
     align-items: center;
@@ -79,6 +75,7 @@ h1{
     margin-right: 2%;
 }
 
+/*hello xyz style and location*/
 #greeting{
     font-size: 2.5vh;
     margin: 0;
