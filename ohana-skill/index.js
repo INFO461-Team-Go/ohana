@@ -1,5 +1,14 @@
-const Alexa = require('ask-sdk-core');
+/**
+ * Harshitha Akkaraju
+ * 
+ * 
+ */
 
+
+const Alexa = require('ask-sdk-core');
+const FirebaseDB = require('./dbConn.js');
+
+// LaunchRequestHandler: Welcome message when user invokes the skill
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
@@ -21,10 +30,12 @@ const LaunchRequestHandler = {
     },
 };
 
-/* LAMBDA SETUP */
+// Lambda Setup
 const skillBuilder = Alexa.SkillBuilders.custom();
 exports.handler = skillBuilder
     .addRequestHandlers(
         LaunchRequestHandler
     )
     .lambda();
+
+FirebaseDB.getTask("Harshi");
