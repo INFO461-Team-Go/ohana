@@ -1,0 +1,85 @@
+/*This is the grey box containing logo, company name, and the user*/
+#logoBox{
+    background-color: #3f3f3f;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 9.1%;
+    box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+/*logo circle place holder-- have one circle element in HTML file as a place holder*/
+#logo{
+    background-color: #363636;
+    width: 6.3vh;
+    height: 6.3vh;
+    border-style: solid;
+    border-width: 0.50vh;
+    border-color: #FFFFFF;
+    border-radius: 50%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left:3.3%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/*logo outer-most circle*/
+#logoInner{
+    background-color: #363636;
+    width: 4.6vh;
+    height: 4.6vh;
+    border-style: solid;
+    border-width: 0.35vh;
+    border-color: #31c4f3;
+    border-radius: 50%;
+    margin: auto;
+}
+
+/*logo inner-most circle*/
+#logoInnerInner{
+    background-color: #363636;
+    width: 3.1vh;
+    height: 3.1vh;
+    border-style: solid;
+    border-width: 0.4vh;
+    border-color: #31c4f3;
+    border-radius: 50%;
+    margin: auto;
+}
+
+h1{
+    color: #FFFFFF;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 300;
+}
+
+/*o'hana! style and location*/
+#logoName{
+    font-size: 4.9vh;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    line-height: 1.9;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 1%;
+}
+
+/*flex container for #greeting*/
+#wrapper{
+    display: flex;
+    align-items: center;
+    float: right;
+    height: 100%;
+    margin-right: 2%;
+}
+
+/*hello xyz style and location*/
+#greeting{
+    font-size: 2.5vh;
+    margin: 0;
+    line-height: 1.8;
+    float: right;
+}
+

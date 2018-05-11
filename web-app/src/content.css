@@ -1,0 +1,84 @@
+/*background gradient value*/
+body{
+    background: linear-gradient(to bottom right, #2B9AB2, #FFA657 80%);
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#menuConatiner{
+    top: 20vh;
+    left: 10vw;
+    width: 43vh;
+    height: 70vh;
+    position: absolute;
+    vertical-align: middle;
+}
+
+.menu{
+    border-radius: 50%;
+    background-color: #FFFFFF;
+}
+
+#menuOne{
+    position: absolute;
+    top: 0%;
+    width: 43vh;
+    height: 43vh;
+    box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.5);
+    background-color: #000000;
+}
+
+#circleInOne{
+    margin: auto;
+    margin-top: 1.5vh;
+    width: 40vh;
+    height: 40vh;
+    border: #31c4f3 solid 1.5vh;
+}
+
+#shadow, #menuTwo{
+    margin-top: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 28vh;
+    height: 28vh;
+    background-color: #2f2f2f;
+}
+
+#shadow{
+ position: absolute;
+ top: 0%;
+ left: 7.5vh;
+ background-color: rgba(0,0,0,0.4);
+}
+
+#positioner{
+    height: 1.5vh;
+}
+
+#circleInTwo{
+    margin:auto;
+    width: 25vh;
+    height: 25vh;
+    border: #31c4f3 solid 1.5vh;
+}
+
+.instruction{
+    margin-top: 36vh;
+    margin-left: 33vw;
+    font-size: 3vh;
+    font-weight: 900;
+    font-family: 'Nunito', sans-serif;
+    color: #FFFFFF;
+    
+}
+
+p{
+    margin: 0;
+}
+
+#light{
+    font-weight: 400;
+    font-size: 2.5vh;
+}
