@@ -1,11 +1,12 @@
 /*background gradient value*/
 body{
-    background: linear-gradient(to bottom right, #2B9AB2, #FFA657 80%);
+    background: linear-gradient(to bottom right, #73C8A9, #373B44 80%);
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
+/*for slogan font*/
 h2{
     font-family: 'Nunito', sans-serif;
     font-weight: 200;
@@ -17,58 +18,76 @@ h2{
     font-weight: 200;
     font-size: 7vh;
     margin-top: 10vh;
-    margin-left: 5vh;
+    margin-left: 6vh;
     margin-right: 3vh;
 }
 
+/*subslogan location and font size definer*/
 .subSlogan{
     margin-top: 0;
-    margin-left: 25vh;
+    margin-left: 27vh;
     font-size: 3.4vh;
 }
 
-
+/*location for the last slogan "3 simple steps"*/
 #threeSteps{
-    margin-left: 60vh
+    margin-left: 65vh
 }
 
-
+/*font size increase for number 3 in slogan*/
 #three{
     font-size: 5vh;
 }
 
-/*font modifier for the slogan*/
+/*font modifier for app name in the slogan*/
 .thicker{
     font-weight: 400;
     font-size: 8vh;
 }
 
+/*wrapper for all the graphics representing each steps*/
 #flex-container{
-    margin-top: 9vh;
+    margin-top: 5vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
+/*wrapper for each steps element*/
 .steps{
     height: 33vh;
     width: 45vh;
-    margin-left: 3vh;
-    margin-right: 3vh;
+    margin-left: 1vh;
+    margin-right: 1vh;
 }
 
-.stepWrapper{
-    margin-top: 2vh;
-    text-align: center;
-}
-
+/**/
 .imageWrapper{
     margin: auto;
+    margin-top: 7vh;
     height: 26vh;
     width: 35vh;
     background-color: white;
     border-radius: 5vh;
     box-shadow: 3px 3px 8px #000000;
+    text-align: center;
+    color: rgba(255,255,255,0);
+    font-size: 2vh;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+}
+
+.note{
+    margin-top: 2vh;
+    font-weight: 200;
+    font-size: 1.2vh;
+}
+
+.imageWrapper:hover {
+    margin-top: 0vh;
+    -webkit-transition: margin-top 1s, height 0.5s color 2s; /* For Safari 3.1 to 6.0 */
+    transition: margin-top 1s, height 0.5s, color 2s;
+    color: rgba(255,255,255,1);
 }
 
 h3{
@@ -79,24 +98,65 @@ h3{
     margin-left: 1vh;
 }
 
+.graphic{
+    margin: auto;
+    margin-top: 3vh;
+    height: 23vh;
+    width: 32vh;
+}
+
+.blocker{
+    height: 0.1px;
+    width: 100%;
+}
+
 #user{
-    
+    background-color: #2E765D;
+}
+
+#user:hover{
+    height: 39vh;
+}
+
+#userGraphic{
+    background-image: url('useri.png');
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 #task{
-    
+    background-color: #2E926F;
+}
+
+#task:hover{
+    height: 39vh;
+}
+
+#taskGraphic{
+    background-image: url('useri.1.png');
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 #alexa{
-    
+    background-color: #4AA987;
+}
+
+#alexa:hover{
+    height: 39vh;
+}
+
+#alexaGraphic{
+    background-image: url('useri.2.png');
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 #startSignIn{
     display: flex;
-    float: right;
     flex-direction: row;
     margin: auto;
-    margin-top: 8vh;
+    margin-top: 12vh;
     width:70vh;
     /*delete this before commiting*/
     background-color: rgba(0,0,0,0);
@@ -105,7 +165,7 @@ h3{
 #googleSignIn{
     background-image: url('btn_google_signin_light_normal_web.png');
     height: 4.82vh;
-    width: 20vh;
+    width: 19vh;
     background-repeat: no-repeat;
     background-size: contain;
 }
