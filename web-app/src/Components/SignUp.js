@@ -37,9 +37,9 @@ export default class SignUp extends React.Component {
 
     handleSubmit(evt) {
         evt.preventDefault();
-        if (this.state.pw != this.state.cpw) {
+        if (this.state.pw !== this.state.cpw) {
             return;
-        } else if (this.state.displayName == "") {
+        } else if (this.state.displayName === "") {
             this.setState({
                 errorMessage: "Enter Display Name"
             });
@@ -108,7 +108,7 @@ export default class SignUp extends React.Component {
                                 value={this.state.cpw}
                                 onInput={evt => this.setState({ cpw: evt.target.value })}
                             />
-                            {this.state.cpw != this.state.pw ?
+                            {this.state.cpw !== this.state.pw ?
                                 <p className="text-danger">
                                     Passwords do not match
                                 </p> :

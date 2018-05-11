@@ -1,6 +1,7 @@
 export default  {
     routes: {
-        signin: "/",
+        home: "/",
+        signin: "/signin",
         signup: "/signup",
         views: "/view/:tabName",
         roommates: "/view/roomates",
