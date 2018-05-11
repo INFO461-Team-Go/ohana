@@ -1,11 +1,10 @@
 /*background gradient value*/
 body{
-    height: fit-content;
-    width: fit-content;
     background: linear-gradient(to bottom right, #73C8A9, #373B44 80%);
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    
 }
 
 /*for slogan font*/
@@ -169,6 +168,7 @@ h3{
 
     /*background gradient value*/
     body{
+        height: fit-content;
         background: linear-gradient(to bottom right, #73C8A9, #373B44 80%);
         margin: 0;
         background-repeat: no-repeat;
@@ -179,19 +179,20 @@ h3{
         text-align: center;
         margin-left: 0px;
         margin-right: 0px;
-        font-size: 4vh;
+        font-size: 6vh;
+    }
+    
+    .thicker{
+        font-size: 7vh;
     }
     
     .subSlogan{
         text-align: center;
+        font-size: 3vh;
     }
     
     #threeSteps{
         margin: 0px;
-    }
-    
-    .thicker{
-        font-size: 4vh;
     }
     
     #flex-container{
@@ -241,4 +242,10 @@ h3{
     #startSignIn{
         vertical-align: middle;
     }
+}
+
+@media only screen and (max-aspect-ratio: 629/887){
+    body{
+        width: fit-content;
+    }    
 }
