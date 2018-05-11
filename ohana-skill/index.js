@@ -4,7 +4,6 @@
  * 
  */
 
-
 const Alexa = require('ask-sdk-core');
 const FirebaseDB = require('./dbConn.js');
 
@@ -14,18 +13,18 @@ const LaunchRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-
-
+        const userId = handlerInput.requestEnvelope.session.user.userId;
+        if (userId == "amzn1.ask.account.[unique-value-here]" || userId == undefined) {
+            let output = "to start using this skill, please use the companion app to authenticate on Amazon"
+            handlerInput.responseBuilder
+                .speak(output)
+                .withLinkAccountCard()
+            return;
+        }
         const speakOutput = "Hello! Welcome to ohana!";
-
-        handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
-
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            .reprompt(speakOutput)
-            .withSimpleCard('Ohana!', speakOutput)
+            .withLinkAccountCard()
             .getResponse();
     },
 };
