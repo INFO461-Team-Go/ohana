@@ -16,12 +16,12 @@ export default class SignIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            email: "",
+            password: ""
         }
     }
 
     componentDidMount() {
-
-
         this.authUnsub = firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.props.history.push(constants.routes.views);
@@ -33,24 +33,69 @@ export default class SignIn extends React.Component {
         this.authUnsub();
     }
 
-    signin(evt) {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        const auth = firebase.auth();
-        auth.signInWithPopup(provider)
-            .then((result) => {
-                const user = result.user;
-                console.log(result);
-                this.setState({
-                    currUser: user
-                })
-            });
-        console.log(this.state.currUser);
+    handleSubmit(evt) {
+        evt.preventDefault();
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+            .catch(err => this.setState({ fberror: err }))
     }
 
     render() {
         return (
             <div className="container">
-                <img src={require('./images/google-signin.png')} alt="Sign in with Google" aria-label="Sign in with Google" onClick={evt => this.signin(evt)}></img>
+                <div>
+                    <header className="bg-secondary py-1">
+                        <h4 className="container text-white my-1">
+                            ohana!
+                    </h4>
+                    </header>
+                    <h1 className="container text-white my-3">Sign in</h1>
+                    <h5 className="container text-white my-3">Sign in to manage your tasks on ohana!</h5>
+                    <div className="container my-5">
+                        {
+                            this.state.fberror ?
+                                <div className="alert alert-danger">
+                                    {this.state.fberror.message}
+                                </div> :
+                                undefined
+                        }
+                        <div className="container pb-5">
+                            <div className="row justify-content-center">
+                                <div className="col-md-10 col-lg-8">
+                                    <div className="card bg-secondary">
+                                        <div className="card-body mt-md-5 mb-md-3">
+                                            <div className="container p-3">
+                                                <form onSubmit={evt => this.handleSubmit(evt)}>
+                                                    <div className="form-group row justify-content-center">
+                                                        <div className="col-md-2">
+                                                            <label htmlFor="Email" className="text-white col-form-label">Email</label>
+                                                        </div>
+                                                        <div className="col-md-7">
+                                                            <input type="Email" className="form-control form-control-sm" placeholder="Enter your email address" value={this.state.email} onInput={evt => this.setState({ email: evt.target.value })} />
+                                                        </div>
+                                                    </div>
+                                                    <div className="form-group row justify-content-center">
+                                                        <div className="col-md-2">
+                                                            <label htmlFor="Password" className="text-white col-form-label">Password</label>
+                                                        </div>
+                                                        <div className="col-md-7">
+                                                            <input type="password" className="form-control form-control-sm" placeholder="Enter your password" value={this.state.password} onInput={evt => this.setState({ password: evt.target.value })} />
+                                                        </div>
+                                                    </div>
+                                                    <div className="form-group row justify-content-center mb-0 mt-4 pt-3">
+                                                        <button type="submit" className="btn btn-white w-25 py-0">
+                                                            Sign in
+                                                    </button>
+                                                    </div>
+                                                    <p className="row justify-content-center mb-0 mt-2"><Link to={constants.routes.signup} className="text-white">Sign up</Link></p>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
