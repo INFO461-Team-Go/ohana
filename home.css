@@ -85,9 +85,14 @@ h2{
 
 .imageWrapper:hover {
     margin-top: 0vh;
+<<<<<<< HEAD
     height: 39vh;
     -webkit-transition: margin-top 1s, height 0.4s color 2s; /* For Safari 3.1 to 6.0 */
     transition: margin-top 1s, height 0.4s, color 2s;
+=======
+    -webkit-transition: margin-top 1s, height 0.5s color 2s; /* For Safari 3.1 to 6.0 */
+    transition: margin-top 1s, height 0.5s, color 2s;
+>>>>>>> 8f5e70a4222c45b1dfe82f18c8d6dd7b8e8d6570
     color: rgba(255,255,255,1);
 }
 
@@ -115,6 +120,13 @@ h3{
     background-color: #2E765D;
 }
 
+<<<<<<< HEAD
+=======
+#user:hover{
+    height: 39vh;
+}
+
+>>>>>>> 8f5e70a4222c45b1dfe82f18c8d6dd7b8e8d6570
 #userGraphic{
     background-image: url('useri.png');
     background-repeat: no-repeat;
@@ -125,8 +137,17 @@ h3{
     background-color: #2E926F;
 }
 
+<<<<<<< HEAD
 #taskGraphic{
     background-image: url('task22.png');
+=======
+#task:hover{
+    height: 39vh;
+}
+
+#taskGraphic{
+    background-image: url('useri.1.png');
+>>>>>>> 8f5e70a4222c45b1dfe82f18c8d6dd7b8e8d6570
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -135,8 +156,17 @@ h3{
     background-color: #4AA987;
 }
 
+<<<<<<< HEAD
 #alexaGraphic{
     background-image: url('alexalogo.png');
+=======
+#alexa:hover{
+    height: 39vh;
+}
+
+#alexaGraphic{
+    background-image: url('useri.2.png');
+>>>>>>> 8f5e70a4222c45b1dfe82f18c8d6dd7b8e8d6570
     background-repeat: no-repeat;
     background-size: contain;
 }
