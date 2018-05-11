@@ -31,97 +31,28 @@ export default class SignUp extends React.Component {
         }
     }
 
-    handleSubmit(evt){
-        evt.preventDefault(); 
-        if(this.state.pw != this.state.cpw){
-            return;
-        } else if(this.state.displayName == ""){
-            this.setState({
-                errorMessage: "Enter Display Name"
-            });  
-            return;
-        } else if(this.state.pw.length < 6) {
-            this.setState({
-                errorMessage: "Password must be at least six characters"
-            });  
-            return;
-        }else {
-            console.log(this.state.photoUrl)
-            firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pw)
-            .then(user => user.updateProfile({
-                photoURL: this.state.photoUrl,
-                displayName: this.state.displayName
-            }))
-            .catch(err => this.setState({
-                errorMessage: err.message
-            }));
-        }
-        
-=======
-        this.authUnsub = firebase.auth().onAuthStateChanged(user => {
-            this.setState({ currentUser: user });
-        });
+    componentWillUnmount() {
+        this.authUnsub();
+    }
+
+    signup() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const auth = firebase.auth();
+        auth.signInWithPopup(provider)
+            .then((result) => {
+                const user = result.user;
+                console.log(result);
+                this.setState({
+                    currUser: user
+                })
+            });
     }
 
     render() {
-        // @TODO: Display warning: Can only sign up through the Alexa App
         return (
-            <div className="m-auto card">
-                <div className="card-body p-5 text-center">
-                    {this.state.errorMessage ?
-                        <div className="alert alert-danger">
-                            {this.state.errorMessage}
-                        </div> :
-                        undefined
-                    }
-                    <h1 className="mb-3">Sign Up</h1>
-                    <form onSubmit={evt => this.handleSubmit(evt)}>
-                        <div className="form-group">
-                            <input id="dName" className="form-control"
-                            type="text" 
-                            placeholder="Display Name"
-                            value={this.state.displayName}
-                            onInput={evt => this.setState({displayName: evt.target.value})}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input id="email" className="form-control"
-                            type="email"
-                            placeholder="Email"
-                            value={this.state.email}
-                            onInput={evt => this.setState({
-                                email: evt.target.value,
-                            })}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input id="pw" className="form-control"
-                            type="password"
-                            placeholder="Password"
-                            value={this.state.pw}
-                            onInput={evt => this.setState({pw: evt.target.value})}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input id="cpw" className="form-control"
-                            type="password"
-                            placeholder="Confirm Password"
-                            value={this.state.cpw}
-                            onInput={evt => this.setState({cpw: evt.target.value})}
-                            />
-                            {this.state.cpw != this.state.pw ?
-                                <p className="text-danger">
-                                    Passwords do not match
-                                </p> :
-                                undefined
-                            }
-                        </div>
-                        <div className="form-group">
-                            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
-                        </div>
-                    </form>
-                    <p>Already have an account? <Link to={constants.routes.signin}>Sign In!</Link></p>
-                </div>
+            <div className="container">
+                <p className="display-3">Sign in with your Google account to enable this skill</p>
+                <img src={require('./images/google-signin.png')} alt="Sign in with Google" aria-label="Sign in with Google" onClick={evt => this.signup(evt)}></img>
             </div>
         );
     }
