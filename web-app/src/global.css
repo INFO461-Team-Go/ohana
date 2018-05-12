@@ -1,7 +1,7 @@
 /*This is the grey box containing logo, company name, and the user*/
 #logoBox{
     background-color: #3f3f3f;
-    position: absolute;
+    position: relative;
     left: 0px;
     top: 0px;
     width: 100%;
