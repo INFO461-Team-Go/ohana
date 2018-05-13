@@ -26,7 +26,7 @@ export default class Home extends React.Component {
                                 <div className="graphic" id="userGraphic"></div>
                             </div>
                             <div className="mobileOnly">
-                                add name of users in order<br/>which they will perform a task
+                                add name of users in order which they will perform a task
                                 <div className="note">*note: special characters and numbers are not allowed</div>
                             </div>
                         </div>
@@ -38,7 +38,7 @@ export default class Home extends React.Component {
                                 <div className="graphic" id="taskGraphic"></div>
                             </div>
                             <div className="mobileOnly">
-                                add name of tasks and assign<br/> a user who will start the order
+                                add name of tasks and assign a user who will start the order
                                 <div className="note">*note: special characters and numbers are not allowed</div>
                             </div>
                         </div>
@@ -50,13 +50,13 @@ export default class Home extends React.Component {
                                 <div className="graphic" id="alexaGraphic"></div>
                             </div>
                             <div className="mobileOnly">
-                                ask alexa to tell you who's turn<br/>it is or to mark your task done
+                                ask alexa to tell you who's turn it is or to mark your task done
                                 <div className="note">for possible commands click here</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="container text-center my-4 py-3">
+                <div className="container text-center py-3" id="startNow">
                     <h5><Link to ={constants.routes.signin} className="text-white">Let's get started!</Link></h5>
                 </div>
             </div>
