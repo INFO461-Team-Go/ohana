@@ -4,11 +4,16 @@ import constants from "./Constants";
 import firebase from "firebase/app";
 import "firebase/auth";
 
+import NameList from "./NameList";
+import NewUserForm from "./NewUserForm";
+
 export default class View extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: undefined
+            user: undefined,
+            roommatesSnap: undefined,
+            roommatesRef: undefined
         }
     }
     
@@ -18,10 +23,16 @@ export default class View extends React.Component {
         this.unlistenAuth = firebase.auth().onAuthStateChanged(currentUser => {
             if (currentUser == null) {
                 console.log("current user is NULL");
-                this.props.history.push(constants.routes.signin);
+                this.props.history.push(constants.routes.home);
             } else {
                 this.setState({user: currentUser});
                 console.log("currentUser is " + this.state.user.email);
+
+                let ref = firebase.database().ref(`/roommates/names`)
+                this.valueListener = ref.on("value", snapshot => this.setState({roommatesSnap: snapshot}));
+                this.setState({roommatesRef: ref});
+                console.log(ref);
+                
             }
         });
     }
@@ -54,6 +65,10 @@ export default class View extends React.Component {
                         </div>
                     </div>
                 </header>
+                <main>
+                    <NameList roommatesSnap={this.state.roommatesSnap} roommatesRef={this.state.roommatesRef}/>
+                    {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
+                </main>
             </div>
         )
     }

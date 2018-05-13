@@ -47,31 +47,33 @@ export default class SignIn extends React.Component {
                     <div id='logo'><div id='logoInner'><div id='logoInnerInner'></div></div></div>
                     <h1 id="logoName">o'hana!</h1>
                 </header>
-                <h2 id="slogan"><span id="thicker">sign in</span> to manage tasks</h2>
-                {/* {
-                    this.state.fberror ?
-                        <div className="alert alert-danger">
-                            {this.state.fberror.message}
-                        </div> :
-                        undefined
-                } */}
-                <div id="test">
-                    <div id="cred">
-                        <div id="uhh"></div>
-                        <form onSubmit={evt => this.handleSubmit(evt)}>
-                            <h2 id="username">email</h2>
-                            <input type="Email" className="textBox form-control form-control-sm" value={this.state.email} 
-                            onInput={evt => this.setState({ email: evt.target.value })}/>
-                            <h2 id="password">password</h2>
-                            <input type="Password" className="textBox form-control form-control-sm" value={this.state.password} 
-                            onInput={evt => this.setState({ password: evt.target.value })}/>
-                            <div class="row mx-auto">
-                                <button id="signin" type="submit">sign in</button>
-                            </div>
-                            <h2 id="signup">Don't have an account? <Link to={constants.routes.signup} className="text-white"><u>sign up</u></Link></h2>
-                        </form>
+                <main>
+                    <h2 id="slogan"><span id="thicker">sign in</span> to manage tasks</h2>
+                    {
+                        this.state.fberror ?
+                            <div className="alert alert-danger">
+                                {this.state.fberror.message}
+                            </div> :
+                            undefined
+                    }
+                    <div id="test">
+                        <div id="cred">
+                            <div id="uhh"></div>
+                            <form onSubmit={evt => this.handleSubmit(evt)}>
+                                <h2 id="username">email</h2>
+                                <input type="Email" className="textBox form-control form-control-sm" value={this.state.email} 
+                                onInput={evt => this.setState({ email: evt.target.value })}/>
+                                <h2 id="password">password</h2>
+                                <input type="Password" className="textBox form-control form-control-sm" value={this.state.password} 
+                                onInput={evt => this.setState({ password: evt.target.value })}/>
+                                <div className="row mx-auto">
+                                    <button id="signin" type="submit">sign in</button>
+                                </div>
+                                <h2 id="signup">Don't have an account? <Link to={constants.routes.signup} className="text-white"><u>sign up</u></Link></h2>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                </main>
             </div>
         )
     }
