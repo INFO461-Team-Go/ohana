@@ -1,10 +1,11 @@
 /*background gradient value*/
 body{
-    background: linear-gradient(to bottom right, #73C8A9, #373B44 80%);
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, #73C8A9, rgb(0, 0, 0) 80%);
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    
 }
 
 
@@ -13,6 +14,13 @@ h2, h4, h5, h6{
     font-family: 'Nunito', sans-serif;
     font-weight: 200;
     color: #FFFFFF;
+}
+
+/******************needs to be changed*******************/
+#wholeContent{
+    width: 100vh;
+    padding: 0;
+    margin: auto;
 }
 
 /*sign in to manage tasks text style and location*/
@@ -27,13 +35,13 @@ h2, h4, h5, h6{
 /*subslogan location and font size definer*/
 .subSlogan{
     margin-top: 0;
-    margin-left: 27vh;
+    margin-left: 35vh;
     font-size: 3.4vh;
 }
 
 /*location for the last slogan "3 simple steps"*/
 #threeSteps{
-    margin-left: 65vh
+    margin-left: 55vh
 }
 
 /*font size increase for number 3 in slogan*/
@@ -101,6 +109,10 @@ h3{
     margin-left: 1vh;
 }
 
+h5{
+    font-size: 3vh;
+}
+
 .graphic{
     margin: auto;
     margin-top: 3vh;
@@ -143,26 +155,9 @@ h3{
     background-size: contain;
 }
 
-#startSignIn{
-    display: flex;
-    flex-direction: row;
-    margin: auto;
-    margin-top: 12vh;
-    width:70vh;
-}
-
-#googleSignIn{
-    background-image: url('btn_google_signin_light_normal_web.png');
-    height: 4.82vh;
-    width: 19vh;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-#goSignIn{
-    font-size: 5vh;
-    font-weight: 400;
-    margin-right: 0vh;
+#startNow{
+    margin-top: 15vh;
+    margin-bottom: 5vh;
 }
 
 @media only screen and (max-aspect-ratio: 1019/887) {
@@ -203,18 +198,24 @@ h3{
     }
     
     .graphic{
-        margin-left: 2vh;
+        margin-top: 2.7vh;
+        height: 45vw;
+        width: 55vw;
     }
     
     .imageWrapper{
         display: flex;
         flex-direction: row;
+        font-size: 1.5vh;
+        height: 45vw;
+        width: 55vw;
     }
     
     .imageWrapper:hover{
         margin-top: 7vh;
-        height: 26vh;
-        width: 63vh;
+        margin-left: -17vw;
+        height: 45vw;
+        width: 90vw;
         -webkit-transition: margin-left 1s, width 0.2s color 3s; /* For Safari 3.1 to 6.0 */
         transition: margin-left 1s, width 0.2s, color 3s;
         color: rgba(255,255,255,1);
@@ -222,26 +223,18 @@ h3{
     
     .mobileOnly{
         margin: auto;
+        margin-right: 1vw;
         text-align: center;
+        font-size: 4vw;
     }
     
     .steps{
-        width: 70vh;
+        width: 55vw;
         margin-left: 0px;
     }
-    
-    #goSignIn{
-        font-size: 4vh;
-        margin-left: auto;
-    }
-    
-    #googleSignIn{
-        margin-right: auto;
-        /*width: 16vh;*/
-    }
-    
-    #startSignIn{
-        vertical-align: middle;
+
+    #startNow{
+        margin-top: 5vw;
     }
 }
 
@@ -249,4 +242,10 @@ h3{
     body{
         width: fit-content;
     }    
+}
+
+@media (min-width: 100vw){
+    .container {
+        max-width: 100vw;
+    }
 }
