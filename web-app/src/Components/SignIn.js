@@ -8,6 +8,7 @@ import firebase from "firebase/app";
 import constants from "./Constants";
 import "firebase/auth";
 
+
 const cardStyle = {
     width: "18rem"
 }
@@ -41,61 +42,38 @@ export default class SignIn extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <div>
-                    <header className="bg-secondary py-1">
-                        <h4 className="container text-white my-1">
-                            ohana!
-                    </h4>
-                    </header>
-                    <h1 className="container text-white my-3">Sign in</h1>
-                    <h5 className="container text-white my-3">Sign in to manage your tasks on ohana!</h5>
-                    <div className="container my-5">
-                        {
-                            this.state.fberror ?
-                                <div className="alert alert-danger">
-                                    {this.state.fberror.message}
-                                </div> :
-                                undefined
-                        }
-                        <div className="container pb-5">
-                            <div className="row justify-content-center">
-                                <div className="col-md-10 col-lg-8">
-                                    <div className="card bg-secondary">
-                                        <div className="card-body mt-md-5 mb-md-3">
-                                            <div className="container p-3">
-                                                <form onSubmit={evt => this.handleSubmit(evt)}>
-                                                    <div className="form-group row justify-content-center">
-                                                        <div className="col-md-2">
-                                                            <label htmlFor="Email" className="text-white col-form-label">Email</label>
-                                                        </div>
-                                                        <div className="col-md-7">
-                                                            <input type="Email" className="form-control form-control-sm" placeholder="Enter your email address" value={this.state.email} onInput={evt => this.setState({ email: evt.target.value })} />
-                                                        </div>
-                                                    </div>
-                                                    <div className="form-group row justify-content-center">
-                                                        <div className="col-md-2">
-                                                            <label htmlFor="Password" className="text-white col-form-label">Password</label>
-                                                        </div>
-                                                        <div className="col-md-7">
-                                                            <input type="password" className="form-control form-control-sm" placeholder="Enter your password" value={this.state.password} onInput={evt => this.setState({ password: evt.target.value })} />
-                                                        </div>
-                                                    </div>
-                                                    <div className="form-group row justify-content-center mb-0 mt-4 pt-3">
-                                                        <button type="submit" className="btn btn-white w-25 py-0">
-                                                            Sign in
-                                                    </button>
-                                                    </div>
-                                                    <p className="row justify-content-center mb-0 mt-2"><Link to={constants.routes.signup} className="text-white">Sign up</Link></p>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
+            <div>
+                <header id="logoBox" className="">
+                    <div id='logo'><div id='logoInner'><div id='logoInnerInner'></div></div></div>
+                    <h1 id="logoName">o'hana!</h1>
+                </header>
+                <main>
+                    <h2 id="slogan"><span id="thicker">sign in</span> to manage tasks</h2>
+                    {
+                        this.state.fberror ?
+                            <div className="alert alert-danger">
+                                {this.state.fberror.message}
+                            </div> :
+                            undefined
+                    }
+                    <div id="test">
+                        <div id="cred">
+                            <div id="uhh"></div>
+                            <form onSubmit={evt => this.handleSubmit(evt)}>
+                                <h2 id="username">email</h2>
+                                <input type="Email" className="textBox form-control form-control-sm" value={this.state.email} 
+                                onInput={evt => this.setState({ email: evt.target.value })}/>
+                                <h2 id="password">password</h2>
+                                <input type="Password" className="textBox form-control form-control-sm" value={this.state.password} 
+                                onInput={evt => this.setState({ password: evt.target.value })}/>
+                                <div className="row mx-auto">
+                                    <button id="signin" type="submit">sign in</button>
                                 </div>
-                            </div>
+                                <h2 id="signup">Don't have an account? <Link to={constants.routes.signup} className="text-white"><u>sign up</u></Link></h2>
+                            </form>
                         </div>
                     </div>
-                </div>
+                </main>
             </div>
         )
     }

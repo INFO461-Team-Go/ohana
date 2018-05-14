@@ -1,0 +1,251 @@
+/*background gradient value*/
+body{
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, #73C8A9, rgb(0, 0, 0) 80%);
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+/*for slogan font*/
+h2, h4, h5, h6{
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    color: #FFFFFF;
+}
+
+/******************needs to be changed*******************/
+#wholeContent{
+    width: 100vh;
+    padding: 0;
+    margin: auto;
+}
+
+/*sign in to manage tasks text style and location*/
+.slogan{
+    font-weight: 200;
+    font-size: 7vh;
+    margin-top: 10vh;
+    margin-left: 6vh;
+    margin-right: 3vh;
+}
+
+/*subslogan location and font size definer*/
+.subSlogan{
+    margin-top: 0;
+    margin-left: 35vh;
+    font-size: 3.4vh;
+}
+
+/*location for the last slogan "3 simple steps"*/
+#threeSteps{
+    margin-left: 55vh
+}
+
+/*font size increase for number 3 in slogan*/
+#three{
+    font-size: 5vh;
+}
+
+/*font modifier for app name in the slogan*/
+.thicker{
+    font-weight: 400;
+    font-size: 8vh;
+}
+
+/*wrapper for all the graphics representing each steps*/
+#flex-container{
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/*wrapper for each steps element*/
+.steps{
+    height: 33vh;
+    width: 45vh;
+    margin-left: 1vh;
+    margin-right: 1vh;
+}
+
+/**/
+.imageWrapper{
+    margin: auto;
+    margin-top: 7vh;
+    height: 26vh;
+    width: 35vh;
+    background-color: white;
+    border-radius: 5vh;
+    box-shadow: 3px 3px 8px #000000;
+    text-align: center;
+    color: rgba(255,255,255,0);
+    font-size: 2vh;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+}
+
+.note{
+    margin-top: 2vh;
+    font-weight: 200;
+    font-size: 1.2vh;
+}
+
+.imageWrapper:hover {
+    margin-top: 0vh;
+    height: 39vh;
+    -webkit-transition: margin-top 1s, height 0.4s color 2s; /* For Safari 3.1 to 6.0 */
+    transition: margin-top 1s, height 0.4s, color 2s;
+    color: rgba(255,255,255,1);
+}
+
+h3{
+    font-family: 'Nunito', sans-serif;
+    color: #FFFFFF;
+    font-size: 2vh;
+    margin: auto;
+    margin-left: 1vh;
+}
+
+h5{
+    font-size: 3vh;
+}
+
+.graphic{
+    margin: auto;
+    margin-top: 3vh;
+    height: 23vh;
+    width: 32vh;
+}
+
+.blocker{
+    height: 0.1px;
+    width: 100%;
+}
+
+#user{
+    background-color: #2E765D;
+}
+
+#userGraphic{
+    background-image: url('useri.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#task{
+    background-color: #2E926F;
+}
+
+#taskGraphic{
+    background-image: url('task22.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#alexa{
+    background-color: #4AA987;
+}
+
+#alexaGraphic{
+    background-image: url('alexalogo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#startNow{
+    margin-top: 15vh;
+    margin-bottom: 5vh;
+}
+
+@media only screen and (max-aspect-ratio: 1019/887) {
+
+    /*background gradient value*/
+    body{
+        height: fit-content;
+        background: linear-gradient(to bottom right, #73C8A9, #373B44 80%);
+        margin: 0;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    
+    .slogan{
+        text-align: center;
+        margin-left: 0px;
+        margin-right: 0px;
+        font-size: 6vh;
+    }
+    
+    .thicker{
+        font-size: 7vh;
+    }
+    
+    .subSlogan{
+        text-align: center;
+        font-size: 3vh;
+    }
+    
+    #threeSteps{
+        margin: 0px;
+    }
+    
+    #flex-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .graphic{
+        margin-top: 2.7vh;
+        height: 45vw;
+        width: 55vw;
+    }
+    
+    .imageWrapper{
+        display: flex;
+        flex-direction: row;
+        font-size: 1.5vh;
+        height: 45vw;
+        width: 55vw;
+    }
+    
+    .imageWrapper:hover{
+        margin-top: 7vh;
+        margin-left: -17vw;
+        height: 45vw;
+        width: 90vw;
+        -webkit-transition: margin-left 1s, width 0.2s color 3s; /* For Safari 3.1 to 6.0 */
+        transition: margin-left 1s, width 0.2s, color 3s;
+        color: rgba(255,255,255,1);
+    }
+    
+    .mobileOnly{
+        margin: auto;
+        margin-right: 1vw;
+        text-align: center;
+        font-size: 4vw;
+    }
+    
+    .steps{
+        width: 55vw;
+        margin-left: 0px;
+    }
+
+    #startNow{
+        margin-top: 5vw;
+    }
+}
+
+@media only screen and (max-aspect-ratio: 629/887){
+    body{
+        width: fit-content;
+    }    
+}
+
+@media (min-width: 100vw){
+    .container {
+        max-width: 100vw;
+    }
+}

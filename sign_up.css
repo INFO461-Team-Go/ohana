@@ -1,0 +1,110 @@
+body{
+    background: linear-gradient(to bottom right, #73C8A9, #373B44 80%);
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/*this is the container that wraps the sign in credentials from username to sign up button*/
+#test{
+    position: relative;
+    background-color: #2E926F;
+    width: 50vh;
+    height: 50vh;
+    margin:auto;
+    margin-top: 0vh;
+    transform: translateY(4vh);
+    border-radius: 2vh 13vh;
+    box-shadow: 3px 3px 8px #000000;
+}
+
+h2{
+    font-family: 'Nunito', sans-serif;
+    font-weight: lighter;
+    color: #FFFFFF;
+}
+
+/*declares common font elements for credential(#test) box*/ 
+#cred{
+    position: relative; 
+    font-weight: 200;
+}
+
+/*this is a div workaround inserted, can be ignored*/
+#uhh{
+    height:1px;
+}
+
+/*username text style and location*/
+#username{
+    font-size: 2.7vh;   
+    margin-top: 4%;
+    margin-left: 10%;
+    margin-bottom: 0%;
+}
+
+/*password text style and location*/
+#password{
+    font-size: 2.7vh;   
+    margin-top: 7%;
+    margin-left: 10%;
+    margin-bottom: 0%;
+}
+
+/*sign up to manage tasks text style and location*/
+#slogan{
+    font-weight: 200;
+    font-size: 3.4vh;
+    text-align: center;
+    margin-top: 20vh;
+}
+
+#warning{
+    font-weight: 200;
+    font-size: 1.5vh;
+    text-align: center;
+    margin-top: 0vh;
+}
+
+/*font modifier for the slogan*/
+.thicker{
+    font-weight: 400;
+    font-size: 5vh;
+}
+
+/*font modifier for the slogan*/
+.thicker_warning{
+    font-weight: 400;
+    font-size: 1.8vh;
+    color: #FFFFFF;
+}
+
+/*credential console style and location*/
+.textBox{
+    width: 80%;
+    height: 4vh;
+    background-color: #FFFFFF;
+    margin: auto;
+    border-radius: 1vh;
+}
+
+/*sign in button style and location*/
+#signin{
+    background-color: #FFA657;
+    color: #FFFFFF;
+    width: 15vh;
+    height: 4vh;
+    margin: auto;
+    margin-top: 3vh;
+    text-align: center;
+    font-size: 3vh;
+    font-weight: 400;
+    border-radius: 1vh;
+}
+
+/*Don't have an account? text style and location*/
+#signup{
+    font-size: 1.8vh;
+    margin-top: 5vh;
+    text-align: center;
+}

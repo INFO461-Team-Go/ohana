@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Switch, Redirect, Route } from 'react-router-dom';
 
-import './App.css';
+import './global.css'
+import './content.css';
+import './home.css';
+import './log.css';
+
 
 import constants from "./Components/Constants";
 import Home from "./Components/Home";

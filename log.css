@@ -1,14 +1,21 @@
+body{
+    background: linear-gradient(to bottom right, #73C8A9, #373B44 80%);
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 /*this is the container that wraps the sign in credentials from username to sign up button*/
 #test{
     position: relative;
-    background-color: rgba(89, 89, 89, 0.3);
+    background-color: #2E926F;
     width: 50vh;
     height: 34.5vh;
     margin:auto;
-    margin-top: 10vh;
+    margin-top: 0vh;
     transform: translateY(4vh);
-    border: rgba(89, 89, 89, 0.5) solid 1.5vh;
     border-radius: 2vh 13vh;
+    box-shadow: 3px 3px 8px #000000;
 }
 
 h2{
@@ -48,15 +55,14 @@ h2{
 #slogan{
     font-weight: 200;
     font-size: 3.4vh;
-    margin-top: 18vh;
-    margin-left: 5vh;
-    margin-right: 3vh;
+    text-align: center;
+    margin-top: 30vh;
 }
 
 /*font modifier for the slogan*/
 #thicker{
     font-weight: 400;
-    font-size: 4vh;
+    font-size: 5vh;
 }
 
 /*credential console style and location*/
@@ -85,6 +91,6 @@ h2{
 /*Don't have an account? text style and location*/
 #signup{
     font-size: 1.8vh;
-    margin-top: 4.5vh;
+    margin-top: 7vh;
     text-align: center;
 }

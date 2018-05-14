@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import constants from "./Constants";
 
+
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -17,31 +18,47 @@ export default class Home extends React.Component {
                 <h2 className="slogan">Welcome to <span className="thicker">o'hana!</span></h2>
                 <h2 className="slogan subSlogan">a reimagined chore manager</h2>
                 <h2 className="slogan subSlogan" id="threeSteps">with <span className="thicker" id="three">3</span> simple steps</h2>
-
-                <div className="container d-md-flex ">
-                    <div className="card mx-auto" style={{ width: 15 + 'em' }}>
-                        <img className="card-img-top" src="..." alt="Card image cap" />
-                        <div className="card-body">
-                            <h5 className="card-title">Step 1</h5>
-                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <div id="flex-container">
+                    <div className="steps">
+                        <div className="imageWrapper" id="user">
+                            <div>
+                                <div className="blocker"></div>
+                                <div className="graphic" id="userGraphic"></div>
+                            </div>
+                            <div className="mobileOnly">
+                                add name of users in order which they will perform a task
+                                <div className="note">*note: special characters and numbers are not allowed</div>
+                            </div>
                         </div>
                     </div>
-                    <div className="card mx-auto" style={{ width: 15 + 'em' }}>
-                        <img className="card-img-top" src="..." alt="Card image cap" />
-                        <div className="card-body">
-                            <h5 className="card-title">Step 2</h5>
-                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <div className="steps">
+                        <div className="imageWrapper" id="task">
+                            <div>
+                                <div className="blocker"></div>
+                                <div className="graphic" id="taskGraphic"></div>
+                            </div>
+                            <div className="mobileOnly">
+                                add name of tasks and assign a user who will start the order
+                                <div className="note">*note: special characters and numbers are not allowed</div>
+                            </div>
                         </div>
                     </div>
-                    <div className="card mx-auto" style={{ width: 15 + 'em' }}>
-                        <img className="card-img-top" src="..." alt="Card image cap" />
-                        <div className="card-body">
-                            <h5 className="card-title">Step 3</h5>
-                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <div className="steps">
+                        <div className="imageWrapper" id="alexa">
+                            <div>
+                                <div className="blocker"></div>
+                                <div className="graphic" id="alexaGraphic"></div>
+                            </div>
+                            <div className="mobileOnly">
+                                ask alexa to tell you who's turn it is or to mark your task done
+                                <div className="note">for possible commands click here</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
+                <div className="container text-center py-3" id="startNow">
+                    <h5><Link to ={constants.routes.signin} className="text-white">Let's get started!</Link></h5>
+                </div>
             </div>
         );
     }

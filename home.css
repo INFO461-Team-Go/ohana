@@ -4,6 +4,7 @@ body{
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    
 }
 
 /*for slogan font*/
@@ -85,8 +86,9 @@ h2{
 
 .imageWrapper:hover {
     margin-top: 0vh;
-    -webkit-transition: margin-top 1s, height 0.5s color 2s; /* For Safari 3.1 to 6.0 */
-    transition: margin-top 1s, height 0.5s, color 2s;
+    height: 39vh;
+    -webkit-transition: margin-top 1s, height 0.4s color 2s; /* For Safari 3.1 to 6.0 */
+    transition: margin-top 1s, height 0.4s, color 2s;
     color: rgba(255,255,255,1);
 }
 
@@ -114,10 +116,6 @@ h3{
     background-color: #2E765D;
 }
 
-#user:hover{
-    height: 39vh;
-}
-
 #userGraphic{
     background-image: url('useri.png');
     background-repeat: no-repeat;
@@ -128,12 +126,8 @@ h3{
     background-color: #2E926F;
 }
 
-#task:hover{
-    height: 39vh;
-}
-
 #taskGraphic{
-    background-image: url('useri.1.png');
+    background-image: url('task22.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -142,12 +136,8 @@ h3{
     background-color: #4AA987;
 }
 
-#alexa:hover{
-    height: 39vh;
-}
-
 #alexaGraphic{
-    background-image: url('useri.2.png');
+    background-image: url('alexalogo.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -158,8 +148,6 @@ h3{
     margin: auto;
     margin-top: 12vh;
     width:70vh;
-    /*delete this before commiting*/
-    background-color: rgba(0,0,0,0);
 }
 
 #googleSignIn{
@@ -173,5 +161,91 @@ h3{
 #goSignIn{
     font-size: 5vh;
     font-weight: 400;
-    margin-right: 0;
+    margin-right: 0vh;
+}
+
+@media only screen and (max-aspect-ratio: 1019/887) {
+
+    /*background gradient value*/
+    body{
+        height: fit-content;
+        background: linear-gradient(to bottom right, #73C8A9, #373B44 80%);
+        margin: 0;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    
+    .slogan{
+        text-align: center;
+        margin-left: 0px;
+        margin-right: 0px;
+        font-size: 6vh;
+    }
+    
+    .thicker{
+        font-size: 7vh;
+    }
+    
+    .subSlogan{
+        text-align: center;
+        font-size: 3vh;
+    }
+    
+    #threeSteps{
+        margin: 0px;
+    }
+    
+    #flex-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .graphic{
+        margin-left: 2vh;
+    }
+    
+    .imageWrapper{
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .imageWrapper:hover{
+        margin-top: 7vh;
+        height: 26vh;
+        width: 63vh;
+        -webkit-transition: margin-left 1s, width 0.2s color 3s; /* For Safari 3.1 to 6.0 */
+        transition: margin-left 1s, width 0.2s, color 3s;
+        color: rgba(255,255,255,1);
+    }
+    
+    .mobileOnly{
+        margin: auto;
+        text-align: center;
+    }
+    
+    .steps{
+        width: 70vh;
+        margin-left: 0px;
+    }
+    
+    #goSignIn{
+        font-size: 4vh;
+        margin-left: auto;
+    }
+    
+    #googleSignIn{
+        margin-right: auto;
+        /*width: 16vh;*/
+    }
+    
+    #startSignIn{
+        vertical-align: middle;
+    }
+}
+
+@media only screen and (max-aspect-ratio: 629/887){
+    body{
+        width: fit-content;
+    }    
 }
