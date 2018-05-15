@@ -57,7 +57,6 @@ export default class View extends React.Component {
     }
 
     render() {
-        let chatRef = firebase.database().ref(this.props.match.params.chanName);
         return (
             <div>
                 <header className="">
@@ -77,24 +76,27 @@ export default class View extends React.Component {
                 <div className="container">
                     <ul className="nav nav-tabs">
                         <li className = "nav-item">
-                        <button 
+                        <a 
                             className={this.props.match.params.tabName == 'roommates'?
                             "display-4 nav-link active":
                             "display-4 nav-link"}
                             onClick={() => this.handleChange('roommates')}
-                            >Roommates</button>
+                            >Roommates</a>
                         </li>
                         <li className = "nav-item">
-                        <button 
+                        <a 
                             className={this.props.match.params.tabName == 'tasks'?
                             "display-4 nav-link active":
                             "display-4 nav-link"}
                             onClick={() => this.handleChange('tasks')}
-                            >Tasks</button>
+                            >Tasks</a>
                         </li>
                     </ul>
-    
+                    {this.props.match.params.tabName == 'roommates'?
                     <NameList roommatesSnap={this.state.roommatesSnap} roommatesRef={this.state.roommatesRef}/>
+                    :
+                    <div></div>
+                    }
                     {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
 
                 </div>
