@@ -6,6 +6,7 @@ import "firebase/auth";
 
 import NameList from "./NameList";
 import NewUserForm from "./NewUserForm";
+import Header from "./Header";
 
 export default class View extends React.Component {
     constructor(props) {
@@ -71,6 +72,7 @@ export default class View extends React.Component {
                         </div>
                     </div>
                 </header>
+                <Header/>
                 <main>
                     <NameList roommatesSnap={this.state.roommatesSnap} roommatesRef={this.state.roommatesRef} countSnap={this.state.countSnap} countRef={this.state.countRef}/>
                     {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}

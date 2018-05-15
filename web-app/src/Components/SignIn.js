@@ -8,6 +8,8 @@ import firebase from "firebase/app";
 import constants from "./Constants";
 import "firebase/auth";
 
+import Header from "./Header";
+
 
 const cardStyle = {
     width: "18rem"
@@ -43,10 +45,7 @@ export default class SignIn extends React.Component {
     render() {
         return (
             <div>
-                <header id="logoBox" className="">
-                    <div id='logo'><div id='logoInner'><div id='logoInnerInner'></div></div></div>
-                    <h1 id="logoName">o'hana!</h1>
-                </header>
+                <Header/>
                 <main>
                     <h2 id="slogan"><span id="thicker">sign in</span> to manage tasks</h2>
                     {
