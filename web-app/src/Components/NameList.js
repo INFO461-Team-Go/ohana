@@ -11,7 +11,8 @@ export default class NameList extends React.Component {
         super(props);
         this.state = {
             name: "",
-            fbError: undefined    
+            fbError: undefined,
+            count: undefined   
         };
     }
 
@@ -23,6 +24,7 @@ export default class NameList extends React.Component {
 
         this.props.roommatesRef.push({name: this.state.name})
             .then(() => this.setState({name: "", fbError: undefined}))
+            .then(() => this.props.countRef.update({count: this.names.length}))
             .catch(err => this.setState({fbError: err}));
     }
 
@@ -34,14 +36,15 @@ export default class NameList extends React.Component {
         //TODO: loop over the tasks snapshot
         //and create a <Task/> for each child snapshot
         //pushing it into an array
-        let names = [];
+        this.names = [];
         this.props.roommatesSnap.forEach(nameSnap => {
-            names.push(<NameCard key={nameSnap.key} nameSnap={nameSnap} roommatesSnap={this.props.roommatesSnap}/>)
+            this.names.push(<NameCard key={nameSnap.key} nameSnap={nameSnap} roommatesSnap={this.props.roommatesSnap} countSnap={this.props.countSnap} countRef={this.props.countRef}/>)
         });
+        console.log(this.names.length);
 
         return (
             <div className="container" id="nameList" ref="wrap" style={listStyles}>
-                {names}
+                {this.names}
                 <form onSubmit={evt => this.handleSubmit(evt)}>
                     {
                         this.state.fbError ? 
