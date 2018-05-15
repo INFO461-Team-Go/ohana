@@ -13,7 +13,9 @@ export default class View extends React.Component {
         this.state = {
             user: undefined,
             roommatesSnap: undefined,
-            roommatesRef: undefined
+            roommatesRef: undefined,
+            countSnap: undefined,
+            countRef: undefined
         }
     }
     
@@ -27,11 +29,12 @@ export default class View extends React.Component {
             } else {
                 this.setState({user: currentUser});
                 console.log("currentUser is " + this.state.user.email);
-
-                let ref = firebase.database().ref(`/roommates/names`)
+                let count = firebase.database().ref(`/roommates`);
+                let ref = firebase.database().ref(`/roommates/names`);
+                this.countListener = count.on("value", snapshot => this.setState({countSnap: snapshot}));
                 this.valueListener = ref.on("value", snapshot => this.setState({roommatesSnap: snapshot}));
                 this.setState({roommatesRef: ref});
-                console.log(ref);
+                this.setState({countRef: count});
                 
             }
         });
@@ -52,6 +55,9 @@ export default class View extends React.Component {
         return (
             <div>
                 <header className="">
+                    
+                </header>
+                <header className="">
                     <div className="container-fluid">
                         <div className="row justify-content-between">
                             <div className="col my-2 align-self-center">
@@ -66,7 +72,7 @@ export default class View extends React.Component {
                     </div>
                 </header>
                 <main>
-                    <NameList roommatesSnap={this.state.roommatesSnap} roommatesRef={this.state.roommatesRef}/>
+                    <NameList roommatesSnap={this.state.roommatesSnap} roommatesRef={this.state.roommatesRef} countSnap={this.state.countSnap} countRef={this.state.countRef}/>
                     {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
                 </main>
             </div>
