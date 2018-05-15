@@ -5,6 +5,8 @@
   "homepage": "https://info461-team-go.github.io/ohana/web-app/build",
   "dependencies": {
     "firebase": "^4.13.1",
+    "firebase-admin": "^5.12.1",
+    "firebase-functions": "^1.0.2",
     "npm": "^6.0.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
