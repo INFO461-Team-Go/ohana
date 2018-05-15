@@ -13,7 +13,8 @@ export default class View extends React.Component {
         this.state = {
             user: undefined,
             roommatesSnap: undefined,
-            roommatesRef: undefined
+            roommatesRef: undefined,
+            channel: "roommates"
         }
     }
     
@@ -48,7 +49,15 @@ export default class View extends React.Component {
         firebase.auth().signOut();   
     }
 
+    handleChange(chan) {
+        this.props.history.push('/view/' + chan);
+        this.setState({
+            channel: chan
+        });
+    }
+
     render() {
+        let chatRef = firebase.database().ref(this.props.match.params.chanName);
         return (
             <div>
                 <header className="">
@@ -65,10 +74,30 @@ export default class View extends React.Component {
                         </div>
                     </div>
                 </header>
-                <main>
+                <div className="container">
+                    <ul className="nav nav-tabs">
+                        <li className = "nav-item">
+                        <button 
+                            className={this.props.match.params.tabName == 'roommates'?
+                            "display-4 nav-link active":
+                            "display-4 nav-link"}
+                            onClick={() => this.handleChange('roommates')}
+                            >Roommates</button>
+                        </li>
+                        <li className = "nav-item">
+                        <button 
+                            className={this.props.match.params.tabName == 'tasks'?
+                            "display-4 nav-link active":
+                            "display-4 nav-link"}
+                            onClick={() => this.handleChange('tasks')}
+                            >Tasks</button>
+                        </li>
+                    </ul>
+    
                     <NameList roommatesSnap={this.state.roommatesSnap} roommatesRef={this.state.roommatesRef}/>
                     {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
-                </main>
+
+                </div>
             </div>
         )
     }
