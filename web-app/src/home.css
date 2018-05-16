@@ -23,6 +23,11 @@ h2, h4, h5, h6{
     margin: auto;
 }
 
+#sloganBox{
+    height: 10vh;
+    width: 50vh;
+}
+
 /*sign in to manage tasks text style and location*/
 .slogan{
     font-weight: 200;
@@ -44,13 +49,21 @@ h2, h4, h5, h6{
     margin-left: 55vh
 }
 
+#logoImg{
+    background-image: url('ohana_logo.png');
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 10vh;
+    width: 30vh;
+    top: 8vh;
+    position: absolute;
+    margin-left: 1vh;
+}
+
 /*font size increase for number 3 in slogan*/
 #three{
     font-size: 5vh;
-}
-
-/*font modifier for app name in the slogan*/
-.thicker{
     font-weight: 400;
     font-size: 8vh;
 }
@@ -115,7 +128,7 @@ h5{
 
 .graphic{
     margin: auto;
-    margin-top: 3vh;
+    margin-top: 2vh;
     height: 23vh;
     width: 32vh;
 }
