@@ -6,6 +6,7 @@ import "firebase/auth";
 
 import NameList from "./NameList";
 import NewUserForm from "./NewUserForm";
+import Header from "./Header";
 
 export default class View extends React.Component {
     constructor(props) {
@@ -60,6 +61,9 @@ export default class View extends React.Component {
         return (
             <div>
                 <header className="">
+                    
+                </header>
+                <header className="">
                     <div className="container-fluid">
                         <div className="row justify-content-between">
                             <div className="col my-2 align-self-center">
@@ -73,6 +77,7 @@ export default class View extends React.Component {
                         </div>
                     </div>
                 </header>
+                <Header/>
                 <div className="container">
                     <ul className="nav nav-tabs">
                         <li className = "nav-item">
@@ -92,14 +97,17 @@ export default class View extends React.Component {
                             >Tasks</a>
                         </li>
                     </ul>
-                    {this.props.match.params.tabName == 'roommates'?
+                </div>
+            
+                <main>
+                {this.props.match.params.tabName == 'roommates'?
                     <NameList roommatesRef={ref}/>
                     :
                     <div></div>
                     }
                     {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
 
-                </div>
+                </main>
             </div>
         )
     }

@@ -56,6 +56,7 @@ export default class NameList extends React.Component {
         this.state.roommatesSnap.forEach(nameSnap => {
             names.push(<NameCard key={nameSnap.key} nameSnap={nameSnap} roommatesSnap={this.state.roommatesSnap}/>)
         });
+        console.log(names.length);
 
         return (
             <div className="container" id="nameList" ref="wrap" style={listStyles}>

@@ -2,7 +2,7 @@
 body{
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom right, #73C8A9, rgb(0, 0, 0) 80%);
+    background: linear-gradient(to bottom right, #73C8A9, #373B44);
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -21,6 +21,11 @@ h2, h4, h5, h6{
     width: 100vh;
     padding: 0;
     margin: auto;
+}
+
+#sloganBox{
+    height: 10vh;
+    width: 50vh;
 }
 
 /*sign in to manage tasks text style and location*/
@@ -44,13 +49,21 @@ h2, h4, h5, h6{
     margin-left: 55vh
 }
 
+#logoImg{
+    background-image: url('ohana_logo.png');
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 10vh;
+    width: 30vh;
+    top: 8vh;
+    position: absolute;
+    margin-left: 1vh;
+}
+
 /*font size increase for number 3 in slogan*/
 #three{
     font-size: 5vh;
-}
-
-/*font modifier for app name in the slogan*/
-.thicker{
     font-weight: 400;
     font-size: 8vh;
 }
@@ -115,7 +128,7 @@ h5{
 
 .graphic{
     margin: auto;
-    margin-top: 3vh;
+    margin-top: 2vh;
     height: 23vh;
     width: 32vh;
 }
@@ -202,6 +215,12 @@ h5{
         height: 45vw;
         width: 55vw;
     }
+
+    .steps{
+        margin-top: 7vw;
+        height: 45vw;
+        width: 55vw;
+    }
     
     .imageWrapper{
         display: flex;
@@ -234,7 +253,7 @@ h5{
     }
 
     #startNow{
-        margin-top: 5vw;
+        margin-top: 15vw;
     }
 }
 
