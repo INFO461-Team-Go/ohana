@@ -2,6 +2,7 @@ import React from "react";
 import NameCard from "./NameCard";
 import firebase from "firebase/app";
 
+
 let listStyles = {
     maxWidth:"50%"
 };
@@ -11,8 +12,25 @@ export default class NameList extends React.Component {
         super(props);
         this.state = {
             name: "",
-            fbError: undefined    
+            fbError: undefined,
+            roommatesSnap: undefined    
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.props.roommatesRef.off("value", this.unlisten);
+        this.unlisten = nextProps.roommatesRef.on("value", snapshot => this.setState({
+            roommatesSnap: snapshot
+        }));
+    }
+
+    componentDidMount() {
+        this.unlisten = this.props.roommatesRef.on('value',
+            snapshot => this.setState({roommatesSnap: snapshot}));
+    }
+
+    componentWillUnmount() {
+        this.props.roommatesRef.off('value', this.unlisten);
     }
 
     handleSubmit(evt) {
@@ -28,15 +46,15 @@ export default class NameList extends React.Component {
 
     render() {
 
-        if (!this.props.roommatesSnap) {
+        if (!this.state.roommatesSnap) {
             return <p>loading...</p>
         }
         //TODO: loop over the tasks snapshot
         //and create a <Task/> for each child snapshot
         //pushing it into an array
         let names = [];
-        this.props.roommatesSnap.forEach(nameSnap => {
-            names.push(<NameCard key={nameSnap.key} nameSnap={nameSnap} roommatesSnap={this.props.roommatesSnap}/>)
+        this.state.roommatesSnap.forEach(nameSnap => {
+            names.push(<NameCard key={nameSnap.key} nameSnap={nameSnap} roommatesSnap={this.state.roommatesSnap}/>)
         });
 
         return (
