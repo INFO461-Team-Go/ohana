@@ -13,10 +13,7 @@ export default class View extends React.Component {
         super(props);
         this.state = {
             user: undefined,
-            roommatesSnap: undefined,
-            roommatesRef: undefined,
-            countSnap: undefined,
-            countRef: undefined
+            channel: "roommates"
         }
     }
     
@@ -29,14 +26,7 @@ export default class View extends React.Component {
                 this.props.history.push(constants.routes.home);
             } else {
                 this.setState({user: currentUser});
-                console.log("currentUser is " + this.state.user.email);
-                let count = firebase.database().ref(`/roommates`);
-                let ref = firebase.database().ref(`/roommates/names`);
-                this.countListener = count.on("value", snapshot => this.setState({countSnap: snapshot}));
-                this.valueListener = ref.on("value", snapshot => this.setState({roommatesSnap: snapshot}));
-                this.setState({roommatesRef: ref});
-                this.setState({countRef: count});
-                
+                console.log("currentUser is " + this.state.user.email);                
             }
         });
     }
@@ -52,7 +42,22 @@ export default class View extends React.Component {
         firebase.auth().signOut();   
     }
 
+    handleChange(chan) {
+        this.props.history.push('/view/' + chan);
+        this.setState({
+            channel: chan
+        });
+    }
+
     render() {
+        let ref;
+
+        if(this.props.match.params.tabName == 'roommates'){
+            ref = firebase.database().ref(this.props.match.params.tabName + "/names/");
+        } else {
+            ref = firebase.database().ref(this.props.match.params.tabName);
+        }
+
         return (
             <div>
                 <header className="">
@@ -73,9 +78,35 @@ export default class View extends React.Component {
                     </div>
                 </header>
                 <Header/>
+                <div className="container">
+                    <ul className="nav nav-tabs">
+                        <li className = "nav-item">
+                        <a 
+                            className={this.props.match.params.tabName == 'roommates'?
+                            "display-4 nav-link active":
+                            "display-4 nav-link"}
+                            onClick={() => this.handleChange('roommates')}
+                            >Roommates</a>
+                        </li>
+                        <li className = "nav-item">
+                        <a 
+                            className={this.props.match.params.tabName == 'tasks'?
+                            "display-4 nav-link active":
+                            "display-4 nav-link"}
+                            onClick={() => this.handleChange('tasks')}
+                            >Tasks</a>
+                        </li>
+                    </ul>
+                </div>
+            
                 <main>
-                    <NameList roommatesSnap={this.state.roommatesSnap} roommatesRef={this.state.roommatesRef} countSnap={this.state.countSnap} countRef={this.state.countRef}/>
+                {this.props.match.params.tabName == 'roommates'?
+                    <NameList roommatesRef={ref}/>
+                    :
+                    <div></div>
+                    }
                     {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
+
                 </main>
             </div>
         )
