@@ -19,9 +19,11 @@ export default class Home extends React.Component {
     render() {
         return (
             <div className="container">
-                <h2 className="slogan">Welcome to <span className="thicker">o'hana!</span></h2>
+                <div id="sloganBox">
+                    <h2 className="slogan">Welcome to <span id="logoImg"></span></h2>
+                </div>
                 <h2 className="slogan subSlogan">a reimagined chore manager</h2>
-                <h2 className="slogan subSlogan" id="threeSteps">with <span className="thicker" id="three">3</span> simple steps</h2>
+                <h2 className="slogan subSlogan" id="threeSteps">with <span id="three">3</span> simple steps</h2>
                 <div id="flex-container">
                     <div className="steps">
                         <div className="imageWrapper" id="user">
