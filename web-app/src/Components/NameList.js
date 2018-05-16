@@ -24,7 +24,7 @@ export default class NameList extends React.Component {
 
         this.props.roommatesRef.push({name: this.state.name})
             .then(() => this.setState({name: "", fbError: undefined}))
-            .then(() => this.props.countRef.update({count: this.names.length}))
+            // .then(() => this.props.countRef.update({count: this.names.length}))
             .catch(err => this.setState({fbError: err}));
     }
 
