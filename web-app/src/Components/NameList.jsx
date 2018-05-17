@@ -49,14 +49,10 @@ export default class NameList extends React.Component {
         if (!this.state.roommatesSnap) {
             return <p>loading...</p>
         }
-        //TODO: loop over the tasks snapshot
-        //and create a <Task/> for each child snapshot
-        //pushing it into an array
         let names = [];
         this.state.roommatesSnap.forEach(nameSnap => {
             names.push(<NameCard key={nameSnap.key} nameSnap={nameSnap} roommatesSnap={this.state.roommatesSnap}/>)
         });
-        console.log(names.length);
 
         return (
             <div className="container" id="nameList" ref="wrap" style={listStyles}>

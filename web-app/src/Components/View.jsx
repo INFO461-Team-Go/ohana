@@ -13,7 +13,7 @@ export default class View extends React.Component {
         super(props);
         this.state = {
             user: undefined,
-            channel: "roommates"
+            channel: "roommates",
         }
     }
     
@@ -26,7 +26,8 @@ export default class View extends React.Component {
                 this.props.history.push(constants.routes.home);
             } else {
                 this.setState({user: currentUser});
-                console.log("currentUser is " + this.state.user.email);                
+                console.log(this.state.user.uid); 
+
             }
         });
     }
@@ -49,13 +50,14 @@ export default class View extends React.Component {
         });
     }
 
+
     render() {
         let ref;
 
         if(this.props.match.params.tabName == 'roommates'){
             ref = firebase.database().ref(this.props.match.params.tabName + "/names/");
         } else {
-            ref = firebase.database().ref(this.props.match.params.tabName);
+            ref = firebase.database().ref(this.props.match.params.tabName + `/taskList/`);
         }
 
         return (
@@ -103,7 +105,7 @@ export default class View extends React.Component {
                 {this.props.match.params.tabName == 'roommates'?
                     <NameList roommatesRef={ref}/>
                     :
-                    <div></div>
+                    <NameList roommatesRef={ref}/>
                     }
                     {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
 
