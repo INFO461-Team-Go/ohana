@@ -63,9 +63,6 @@ export default class View extends React.Component {
         return (
             <div>
                 <header className="">
-                    
-                </header>
-                <header className="">
                     <div className="container-fluid">
                         <div className="row justify-content-between">
                             <div className="col my-2 align-self-center">
@@ -99,17 +96,17 @@ export default class View extends React.Component {
                             >Tasks</a>
                         </li>
                     </ul>
-                </div>
             
-                <main>
-                {this.props.match.params.tabName == 'roommates'?
-                    <NameList roommatesRef={ref}/>
-                    :
-                    <NameList roommatesRef={ref}/>
-                    }
-                    {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
+                        <main>
+                        {this.props.match.params.tabName == 'roommates'?
+                            <NameList roommatesRef={ref}/>
+                            :
+                            <div></div>
+                            }
+                            {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
 
-                </main>
+                        </main>
+                    </div>
             </div>
         )
     }
