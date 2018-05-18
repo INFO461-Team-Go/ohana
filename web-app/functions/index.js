@@ -13,7 +13,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
 
-exports.countShit = functions.database.ref('/roommates/names')
+exports.countShit = functions.database.ref('../roommates/names')
     .onWrite((change, context) => {
         if (!change.after.exists()) {
             return null;
@@ -28,3 +28,5 @@ exports.countShit = functions.database.ref('/roommates/names')
 
         return change.after.ref.parent.update(toUpdate);
     });
+
+exports.create

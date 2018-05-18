@@ -26,7 +26,8 @@ export default class View extends React.Component {
                 this.props.history.push(constants.routes.home);
             } else {
                 this.setState({user: currentUser});
-                console.log(this.state.user.uid); 
+                this.setState({uid: currentUser.uid})
+                // console.log(this.state.user.uid); 
 
             }
         });
@@ -55,7 +56,9 @@ export default class View extends React.Component {
         let ref;
 
         if(this.props.match.params.tabName == 'roommates'){
-            ref = firebase.database().ref(this.props.match.params.tabName + "/names/");
+            ref = firebase.database().ref(this.state.uid + "/" + this.props.match.params.tabName + "/names/");
+            // console.log(this.state.user.uid);
+            console.log(this.state.uid);
         } else {
             ref = firebase.database().ref(this.props.match.params.tabName + `/taskList/`);
         }

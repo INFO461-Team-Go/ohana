@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://info461-team-go.github.io/ohana/web-app/build",
   "dependencies": {
+    "blueimp-md5": "^2.10.0",
     "firebase": "^4.13.1",
     "firebase-admin": "^5.12.1",
     "firebase-functions": "^1.0.2",
