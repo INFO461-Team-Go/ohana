@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import constants from "./Constants";
 import firebase from "firebase/app";
 import "firebase/auth";
+import md5 from "blueimp-md5";
 
 import NameList from "./NameList";
 import NewUserForm from "./NewUserForm";
@@ -26,7 +27,8 @@ export default class View extends React.Component {
                 this.props.history.push(constants.routes.home);
             } else {
                 this.setState({user: currentUser});
-                this.setState({uid: currentUser.uid})
+                let hash = md5(currentUser.email);
+                this.setState({userHash: hash})
                 // console.log(this.state.user.uid); 
 
             }
@@ -56,9 +58,9 @@ export default class View extends React.Component {
         let ref;
 
         if(this.props.match.params.tabName == 'roommates'){
-            ref = firebase.database().ref(this.state.uid + "/" + this.props.match.params.tabName + "/names/");
+            ref = firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/");
             // console.log(this.state.user.uid);
-            console.log(this.state.uid);
+            console.log(this.state.userHash);
         } else {
             ref = firebase.database().ref(this.props.match.params.tabName + `/taskList/`);
         }
