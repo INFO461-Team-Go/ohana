@@ -14,7 +14,7 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 
 
-exports.countShit = functions.database.ref('{hash}/roommates/names')
+exports.handleCountRoommaates = functions.database.ref('{hash}/roommates/names')
 .onWrite((change, context) => {
     if (!change.after.exists()) {
         return null;
