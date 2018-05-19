@@ -11,6 +11,9 @@
   "dependencies": {
     "ask-sdk-core": "^2.0.4",
     "ask-sdk-model": "^1.2.0",
+    "firebase": "^5.0.2",
+    "grpc": "^1.11.3",
+    "md5": "^2.2.1",
     "request": "^2.85.0"
   }
 }
