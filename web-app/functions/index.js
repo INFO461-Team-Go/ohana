@@ -14,18 +14,24 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 
 
-exports.countShit = functions.database.ref('/roommates/names')
-    .onWrite((change, context) => {
-        if (!change.after.exists()) {
-            return null;
-        }
+exports.countShit = functions.database.ref('{hash}/roommates/names')
+.onWrite((change, context) => {
+    if (!change.after.exists()) {
+        return null;
+    }
 
-        let parentRef = change.after.ref.parent;
-        let namesSnap = change.after;
-        let names = [];
-        namesSnap.forEach(nameSnap => names.push(nameSnap));
-        let length = names.length;
-        let toUpdate = {count: length};
-
-        return change.after.ref.parent.update(toUpdate);
+    let parentRef = change.after.ref.parent;
+    let namesSnap = change.after;
+    let names = [];
+    let indexCount = 0;
+    namesSnap.forEach(nameSnap => {
+        nameSnap.ref.update({index: indexCount})
+        names.push(nameSnap)
+        indexCount++;
     });
+    let length = names.length;
+    let toUpdate = {count: length};
+
+    return change.after.ref.parent.update(toUpdate);
+});
+
