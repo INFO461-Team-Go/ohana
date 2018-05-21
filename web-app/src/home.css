@@ -10,7 +10,7 @@ body{
 
 
 /*for slogan font*/
-h2, h4, h5, h6{
+h2, h5{
     font-family: 'Nunito', sans-serif;
     font-weight: 200;
     color: #FFFFFF;
@@ -63,7 +63,6 @@ h2, h4, h5, h6{
 
 /*font size increase for number 3 in slogan*/
 #three{
-    font-size: 5vh;
     font-weight: 400;
     font-size: 8vh;
 }

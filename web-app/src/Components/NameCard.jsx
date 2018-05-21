@@ -44,12 +44,18 @@ export default class NameCard extends React.Component {
                 {
                     !this.state.edit ?
                     <div className="d-flex">
-                        <div className="card my-3">
+                        {/* <div className="card my-3">
                             <div className="card-body py-0">
                                 <div id="content">
                                     <p className="card-text py-3">{roommate.name}</p>
                                 </div>
                             </div>
+                        </div> */}
+                        <div className="cardBox my-2 row">
+                            <div className="col-2"/>
+                            <h4 className="m-0 col-8 text-truncate" id="cardFont">{roommate.name}</h4>
+                            <i className="material-icons col-2" id="moreIcon">more_vert</i>
+                            {/* <h4 className="text-center">{roommate.name}</h4> */}
                         </div>
                         <div className="buttons d-flex flex-column">
                             <button type="button" className="btn btn-sm btn-outline-primary" onClick={() => this.handleEdit()}>Edit</button>

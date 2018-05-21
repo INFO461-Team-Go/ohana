@@ -8,6 +8,7 @@ import constants from "./Constants"
 import firebase from 'firebase/app'
 import 'firebase/auth';
 import 'firebase/database';
+import md5 from 'blueimp-md5';
 
 import Header from "./Header";
 
@@ -17,7 +18,7 @@ export default class SignUp extends React.Component {
         //listen for auth change
         this.authUnsub = firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.props.history.push('/channels/view/SignIn')
+                this.props.history.push(constants.routes.signin)
             }
         });
     }
@@ -52,8 +53,12 @@ export default class SignUp extends React.Component {
             });
             return;
         } else {
+            let hash = md5(this.state.email);
+            let ref = firebase.database().ref(hash + "/roommates/");
+            let toUpdate = {count: 0};
             console.log(this.state.photoUrl)
             firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pw)
+                .then(() => ref.update(toUpdate))
                 .then(user => user.updateProfile({
                     photoURL: this.state.photoUrl,
                     displayName: this.state.displayName
