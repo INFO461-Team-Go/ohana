@@ -73,7 +73,6 @@ export default class NameList extends React.Component {
                                 placeholder="new roommate here"
                             />
                         </form> :
-    
                             <i className="material-icons" id="addIcon"
                             onClick={() => this.setState({addActive: true})}> add_circle_outline</i>
                    
