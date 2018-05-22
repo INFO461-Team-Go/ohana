@@ -86,7 +86,7 @@ h2, h5{
 /**/
 .imageWrapper{
     margin: auto;
-    margin-top: 7vh;
+    margin-top: 5vh;
     height: 26vh;
     width: 35vh;
     background-color: white;
@@ -102,7 +102,7 @@ h2, h5{
 .note{
     margin-top: 2vh;
     font-weight: 200;
-    font-size: 1.2vh;
+    font-size: 1.4vh;
 }
 
 .imageWrapper:hover {
@@ -169,7 +169,12 @@ h5{
 
 #startNow{
     margin-top: 15vh;
-    margin-bottom: 5vh;
+    margin-bottom: 2vh;
+}
+
+
+#bolded{
+    font-weight: 400;
 }
 
 @media only screen and (max-aspect-ratio: 1019/887) {
@@ -188,6 +193,10 @@ h5{
         margin-left: 0px;
         margin-right: 0px;
         font-size: 6vh;
+    }
+
+    #sloganBox{
+        align-items: center;
     }
     
     .thicker{
