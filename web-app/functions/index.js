@@ -25,9 +25,11 @@ exports.handleCountRoommates = functions.database.ref('{hash}/roommates/names')
     let names = [];
     let indexCount = 0;
     namesSnap.forEach(nameSnap => {
-        nameSnap.ref.update({index: indexCount})
-        names.push(nameSnap)
-        indexCount++;
+        if (nameSnap) {
+            nameSnap.ref.update({index: indexCount})
+            names.push(nameSnap)
+            indexCount++;
+        }
     });
     let length = names.length;
     let toUpdate = {count: length};
@@ -35,3 +37,7 @@ exports.handleCountRoommates = functions.database.ref('{hash}/roommates/names')
     return change.after.ref.parent.update(toUpdate);
 });
 
+// use numChildren
+
+// to assign roommates to tasks
+// set ref to names. then orderByChild("index").equalTo(whatever index that was)
