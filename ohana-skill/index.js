@@ -1,18 +1,32 @@
 'use strict';
+// Dependencies
 const Alexa = require('ask-sdk-core');
 const Request = require('request');
-const Firebase = require('./firebase-functions');
+const Firebase = require("firebase");
+const MD5 = require('md5');
 
-// Amazon Profile URL
+// Used to initializa Firebase app
+const config = {
+    apiKey: "AIzaSyCh7wRFGqzNXGuKBLzPYItxrhz8S-9b2aY",
+    authDomain: "ohana-e7233.firebaseapp.com",
+    databaseURL: "https://ohana-e7233.firebaseio.com",
+    storageBucket: "ohana-e7233.appspot.com",
+};
+
+// Constants
+//const db = Firebase.database();
 const amznProfileURL = 'https://api.amazon.com/user/profile?access_token=';
 
-// LaunchRequestHandler:
+/// REQUEST HANDLERS: Code to handle user interaction with Ohana
+
+/**
+ * LaunchRequestHandler
+ */
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-        handlerInput.requestEnvelope.context.callBackWaitsForEmptyEventLoop = false; 
         const user = handlerInput.requestEnvelope.session.user;
         if (user.userId == "amzn1.ask.account.[unique-value-here]" || user.userId == undefined) {
             let output = "to start using this skill, please use the companion app to authenticate on Amazon";
@@ -25,8 +39,6 @@ const LaunchRequestHandler = {
             if (response.statusCode == 200) {
                 let profile = JSON.parse(body);
                 console.log(profile.email);
-                // TODO: Delete this later
-                // firebase.getTask("harshi");
             }
         });
         const speakOutput = 'Hello! Welcome to ohana!';
@@ -36,6 +48,9 @@ const LaunchRequestHandler = {
     }
 };
 
+/**
+ * 
+ */
 const GetTaskIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
@@ -106,13 +121,27 @@ const SessionEndedRequestHandler = {
 };
 
 // Lambda Setup
-const skillBuilder = Alexa.SkillBuilders.custom();
-exports.handler = skillBuilder
-    .addRequestHandlers(
-        LaunchRequestHandler,
-        GetTaskIntentHandler,
-        MarkAsDoneIntentHandler,
-        HelpIntentHandler,
-        CancelAndStopIntentHandler
-    )
-    .lambda();
+let skill = undefined;
+exports.handler = async function(event, context) {
+    context.callbackWaitsForEmptyEventLoop = false;
+    // This snippet is needed for Firebase initialization on lambda
+    if (Firebase.apps.length === 0) {
+        Firebase.initializeApp(config);
+    }
+    // Debug code
+    console.log(`REQUEST++++${JSON.stringify(event)}`);
+    if (!skill) {
+        // TODO: Add error handlers after request handlers
+        skill = Alexa.SkillBuilders.custom()
+            .addRequestHandlers(
+                LaunchRequestHandler,
+                GetTaskIntentHandler,
+                MarkAsDoneIntentHandler,
+                HelpIntentHandler,
+                CancelAndStopIntentHandler,
+                SessionEndedRequestHandler
+            )
+            .create();
+    }
+    return skill.invoke(event, context);
+}
