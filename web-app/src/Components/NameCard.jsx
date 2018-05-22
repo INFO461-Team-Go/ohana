@@ -10,7 +10,8 @@ export default class NameCard extends React.Component {
     }
     
     handleDelete() {
-        this.props.nameSnap.ref.remove();
+        this.props.nameSnap.ref.remove()
+            .then(() => console.log("remove succeeded"))
         // let snap= this.props.countSnap.val();
         // console.log("number = " + number);
         // this.props.countRef.set({count: number});
