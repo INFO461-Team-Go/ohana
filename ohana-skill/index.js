@@ -1,11 +1,10 @@
 'use strict';
 const Alexa = require('ask-sdk-core');
 const Request = require('request');
-const DBFunctions = require('./firebase-functions');
+const Firebase = require('./firebase-functions');
 
 // Amazon Profile URL
 const amznProfileURL = 'https://api.amazon.com/user/profile?access_token=';
-// const firebase = new DBFunctions();
 
 // LaunchRequestHandler:
 const LaunchRequestHandler = {

@@ -7,17 +7,14 @@ const config = {
     databaseURL: "https://ohana-e7233.firebaseio.com",
     storageBucket: "ohana-e7233.appspot.com",
 };
+firebase.initializeApp(config);
 
-module.exports = function() {
-    firebase.initializeApp(config);
-    const db = firebase.database();
-    const accounts = db.ref(`/accounts`);
+const db = firebase.database();
 
-    this.getTask = function(name) {
-        console.log(name);
-    }
+exports.getTask = function(name) {
+    
+}
 
-    this.markAsDone = function(name) {
-
-    }
+exports.markAsDone = function(name) {
+   
 }
