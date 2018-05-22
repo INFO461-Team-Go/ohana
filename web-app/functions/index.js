@@ -13,7 +13,12 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
 
-
+/**
+ * Initializes listeners in each instance of names. Counts and indexes all names in roommates 
+ * whenever there is a change and updates database accordingly
+ * @namespace cloudfunctions
+ * @function cloudfunctions.handleCountRoommates
+ */
 exports.handleCountRoommates = functions.database.ref('{hash}/roommates/names')
 .onWrite((change, context) => {
     if (!change.after.exists()) {
@@ -25,6 +30,7 @@ exports.handleCountRoommates = functions.database.ref('{hash}/roommates/names')
     let names = [];
     let indexCount = 0;
     namesSnap.forEach(nameSnap => {
+        // due to instances of method pushing blank entries. 
         if (nameSnap) {
             nameSnap.ref.update({index: indexCount})
             names.push(nameSnap)
