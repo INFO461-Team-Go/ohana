@@ -20,14 +20,25 @@ export default class NameList extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         this.props.roommatesRef.off("value", this.unlisten);
-        this.unlisten = nextProps.roommatesRef.on("value", snapshot => this.setState({
-            roommatesSnap: snapshot
-        }));
+        this.unlisten = nextProps.roommatesRef.on("value", snapshot => {
+            this.setState({roommatesSnap: snapshot});
+            if (snapshot.numChildren() > 0) {
+                this.setState({addActive: false});
+            } else {
+                this.setState({addActive: true});
+            }
+        });
     }
 
     componentDidMount() {
-        this.unlisten = this.props.roommatesRef.on('value',
-            snapshot => this.setState({roommatesSnap: snapshot}));
+        this.unlisten = this.props.roommatesRef.on('value', snapshot => {
+            this.setState({roommatesSnap: snapshot});
+            if (snapshot.numChildren() > 0) {
+                this.setState({addActive: false});
+            } else {
+                this.setState({addActive: true});
+            }    
+        });
     }
 
     componentWillUnmount() {
