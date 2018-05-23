@@ -30,7 +30,8 @@ exports.handleCountRoommates = functions.database.ref('{hash}/roommates/names')
     let names = [];
     let indexCount = 0;
     namesSnap.forEach(nameSnap => {
-        // due to instances of method pushing blank entries. 
+        // due to instances of method pushing blank entries, method checks if nameSnap exists. 
+        // performs count and update if nameSnap is truthy.
         if (nameSnap) {
             nameSnap.ref.update({index: indexCount})
             names.push(nameSnap)
@@ -43,7 +44,7 @@ exports.handleCountRoommates = functions.database.ref('{hash}/roommates/names')
     return change.after.ref.parent.update(toUpdate);
 });
 
-// use numChildren
+// use snapshot.numChildren() to find number of children
 
 // to assign roommates to tasks
 // set ref to names. then orderByChild("index").equalTo(whatever index that was)
