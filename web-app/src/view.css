@@ -26,7 +26,7 @@
 #moreIcon {
     color: #31C4F3;
     padding-top: 8px;
-    transform: translate(0.8rem, 8px);
+    transform: translate(0px, 1px);
     cursor: pointer;
     display: none;
 }
