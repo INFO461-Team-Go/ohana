@@ -89,9 +89,15 @@ export default class TaskList extends React.Component {
         });
         console.log(names.length);
 
-        console.log(this.state.dataSource)
-        this.state.dataSource.forEach(elem => {
-            rooms.push(<Picker.Item label={elem.value}/>)
+        // console.log(this.state.dataSource)
+        // this.state.dataSource.forEach(elem => {
+        //     rooms.push(<Picker.Item label={elem.value}/>)
+        // });
+
+        this.state.dataSource.forEach(element => {
+            console.log(element.name);
+            rooms.push(<option value={element.name}>{element.name}</option>)
+            // rooms.push(<Picker.Item label={element.name} value={element.name} />);
         });
 
         return (
@@ -109,10 +115,9 @@ export default class TaskList extends React.Component {
                         onInput={evt => this.setState({name: evt.target.value})}
                         placeholder="new task here"
                     />
-                    <Picker
-                    onValueChange={(itemValue, itemIndex) => this.setState({roommate: itemValue})}>
-                        {rooms}
-                    </Picker>
+                    <select>
+                    {rooms}
+                    </select>
                     <input type="submit" value="Submit"/>
                 </form>
                 <div ref="listEnd"></div>
