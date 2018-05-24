@@ -26,6 +26,17 @@ h2{
     color: #FFFFFF;
 }
 
+.alert{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(0,0,0,0);
+    border-color: rgba(0,0,0,0);
+    color: #FF4D4D;
+    font-family: 'Quicksand';
+    font-weight: 400;
+}
+
 /*declares common font elements for credential(#test) box*/ 
 #cred{
     position: relative; 

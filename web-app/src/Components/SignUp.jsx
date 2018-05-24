@@ -125,7 +125,7 @@ export default class SignUp extends React.Component {
                                 }
                             </div>
                             <div className="form-group">
-                                <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+                                <button type="submit" className="btn btn-primary w-100">Sign Up</button>
                             </div>
                         </form>
                         <p>Already have an account? <Link to={constants.routes.signin}>Sign In!</Link></p>
