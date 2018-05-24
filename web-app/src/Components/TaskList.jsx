@@ -1,6 +1,7 @@
 import React from "react";
 import NameCard from "./NameCard";
 import firebase from "firebase/app";
+import Picker from 'react-picker'
 
 
 let listStyles = {
@@ -13,20 +14,40 @@ export default class TaskList extends React.Component {
         this.state = {
             name: "",
             fbError: undefined,
-            roommatesSnap: undefined    
+            taskSnap: undefined,
+            dataSource: []  
         };
     }
+
+    /*async get_firebase_list(){
+        return firebase.database().ref('/roommates/names/').once('value').then(function(snapshot) {
+            var items = [];
+            snapshot.forEach(function(childSnapshot) {
+              var childKey = childSnapshot.key;
+              var childData = childSnapshot.val();
+              items.push(childData);
+            }); 
+            // console.log("items_load: " + items);
+            return items;
+        });
+    }
+    async componentWillMount(){
+        this.setState({
+            dataSource : await this.get_firebase_list()
+        })
+        console.log("items: " + this.state.dataSource);
+    }*/
 
     componentWillReceiveProps(nextProps) {
         this.props.taskRef.off("value", this.unlisten);
         this.unlisten = nextProps.taskRef.on("value", snapshot => this.setState({
-            roommatesSnap: snapshot
+            taskSnap: snapshot
         }));
     }
 
     componentDidMount() {
         this.unlisten = this.props.taskRef.on('value',
-            snapshot => this.setState({roommatesSnap: snapshot}));
+            snapshot => this.setState({taskSnap: snapshot}));
     }
 
     componentWillUnmount() {
@@ -52,15 +73,22 @@ export default class TaskList extends React.Component {
 
     render() {
 
-        if (!this.state.roommatesSnap) {
+        if (!this.state.taskSnap) {
             return <p>loading...</p>
         }
         //TODO: loop over the tasks snapshot
         //and create a <Task/> for each child snapshot
         //pushing it into an array
         let names = [];
-        this.state.roommatesSnap.forEach(nameSnap => {
-            names.push(<NameCard key={nameSnap.key} nameSnap={nameSnap} roommatesSnap={this.state.roommatesSnap}/>)
+
+        //let roommates = this.get_firebase_list();
+
+        /*roommates.forEach(function(elem){
+            console.log(elem)
+        });*/
+
+        this.state.taskSnap.forEach(nameSnap => {
+            names.push(<NameCard key={nameSnap.key} nameSnap={nameSnap} taskSnap={this.state.taskSnap}/>)
         });
         console.log(names.length);
 
@@ -79,6 +107,7 @@ export default class TaskList extends React.Component {
                         onInput={evt => this.setState({name: evt.target.value})}
                         placeholder="new task here"
                     />
+                    <Picker />
                     <input type="submit" value="Submit"/>
                 </form>
                 <div ref="listEnd"></div>
