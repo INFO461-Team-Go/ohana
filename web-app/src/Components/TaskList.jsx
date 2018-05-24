@@ -116,9 +116,15 @@ export default class TaskList extends React.Component {
                         placeholder="new task here"
                     />
                     <select>
-                    {rooms}
+                    {rooms.length == 0?
+                    <option disabled selected value> Please Submit a Roommmate to Begin </option>:
+                    rooms
+                    }
                     </select>
-                    <input type="submit" value="Submit"/>
+                    {rooms.length == 0?
+                    <input type="submit" value="Submit" className ="btn btn-primary" disabled/>:
+                    <input type="submit" value="Submit" className ="btn btn-primary"/>
+                    }                    
                 </form>
                 <div ref="listEnd"></div>
             </div>
