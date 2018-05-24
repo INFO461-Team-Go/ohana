@@ -5,6 +5,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 import NameList from "./NameList";
+import TaskList from "./TaskList";
 import NewUserForm from "./NewUserForm";
 import Header from "./Header";
 
@@ -99,7 +100,7 @@ export default class View extends React.Component {
                         {this.props.match.params.tabName == 'roommates'?
                             <NameList roommatesRef={ref}/>
                             :
-                            <div></div>
+                            <TaskList taskRef={ref}/>
                             }
                             {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
 

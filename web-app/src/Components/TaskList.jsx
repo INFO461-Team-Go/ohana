@@ -18,19 +18,19 @@ export default class TaskList extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.props.roommatesRef.off("value", this.unlisten);
-        this.unlisten = nextProps.roommatesRef.on("value", snapshot => this.setState({
+        this.props.taskRef.off("value", this.unlisten);
+        this.unlisten = nextProps.taskRef.on("value", snapshot => this.setState({
             roommatesSnap: snapshot
         }));
     }
 
     componentDidMount() {
-        this.unlisten = this.props.roommatesRef.on('value',
+        this.unlisten = this.props.taskRef.on('value',
             snapshot => this.setState({roommatesSnap: snapshot}));
     }
 
     componentWillUnmount() {
-        this.props.roommatesRef.off('value', this.unlisten);
+        this.props.taskRef.off('value', this.unlisten);
     }
 
     handleSubmit(evt) {
@@ -39,9 +39,15 @@ export default class TaskList extends React.Component {
         //back to the server
         evt.preventDefault();
 
-        this.props.roommatesRef.push({name: this.state.name})
+        this.props.taskRef.push({name: this.state.name})
             .then(() => this.setState({name: "", fbError: undefined}))
             .catch(err => this.setState({fbError: err}));
+    }
+
+    onKeyPress(event) {
+        if (event.which === 13 /* Enter */) {
+          event.preventDefault();
+        }
     }
 
     render() {
@@ -61,7 +67,7 @@ export default class TaskList extends React.Component {
         return (
             <div className="container" id="nameList" ref="wrap" style={listStyles}>
                 {names}
-                <form onSubmit={evt => this.handleSubmit(evt)}>
+                <form onKeyPress={this.onKeyPress} onSubmit={evt => {this.handleSubmit(evt); evt.preventDefault();}}>
                     {
                         this.state.fbError ? 
                         <div className="alert alert-danger">{this.state.fbError.message}</div> : 
@@ -71,8 +77,9 @@ export default class TaskList extends React.Component {
                         className="form-control"
                         value={this.state.name}
                         onInput={evt => this.setState({name: evt.target.value})}
-                        placeholder="new roommate here"
+                        placeholder="new task here"
                     />
+                    <input type="submit" value="Submit"/>
                 </form>
                 <div ref="listEnd"></div>
             </div>
