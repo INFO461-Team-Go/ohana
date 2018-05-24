@@ -34,7 +34,8 @@ h2{
     border-color: rgba(0,0,0,0);
     color: #FF4D4D;
     font-family: 'Quicksand';
-    font-weight: 400;
+    font-weight: 600;
+    font-size: 1.5vh;
 }
 
 /*declares common font elements for credential(#test) box*/ 
@@ -65,17 +66,33 @@ h2{
 }
 
 /*sign in to manage tasks text style and location*/
-#slogan{
+.slogan{
     font-weight: 200;
     font-size: 3.4vh;
     text-align: center;
-    margin-top: 21vh;
+    margin-top: 10.9vh;
+}
+
+#subSlogan{
+    font-weight: 200;
+    font-size: 1.5vh;
+    text-align: center;
+    margin-top: 0;
+}
+
+#sloganOverRide{
+    margin-top: 10vh;
 }
 
 /*font modifier for the slogan*/
-#thicker{
+.thicker{
     font-weight: 400;
     font-size: 5vh;
+}
+
+.thickerOverRide{
+    font-weight: 400;
+    font-size: 1.8vh;
 }
 
 /*credential console style and location*/
