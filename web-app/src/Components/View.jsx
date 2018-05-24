@@ -51,13 +51,6 @@ export default class View extends React.Component {
     }
 
     render() {
-        let ref;
-
-        if(this.props.match.params.tabName == 'roommates'){
-            ref = firebase.database().ref(this.props.match.params.tabName + "/names/");
-        } else {
-            ref = firebase.database().ref(this.props.match.params.tabName);
-        }
 
         return (
             <div>
@@ -98,9 +91,9 @@ export default class View extends React.Component {
             
                         <main>
                         {this.props.match.params.tabName == 'roommates'?
-                            <NameList roommatesRef={ref}/>
+                            <NameList roommatesRef={firebase.database().ref(this.props.match.params.tabName + '/names/')}/>
                             :
-                            <TaskList taskRef={ref}/>
+                            <TaskList taskRef={firebase.database().ref(this.props.match.params.tabName)}/>
                             }
                             {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
 

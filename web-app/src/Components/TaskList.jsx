@@ -15,11 +15,12 @@ export default class TaskList extends React.Component {
             name: "",
             fbError: undefined,
             taskSnap: undefined,
-            dataSource: []  
+            dataSource: [] ,
+            roommate: "" 
         };
     }
 
-    /*async get_firebase_list(){
+    async get_firebase_list(){
         return firebase.database().ref('/roommates/names/').once('value').then(function(snapshot) {
             var items = [];
             snapshot.forEach(function(childSnapshot) {
@@ -31,12 +32,13 @@ export default class TaskList extends React.Component {
             return items;
         });
     }
+
     async componentWillMount(){
         this.setState({
             dataSource : await this.get_firebase_list()
         })
         console.log("items: " + this.state.dataSource);
-    }*/
+    }
 
     componentWillReceiveProps(nextProps) {
         this.props.taskRef.off("value", this.unlisten);
@@ -80,17 +82,17 @@ export default class TaskList extends React.Component {
         //and create a <Task/> for each child snapshot
         //pushing it into an array
         let names = [];
-
-        //let roommates = this.get_firebase_list();
-
-        /*roommates.forEach(function(elem){
-            console.log(elem)
-        });*/
+        let rooms = [];
 
         this.state.taskSnap.forEach(nameSnap => {
             names.push(<NameCard key={nameSnap.key} nameSnap={nameSnap} taskSnap={this.state.taskSnap}/>)
         });
         console.log(names.length);
+
+        console.log(this.state.dataSource)
+        this.state.dataSource.forEach(elem => {
+            rooms.push(<Picker.Item label={elem.value}/>)
+        });
 
         return (
             <div className="container" id="nameList" ref="wrap" style={listStyles}>
@@ -107,7 +109,10 @@ export default class TaskList extends React.Component {
                         onInput={evt => this.setState({name: evt.target.value})}
                         placeholder="new task here"
                     />
-                    <Picker />
+                    <Picker
+                    onValueChange={(itemValue, itemIndex) => this.setState({roommate: itemValue})}>
+                        {rooms}
+                    </Picker>
                     <input type="submit" value="Submit"/>
                 </form>
                 <div ref="listEnd"></div>
