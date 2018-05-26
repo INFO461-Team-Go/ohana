@@ -74,8 +74,8 @@ export default class SignUp extends React.Component {
         return (
             <div>
                 <Header/>
-                <h2 className='slogan' id="sloganOverRide"><span className="thicker">sign up</span> with <span className="thicker">Amazon</span> email</h2>
-                <h2 id="subSlogan">alexa will <span className='thickerOverRide'>NOT</span> work if you don't sign up with your <span className='thickerOverRide'>AMAZON</span> email</h2>
+                <h2 className='sloganS' id="sloganOverRide"><span className="thicker">sign up</span> with <span className="thicker">Amazon</span> email</h2>
+                <h2 id="subSloganS">alexa will <span className='thickerOverRide'>NOT</span> work if you don't sign up with your <span className='thickerOverRide'>AMAZON</span> email</h2>
                 <div className="m-auto card" id='test'>
                     <div className="card-body p-5 text-center">
                         {this.state.errorMessage ?

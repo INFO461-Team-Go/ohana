@@ -6,7 +6,6 @@ import './content.css';
 import './home.css';
 import './signin.css';
 import './view.css';
-import './signup.css';
 
 import constants from "./Components/Constants";
 import Home from "./Components/Home";

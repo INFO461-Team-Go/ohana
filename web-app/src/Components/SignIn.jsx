@@ -47,7 +47,7 @@ export default class SignIn extends React.Component {
             <div>
                 <Header/>
                 <main>
-                    <h2 className="slogan"><span className="thicker">sign in</span> to manage tasks</h2>
+                    <h2 className="sloganS"><span className="thicker">sign in</span> to manage tasks</h2>
                     {
                         this.state.fberror ?
                             <div className="alert alert-danger">
