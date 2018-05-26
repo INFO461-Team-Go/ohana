@@ -19,7 +19,7 @@
 
 #addIcon{
     cursor: pointer;
-    transform: translate(16rem, 5px);
+    margin: auto;
     color: rgba(255, 255, 255, 0.5)
 
 }
@@ -33,4 +33,28 @@
 
 .cardBox:hover > #moreIcon {
     display: block;
+}
+
+#formBox {
+    width: 13rem;
+    height: 80px;
+    background-color: #ffff;
+    margin-left: 10rem;
+    border-radius: 8px;
+    padding-top: 3px;
+}
+
+#inputBox {
+    width: 12.5rem;
+    height: 40px;
+    background-color: #bcbcbc;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#newCardButton {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    cursor: pointer;
 }

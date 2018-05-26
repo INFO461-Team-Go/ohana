@@ -10,11 +10,18 @@ export default class NameCard extends React.Component {
     }
     
     handleDelete() {
-        this.props.nameSnap.ref.remove()
-            .then(() => console.log("remove succeeded"))
+        let toRemove = this.props.nameSnap;
+        toRemove.ref.remove()
+            .then(() => console.log("remove succeeded"));
+            // .then(() => console.log("remove succeeded"))
+            // .then(() => {
+            //     let indexCount = 0;
+            //     toRemove.ref.parent.once()
+            // });
         // let snap= this.props.countSnap.val();
         // console.log("number = " + number);
         // this.props.countRef.set({count: number});
+ 
     }
 
     handleEdit() {
@@ -38,29 +45,41 @@ export default class NameCard extends React.Component {
 
     
     render() {
+        function toTitleCase(str) {
+            return str.replace(/\w\S*/g, function(txt){
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+        }
+
         let roommate = this.props.nameSnap.val();
         let ref = this.props.nameSnap.ref;
         return (   
-            <div>
+            <div className="container">
                 {
                     !this.state.edit ?
-                    <div className="d-flex">
+                    <div className="row">
                         {/* <div className="card my-3">
                             <div className="card-body py-0">
                                 <div id="content">
-                                    <p className="card-text py-3">{roommate.name}</p>
+                                    <p className="card-text py-3">{toTitleCase(roommate.name)}</p>
                                 </div>
                             </div>
                         </div> */}
-                        <div className="cardBox my-2 row">
-                            <div className="col-2"/>
-                            <h4 className="m-0 col-8 text-truncate" id="cardFont">{roommate.name}</h4>
-                            <i className="material-icons col-2" id="moreIcon">more_vert</i>
-                            {/* <h4 className="text-center">{roommate.name}</h4> */}
+                        <div className="col-2">
                         </div>
-                        <div className="buttons d-flex flex-column">
-                            <button type="button" className="btn btn-sm btn-outline-primary" onClick={() => this.handleEdit()}>Edit</button>
-                            <button type="button" className="btn btn-sm btn-outline-primary" onClick={() => this.handleDelete()}>Delete</button>
+                        <div className="col-8">
+                            <div className="cardBox my-2 row">
+                                <div className="col-2"/>
+                                <h4 className="m-0 col-8 text-truncate" id="cardFont">{roommate.name}</h4>
+                                <i className="material-icons col-2" id="moreIcon">more_vert</i>
+                                {/* <h4 className="text-center">{roommate.name}</h4> */}
+                            </div>
+                        </div>
+                        <div className="col-2">
+                            <div className="buttons d-flex flex-column">
+                                <button type="button" className="btn btn-sm btn-outline-primary" onClick={() => this.handleEdit()}>Edit</button>
+                                <button type="button" className="btn btn-sm btn-outline-primary" onClick={() => this.handleDelete()}>Delete</button>
+                            </div>
                         </div>
                     </div> :
                     <div className="">

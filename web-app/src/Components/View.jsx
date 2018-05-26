@@ -6,6 +6,7 @@ import "firebase/auth";
 import md5 from "blueimp-md5";
 
 import NameList from "./NameList";
+import TaskList from "./TaskList";
 import NewUserForm from "./NewUserForm";
 import Header from "./Header";
 
@@ -56,6 +57,7 @@ export default class View extends React.Component {
 
 
     render() {
+
         let ref;
 
         if(this.props.match.params.tabName == 'roommates'){
@@ -68,7 +70,7 @@ export default class View extends React.Component {
 
         return (
             <div>
-                <header className="">
+                {/* <header className="">
                     <div className="container-fluid">
                         <div className="row justify-content-between">
                             <div className="col-1 align-self-center">
@@ -78,8 +80,23 @@ export default class View extends React.Component {
                             </div>
                         </div>
                     </div>
+                </header> */}
+                <header id="logoBox" className="row m-0">
+                    <div className="col">
+                        <div id='logo' className="">
+                            <div id='logoInner'>
+                                <div id='logoInnerInner'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col d-flex justify-content-end align-items-center">
+                        <div id="signOut" className="">
+                            <button className="btn btn-outline-danger btn-sm" onClick={this.handleSignOut}>
+                                Sign Out
+                            </button>
+                        </div>
+                    </div> 
                 </header>
-                <Header/>
                 <div className="container">
                     <ul className="nav nav-tabs">
                         <li className = "nav-item">
@@ -102,9 +119,9 @@ export default class View extends React.Component {
             
                         <main>
                         {this.props.match.params.tabName == 'roommates'?
-                            <NameList roommatesRef={ref}/>
+                            <NameList roommatesRef={firebase.database().ref(this.props.match.params.tabName + '/names/')}/>
                             :
-                            <div></div>
+                            <TaskList taskRef={firebase.database().ref(this.props.match.params.tabName)}/>
                             }
                             {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
 

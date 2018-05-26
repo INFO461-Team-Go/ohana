@@ -1,5 +1,6 @@
 import React from "react";
 import NameCard from "./NameCard";
+import NewUserForm from "./NewUserForm";
 import firebase from "firebase/app";
 
 
@@ -86,8 +87,8 @@ export default class NameList extends React.Component {
                         </form> :
                         <i className="material-icons" id="addIcon"
                         onClick={() => this.setState({addActive: true})}> add_circle_outline</i>
-                   
                 }
+                <NewUserForm/>
                 <div ref="listEnd"></div>
             </div>
         );
