@@ -37,6 +37,12 @@ export default class NameCard extends React.Component {
 
     
     render() {
+        function toTitleCase(str) {
+            return str.replace(/\w\S*/g, function(txt){
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+        }
+
         let roommate = this.props.nameSnap.val();
         let ref = this.props.nameSnap.ref;
         return (   
@@ -47,7 +53,7 @@ export default class NameCard extends React.Component {
                         <div className="card my-3">
                             <div className="card-body py-0">
                                 <div id="content">
-                                    <p className="card-text py-3">{roommate.name}</p>
+                                    <p className="card-text py-3">{toTitleCase(roommate.name)}</p>
                                 </div>
                             </div>
                         </div>

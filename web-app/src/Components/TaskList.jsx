@@ -94,9 +94,18 @@ export default class TaskList extends React.Component {
         //     rooms.push(<Picker.Item label={elem.value}/>)
         // });
 
+        function toTitleCase(str) {
+            return str.replace(/\w\S*/g, function(txt){
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+        }
+
+        let index = 0;
+
         this.state.dataSource.forEach(element => {
             console.log(element.name);
-            rooms.push(<option value={element.name}>{element.name}</option>)
+            rooms.push(<option value={index}>{toTitleCase(element.name)}</option>)
+            index++;
             // rooms.push(<Picker.Item label={element.name} value={element.name} />);
         });
 
@@ -121,7 +130,7 @@ export default class TaskList extends React.Component {
                     rooms
                     }
                     </select>
-                    {rooms.length == 0?
+                    {rooms.length == 0 || this.state.name.trim() == ""?
                     <input type="submit" value="Submit" className ="btn btn-primary" disabled/>:
                     <input type="submit" value="Submit" className ="btn btn-primary"/>
                     }                    
