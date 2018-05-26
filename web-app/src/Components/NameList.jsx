@@ -1,11 +1,19 @@
 import React from "react";
 import NameCard from "./NameCard";
+import NewUserForm from "./NewUserForm";
 import firebase from "firebase/app";
-
 
 let listStyles = {
     maxWidth:"50%"
 };
+
+let greyButton = {
+    color: "#8B8B8B"
+}
+
+let redButton = {
+    color: "#FF4D4D"
+}
 
 export default class NameList extends React.Component {
     constructor(props) {
@@ -56,6 +64,10 @@ export default class NameList extends React.Component {
             .catch(err => this.setState({fbError: err}));
     }
 
+    handleCancelAdd() {
+        this.setState({addActive: false});
+    }
+
     render() {
 
         if (!this.state.roommatesSnap) {
@@ -71,22 +83,33 @@ export default class NameList extends React.Component {
                 {names}
                 {
                     this.state.addActive ?
-                        <form onSubmit={evt => this.handleSubmit(evt)}>
-                            {
-                                this.state.fbError ? 
-                                <div className="alert alert-danger">{this.state.fbError.message}</div> : 
-                                undefined
-                            }
-                            <input type="text" 
-                                className="form-control"
-                                value={this.state.name}
-                                onInput={evt => this.setState({name: evt.target.value})}
-                                placeholder="new roommate here"
-                            />
-                        </form> :
-                        <i className="material-icons" id="addIcon"
-                        onClick={() => this.setState({addActive: true})}> add_circle_outline</i>
-                   
+                        <div className="container">
+                            <div id="formBox" className="mx-auto" onSubmit={evt => this.handleSubmit(evt)}>
+                                {
+                                    this.state.fbError ? 
+                                    <div className="alert alert-danger">{this.state.fbError.message}</div> : 
+                                    undefined
+                                }
+                                <input type="text" 
+                                    className="form-control form-control-sm mx-auto"
+                                    id="inputBox"
+                                    value={this.state.name}
+                                    onInput={evt => this.setState({name: evt.target.value})}
+                                    placeholder="new roommate here"
+                                />
+                                <div className="row mx-auto px-1">
+                                    <h4 className="col text-center m-1" id="newCardButton" style={redButton}
+                                    onClick={() => this.handleCancelAdd()}>cancel</h4>
+                                    <h4 className="col text-center m-1" id="newCardButton" style={greyButton}
+                                    onClick={(evt) => this.handleSubmit(evt)}>add</h4>
+                                </div>
+                            </div>
+                        </div> 
+                        :
+                        <div className="container d-flex justify-content-center my-3">
+                            <i className="material-icons" id="addIcon"
+                            onClick={() => this.setState({addActive: true})}> add_circle_outline</i>
+                        </div>
                 }
                 <div ref="listEnd"></div>
             </div>

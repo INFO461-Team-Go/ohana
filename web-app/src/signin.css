@@ -8,16 +8,20 @@ body{
 }
 
 /*this is the container that wraps the sign in credentials from username to sign up button*/
-#test{
+.test{
     position: relative;
     background-color: #2E926F;
     width: 45vh;
     height: 34.5vh;
-    margin:auto;
+    margin: auto;
     margin-top: 0vh;
     transform: translateY(4vh);
     border-radius: 2vh 13vh;
     box-shadow: 3px 3px 8px #000000;
+}
+
+#testSignUp{
+    height: 50vh;
 }
 
 h2{
@@ -32,10 +36,11 @@ h2{
     text-align: center;
     background-color: rgba(0,0,0,0);
     border-color: rgba(0,0,0,0);
-    color: #FF4D4D;
+    color: #BD0D0D;
     font-family: 'Quicksand';
     font-weight: 600;
-    font-size: 1.5vh;
+    font-size: 1.7vh;
+    padding: 0%;
 }
 
 /*declares common font elements for credential(#test) box*/ 
@@ -55,6 +60,18 @@ h2{
     margin-top: 9%;
     margin-left: 10%;
     margin-bottom: 0%;
+}
+
+.inputSignUp{
+    font-size: 2.7vh;
+    margin-left: 10%;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    text-align: left;
+}
+
+#starterMargin{
+    margin-top: 10%;
 }
 
 /*password text style and location*/
@@ -105,7 +122,7 @@ h2{
 }
 
 /*sign in button style and location*/
-#signin{
+.signin{
     background-color: #FFA657;
     color: #FFFFFF;
     width: 15vh;
@@ -118,11 +135,24 @@ h2{
     border-radius: 1vh;
 }
 
+#signinOverRide{
+    margin-top: 1.3vh;
+}
+
+#centerMargin{
+    display: grid;
+    align-items: center;
+}
+
 /*Don't have an account? text style and location*/
-#signup{
+.signup{
     font-size: 1.8vh;
     margin-top: 6vh;
     text-align: center;
+}
+
+#marginCorrection{
+    margin-top: 4vh;
 }
 
 @media (min-width: 100vw){
