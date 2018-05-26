@@ -13,18 +13,38 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
 
-exports.countShit = functions.database.ref('/roommates/names')
-    .onWrite((change, context) => {
-        if (!change.after.exists()) {
-            return null;
+/**
+ * Initializes listeners in each instance of names. Counts and indexes all names in roommates 
+ * whenever there is a change and updates database accordingly
+ * @namespace cloudfunctions
+ * @function cloudfunctions.handleCountRoommates
+ */
+exports.handleCountRoommates = functions.database.ref('{hash}/roommates/names')
+.onWrite((change, context) => {
+    if (!change.after.exists()) {
+        return null;
+    }
+
+    let parentRef = change.after.ref.parent;
+    let namesSnap = change.after;
+    let names = [];
+    let indexCount = 0;
+    namesSnap.forEach(nameSnap => {
+        // due to instances of method pushing blank entries, method checks if nameSnap exists. 
+        // performs count and update if nameSnap is truthy.
+        if (nameSnap) {
+            nameSnap.ref.update({index: indexCount})
+            names.push(nameSnap)
+            indexCount++;
         }
-
-        let parentRef = change.after.ref.parent;
-        let namesSnap = change.after;
-        let names = [];
-        namesSnap.forEach(nameSnap => names.push(nameSnap));
-        let length = names.length;
-        let toUpdate = {count: length};
-
-        return change.after.ref.parent.update(toUpdate);
     });
+    let length = names.length;
+    let toUpdate = {count: length};
+
+    return change.after.ref.parent.update(toUpdate);
+});
+
+// use snapshot.numChildren() to find number of children
+
+// to assign roommates to tasks
+// set ref to names. then orderByChild("index").equalTo(whatever index that was)

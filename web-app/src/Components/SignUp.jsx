@@ -8,6 +8,7 @@ import constants from "./Constants"
 import firebase from 'firebase/app'
 import 'firebase/auth';
 import 'firebase/database';
+import md5 from 'blueimp-md5';
 
 import Header from "./Header";
 
@@ -52,8 +53,12 @@ export default class SignUp extends React.Component {
             });
             return;
         } else {
+            let hash = md5(this.state.email);
+            let ref = firebase.database().ref(hash + "/roommates/");
+            let toUpdate = {count: 0};
             console.log(this.state.photoUrl)
             firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pw)
+                .then(() => ref.update(toUpdate))
                 .then(user => user.updateProfile({
                     photoURL: this.state.photoUrl,
                     displayName: this.state.displayName
@@ -69,7 +74,9 @@ export default class SignUp extends React.Component {
         return (
             <div>
                 <Header/>
-                <div className="m-auto card">
+                <h2 className='sloganS' id="sloganOverRide"><span className="thicker">sign up</span> with <span className="thicker">Amazon</span> email</h2>
+                <h2 id="subSloganS">alexa will <span className='thickerOverRide'>NOT</span> work if you don't sign up with your <span className='thickerOverRide'>AMAZON</span> email</h2>
+                <div className="m-auto card" id='test'>
                     <div className="card-body p-5 text-center">
                         {this.state.errorMessage ?
                             <div className="alert alert-danger">
@@ -77,7 +84,6 @@ export default class SignUp extends React.Component {
                             </div> :
                             undefined
                         }
-                        <h1 className="mb-3">Sign Up</h1>
                         <form onSubmit={evt => this.handleSubmit(evt)}>
                             <div className="form-group">
                                 <input id="dName" className="form-control"
@@ -120,10 +126,10 @@ export default class SignUp extends React.Component {
                                 }
                             </div>
                             <div className="form-group">
-                                <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+                                <button type="submit" className="btn btn-primary w-100">sign up</button>
                             </div>
                         </form>
-                        <p>Already have an account? <Link to={constants.routes.signin}>Sign In!</Link></p>
+                        <p>Already have an account? <Link to={constants.routes.signin}>sign in</Link></p>
                     </div>
                 </div>
             </div>

@@ -4,8 +4,8 @@ import { HashRouter as Router, Switch, Redirect, Route } from 'react-router-dom'
 import './global.css'
 import './content.css';
 import './home.css';
-import './log.css';
-
+import './signin.css';
+import './view.css';
 
 import constants from "./Components/Constants";
 import Home from "./Components/Home";

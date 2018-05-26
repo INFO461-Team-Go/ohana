@@ -3,18 +3,20 @@ import { Link } from "react-router-dom";
 import constants from "./Constants";
 import firebase from "firebase/app";
 import "firebase/auth";
+import md5 from "blueimp-md5";
 
 import NameList from "./NameList";
 import TaskList from "./TaskList";
 import NewUserForm from "./NewUserForm";
 import Header from "./Header";
 
+
 export default class View extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             user: undefined,
-            channel: "roommates"
+            channel: "roommates",
         }
     }
     
@@ -27,7 +29,10 @@ export default class View extends React.Component {
                 this.props.history.push(constants.routes.home);
             } else {
                 this.setState({user: currentUser});
-                console.log("currentUser is " + this.state.user.email);                
+                let hash = md5(currentUser.email);
+                this.setState({userHash: hash})
+                // console.log(this.state.user.uid); 
+
             }
         });
     }
@@ -50,16 +55,24 @@ export default class View extends React.Component {
         });
     }
 
+
     render() {
+
+        let ref;
+
+        if(this.props.match.params.tabName == 'roommates'){
+            ref = firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/");
+            // console.log(this.state.user.uid);
+            console.log(this.state.userHash);
+        } else {
+            ref = firebase.database().ref(this.props.match.params.tabName + `/taskList/`);
+        }
 
         return (
             <div>
                 <header className="">
                     <div className="container-fluid">
                         <div className="row justify-content-between">
-                            <div className="col my-2 align-self-center">
-                                This is the tab view   
-                            </div>
                             <div className="col-1 align-self-center">
                                 <button className="btn btn-outline-danger btn-sm" onClick={this.handleSignOut}>
                                     Sign Out

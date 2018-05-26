@@ -1,7 +1,7 @@
 {
   "name": "ohana-skill",
   "version": "1.0.0",
-  "description": "Source code for ohana's lambda function",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,8 +9,13 @@
   "author": "Harshitha Akkaraju",
   "license": "ISC",
   "dependencies": {
-    "ask-sdk-core": "^2.0.2",
-    "ask-sdk-model": "^1.0.2",
-    "firebase": "^4.13.1"
+    "ask-sdk-core": "^2.0.4",
+    "ask-sdk-model": "^1.2.0",
+    "firebase": "^5.0.2",
+    "grpc": "^1.11.3",
+    "md5": "^2.2.1",
+    "node-pre-gyp": "^0.10.0",
+    "npm": "^6.0.1",
+    "request": "^2.85.0"
   }
 }

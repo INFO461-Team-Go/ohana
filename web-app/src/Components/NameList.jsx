@@ -13,20 +13,32 @@ export default class NameList extends React.Component {
         this.state = {
             name: "",
             fbError: undefined,
-            roommatesSnap: undefined    
+            roommatesSnap: undefined,
+            addActive: false
         };
     }
 
     componentWillReceiveProps(nextProps) {
         this.props.roommatesRef.off("value", this.unlisten);
-        this.unlisten = nextProps.roommatesRef.on("value", snapshot => this.setState({
-            roommatesSnap: snapshot
-        }));
+        this.unlisten = nextProps.roommatesRef.on("value", snapshot => {
+            this.setState({roommatesSnap: snapshot});
+            if (snapshot.numChildren() > 0) {
+                this.setState({addActive: false});
+            } else {
+                this.setState({addActive: true});
+            }
+        });
     }
 
     componentDidMount() {
-        this.unlisten = this.props.roommatesRef.on('value',
-            snapshot => this.setState({roommatesSnap: snapshot}));
+        this.unlisten = this.props.roommatesRef.on('value', snapshot => {
+            this.setState({roommatesSnap: snapshot});
+            if (snapshot.numChildren() > 0) {
+                this.setState({addActive: false});
+            } else {
+                this.setState({addActive: true});
+            }    
+        });
     }
 
     componentWillUnmount() {
@@ -40,7 +52,7 @@ export default class NameList extends React.Component {
         evt.preventDefault();
 
         this.props.roommatesRef.push({name: this.state.name})
-            .then(() => this.setState({name: "", fbError: undefined}))
+            .then(() => this.setState({name: "", fbError: undefined, addActive: false}))
             .catch(err => this.setState({fbError: err}));
     }
 
@@ -49,31 +61,33 @@ export default class NameList extends React.Component {
         if (!this.state.roommatesSnap) {
             return <p>loading...</p>
         }
-        //TODO: loop over the tasks snapshot
-        //and create a <Task/> for each child snapshot
-        //pushing it into an array
         let names = [];
         this.state.roommatesSnap.forEach(nameSnap => {
             names.push(<NameCard key={nameSnap.key} nameSnap={nameSnap} roommatesSnap={this.state.roommatesSnap}/>)
         });
-        console.log(names.length);
 
         return (
             <div className="container" id="nameList" ref="wrap" style={listStyles}>
                 {names}
-                <form onSubmit={evt => this.handleSubmit(evt)}>
-                    {
-                        this.state.fbError ? 
-                        <div className="alert alert-danger">{this.state.fbError.message}</div> : 
-                        undefined
-                    }
-                    <input type="text" 
-                        className="form-control"
-                        value={this.state.name}
-                        onInput={evt => this.setState({name: evt.target.value})}
-                        placeholder="new roommate here"
-                    />
-                </form>
+                {
+                    this.state.addActive ?
+                        <form onSubmit={evt => this.handleSubmit(evt)}>
+                            {
+                                this.state.fbError ? 
+                                <div className="alert alert-danger">{this.state.fbError.message}</div> : 
+                                undefined
+                            }
+                            <input type="text" 
+                                className="form-control"
+                                value={this.state.name}
+                                onInput={evt => this.setState({name: evt.target.value})}
+                                placeholder="new roommate here"
+                            />
+                        </form> :
+                        <i className="material-icons" id="addIcon"
+                        onClick={() => this.setState({addActive: true})}> add_circle_outline</i>
+                   
+                }
                 <div ref="listEnd"></div>
             </div>
         );

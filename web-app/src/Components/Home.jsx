@@ -57,13 +57,13 @@ export default class Home extends React.Component {
                             </div>
                             <div className="mobileOnly">
                                 ask alexa to tell you who's turn it is or to mark your task done
-                                <div className="note">for possible commands click here</div>
+                                <div className="note">*note: make sure you use your amazon email</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="container text-center py-3" id="startNow">
-                    <h5>Let's get started!: <Link to ={constants.routes.signin} className="text-white">sign in</Link></h5>
+                    <h5><Link to ={constants.routes.signin} className="text-white">Let's get started!: <span id="bolded">sign in</span></Link></h5>
                 </div>
             </div>
         );
