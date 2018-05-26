@@ -68,7 +68,7 @@ export default class View extends React.Component {
 
         return (
             <div>
-                <header className="">
+                {/* <header className="">
                     <div className="container-fluid">
                         <div className="row justify-content-between">
                             <div className="col-1 align-self-center">
@@ -78,8 +78,23 @@ export default class View extends React.Component {
                             </div>
                         </div>
                     </div>
+                </header> */}
+                <header id="logoBox" className="row m-0">
+                    <div className="col">
+                        <div id='logo' className="">
+                            <div id='logoInner'>
+                                <div id='logoInnerInner'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col d-flex justify-content-end align-items-center">
+                        <div id="signOut" className="">
+                            <button className="btn btn-outline-danger btn-sm" onClick={this.handleSignOut}>
+                                Sign Out
+                            </button>
+                        </div>
+                    </div> 
                 </header>
-                <Header/>
                 <div className="container">
                     <ul className="nav nav-tabs">
                         <li className = "nav-item">
