@@ -76,8 +76,8 @@ export default class SignUp extends React.Component {
                 <Header/>
                 <h2 className='sloganS' id="sloganOverRide"><span className="thicker">sign up</span> with <span className="thicker">Amazon</span> email</h2>
                 <h2 id="subSloganS">alexa will <span className='thickerOverRide'>NOT</span> work if you don't sign up with your <span className='thickerOverRide'>AMAZON</span> email</h2>
-                <div className="m-auto card" id='test'>
-                    <div className="card-body p-5 text-center">
+                <div className="test m-auto card" id="testSignUp">
+                    <div className="card-body p-0">
                         {this.state.errorMessage ?
                             <div className="alert alert-danger">
                                 {this.state.errorMessage}
@@ -85,36 +85,36 @@ export default class SignUp extends React.Component {
                             undefined
                         }
                         <form onSubmit={evt => this.handleSubmit(evt)}>
+                        <h2 className="inputSignUp" id="starterMargin">display name</h2>
                             <div className="form-group">
-                                <input id="dName" className="form-control"
+                                <input id="dName" className="textBox form-control"
                                     type="text"
-                                    placeholder="Display Name"
                                     value={this.state.displayName}
                                     onInput={evt => this.setState({ displayName: evt.target.value })}
                                 />
                             </div>
+                            <h2 className="inputSignUp">amazon email</h2>
                             <div className="form-group">
-                                <input id="email" className="form-control"
+                                <input id="email" className="textBox form-control"
                                     type="email"
-                                    placeholder="Enter your Amazon email address"
                                     value={this.state.email}
                                     onInput={evt => this.setState({
                                         email: evt.target.value,
                                     })}
                                 />
                             </div>
+                            <h2 className="inputSignUp">password</h2>
                             <div className="form-group">
-                                <input id="pw" className="form-control"
+                                <input id="pw" className="textBox form-control"
                                     type="password"
-                                    placeholder="Password"
                                     value={this.state.pw}
                                     onInput={evt => this.setState({ pw: evt.target.value })}
                                 />
                             </div>
+                            <h2 className="inputSignUp">confirm password</h2>
                             <div className="form-group">
-                                <input id="cpw" className="form-control"
+                                <input id="cpw" className="textBox form-control"
                                     type="password"
-                                    placeholder="Confirm Password"
                                     value={this.state.cpw}
                                     onInput={evt => this.setState({ cpw: evt.target.value })}
                                 />
@@ -125,11 +125,11 @@ export default class SignUp extends React.Component {
                                     undefined
                                 }
                             </div>
-                            <div className="form-group">
-                                <button type="submit" className="btn btn-primary w-100">sign up</button>
+                            <div className="form-group" id="centerMargin">
+                                <button type="submit" className="btn btn-primary" className="signin" id="signinOverRide">sign up</button>
                             </div>
                         </form>
-                        <p>Already have an account? <Link to={constants.routes.signin}>sign in</Link></p>
+                        <h2 className="signup" id="marginCorrection">Already have an account? <Link to={constants.routes.signin} className="text-white">sign in</Link></h2>
                     </div>
                 </div>
             </div>
