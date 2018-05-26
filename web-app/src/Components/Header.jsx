@@ -41,7 +41,7 @@ export default class Header extends React.Component {
                 </div>
                 <div className="col d-flex justify-content-end align-items-center">
                     <div id="signOut" className="">
-                        <button className="btn btn-outline-danger btn-sm" onClick={this.handleSignOut()}>
+                        <button className="btn btn-outline-danger btn-sm" onClick={this.handleSignOut}>
                             Sign Out
                         </button>
                     </div>

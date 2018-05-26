@@ -55,7 +55,7 @@ export default class SignIn extends React.Component {
                             </div> :
                             undefined
                     }
-                    <div id="test">
+                    <div className="test">
                         <div id="cred">
                             <div id="uhh"></div>
                             <form onSubmit={evt => this.handleSubmit(evt)}>
@@ -66,9 +66,9 @@ export default class SignIn extends React.Component {
                                 <input type="Password" className="textBox form-control form-control-sm" value={this.state.password} 
                                 onInput={evt => this.setState({ password: evt.target.value })}/>
                                 <div className="row mx-auto">
-                                    <button className="btn-default" id="signin" type="submit">sign in</button>
+                                    <button className="btn btn-primary" className="signin" type="submit">sign in</button>
                                 </div>
-                                <h2 id="signup">Don't have an account? <Link to={constants.routes.signup} className="text-white"><u>sign up</u></Link></h2>
+                                <h2 className="signup">Don't have an account? <Link to={constants.routes.signup} className="text-white"><u>sign up</u></Link></h2>
                             </form>
                         </div>
                     </div>
