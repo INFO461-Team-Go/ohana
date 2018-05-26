@@ -6,6 +6,7 @@ import "firebase/auth";
 import md5 from "blueimp-md5";
 
 import NameList from "./NameList";
+import TaskList from "./TaskList";
 import NewUserForm from "./NewUserForm";
 import Header from "./Header";
 
@@ -56,6 +57,7 @@ export default class View extends React.Component {
 
 
     render() {
+
         let ref;
 
         if(this.props.match.params.tabName == 'roommates'){
@@ -117,9 +119,9 @@ export default class View extends React.Component {
             
                         <main>
                         {this.props.match.params.tabName == 'roommates'?
-                            <NameList roommatesRef={ref}/>
+                            <NameList roommatesRef={firebase.database().ref(this.props.match.params.tabName + '/names/')}/>
                             :
-                            <div></div>
+                            <TaskList taskRef={firebase.database().ref(this.props.match.params.tabName)}/>
                             }
                             {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
 

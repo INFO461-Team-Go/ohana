@@ -4,13 +4,15 @@
   "private": true,
   "homepage": "https://info461-team-go.github.io/ohana/web-app/build",
   "dependencies": {
+    "ajv": "^6.5.0",
     "blueimp-md5": "^2.10.0",
     "firebase": "^4.13.1",
     "firebase-admin": "^5.12.1",
     "firebase-functions": "^1.0.3",
     "npm": "^6.0.1",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-picker": "^1.2.11",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4"
   },
