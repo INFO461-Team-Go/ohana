@@ -1,7 +1,7 @@
 'use strict';
 // Dependencies
 const Alexa = require('ask-sdk-core');
-const Request = require('request');
+const request = require('request');
 const Firebase = require("firebase");
 const MD5 = require('md5');
 
@@ -35,12 +35,16 @@ const LaunchRequestHandler = {
                 .withLinkAccountCard()
                 .getResponse();
         }
-        Request(amznProfileURL + user.accessToken, function (error, response, body) {
+        /*
+        request(amznProfileURL + user.accessToken, function (error, response, body) {
+            console.log("here");
             if (response.statusCode == 200) {
                 let profile = JSON.parse(body);
                 console.log(profile.email);
+                
             }
         });
+        */
         const speakOutput = 'Hello! Welcome to ohana!';
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -54,22 +58,54 @@ const LaunchRequestHandler = {
 const GetTaskIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
-            handlerInput.requestEnvelope.request.type === 'GetTaskIntent';
+            handlerInput.requestEnvelope.request.intent.name === 'GetTaskIntent';
     },
     handle(handlerInput) {
-        // do something
-        const speakOutput = 'Hello! Welcome to ohana!';
-        console.log("inside GetTaskIntentHandler");
+        const user = handlerInput.requestEnvelope.session.user;
+        const attributes = handlerInput.attributesManager.getSessionAttributes();
+        const response = handlerInput.responseBuilder;
+        const url = amznProfileURL + user.accessToken;
+        console.log(url);
+        let promise = getProfile(url);
+        promise.then(function(result) {
+            console.log(result);
+        }, function(error) {
+            console.log(error);
+        });
+        /*
+        let speakOutput = "Will do! What's your name?";
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .getResponse();
+        */
     }
 };
+
+function getProfile(url) {
+    let options = {
+        url: url,
+        headers: {
+            'User-Agent': 'request'
+        }
+    }
+    console.log("Inside getProfile()");
+    return new Promise(function(resolve, reject) {
+        console.log("Inside promise");
+        request(options, function(error, response, body) {
+            console.log("Received a response");
+            if (error) {
+                reject(error);
+            } else {
+                resolve(JSON.parse(body));
+            }
+        });
+    });
+}
 
 const MarkAsDoneIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
-            handlerInput.requestEnvelope.request.type === 'MarkAsDoneIntent';
+            handlerInput.requestEnvelope.request.intent.name === 'MarkAsDoneIntent';
     },
     handle(handlerInput) {
         const speakOutput = 'Hello! Welcome to ohana!';
@@ -80,10 +116,29 @@ const MarkAsDoneIntentHandler = {
     }
 };
 
+/**
+ * GetNameIntentHandler: Listens for user's name. 
+ *      Can be invoked in response to `GetTaskIntentHandler` and `MarkAsDoneIntentHandler`
+ */
+const GetNameIntentHandler = {
+    canHandle(handlerInput) {
+        const attributes = handlerInput.attributesManager.getSessionAttributes();
+        return attributes.state === state.LISTEN &&
+            handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
+            handlerInput.requestEnvelope.request.intent.name === 'GetNameIntentHandler';
+    },
+    handle(handlerInput) {
+        console.log(handlerInput);
+        return handlerInput.responseBuilder
+            .speak("We're here!")
+            .getResponse();
+    }
+}
+
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
-            handlerInput.requestEnvelope.request.type === 'AMAZON.HelpIntent';
+            handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
         const speakOutput = 'Hello! Welcome to ohana!';
@@ -97,8 +152,8 @@ const HelpIntentHandler = {
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
-            (handlerInput.requestEnvelope.request.type === 'AMAZON.CancelIntent' ||
-            handlerInput.requestEnvelope.request.type === 'AMAZON.StopIntent');
+            (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent' ||
+            handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
         const speakOutput = 'Hello! Welcome to ohana!';
@@ -129,7 +184,7 @@ exports.handler = async function(event, context) {
         Firebase.initializeApp(config);
     }
     // Debug code
-    console.log(`REQUEST++++${JSON.stringify(event)}`);
+    // console.log(`REQUEST++++${JSON.stringify(event)}`);
     if (!skill) {
         // TODO: Add error handlers after request handlers
         skill = Alexa.SkillBuilders.custom()

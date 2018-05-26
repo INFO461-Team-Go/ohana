@@ -16,6 +16,8 @@
  *
  */
 
+#include <grpc/support/port_platform.h>
+
 #include "src/core/ext/transport/chttp2/transport/hpack_encoder.h"
 
 #include <assert.h>
@@ -468,7 +470,7 @@ static void hpack_enc(grpc_chttp2_hpack_compressor* c, grpc_mdelem elem,
       v = grpc_slice_to_c_string(GRPC_MDVALUE(elem));
     }
     gpr_log(
-        GPR_DEBUG,
+        GPR_INFO,
         "Encode: '%s: %s', elem_interned=%d [%d], k_interned=%d, v_interned=%d",
         k, v, GRPC_MDELEM_IS_INTERNED(elem), GRPC_MDELEM_STORAGE(elem),
         grpc_slice_is_interned(GRPC_MDKEY(elem)),
@@ -652,7 +654,7 @@ void grpc_chttp2_hpack_compressor_set_max_table_size(
   }
   c->advertise_table_size_change = 1;
   if (grpc_http_trace.enabled()) {
-    gpr_log(GPR_DEBUG, "set max table size from encoder to %d", max_table_size);
+    gpr_log(GPR_INFO, "set max table size from encoder to %d", max_table_size);
   }
 }
 
