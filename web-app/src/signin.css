@@ -13,7 +13,7 @@ body{
     background-color: #2E926F;
     width: 45vh;
     height: 34.5vh;
-    margin:auto;
+    margin: auto;
     margin-top: 0vh;
     transform: translateY(4vh);
     border-radius: 2vh 13vh;
@@ -36,10 +36,11 @@ h2{
     text-align: center;
     background-color: rgba(0,0,0,0);
     border-color: rgba(0,0,0,0);
-    color: #FF4D4D;
+    color: #BD0D0D;
     font-family: 'Quicksand';
     font-weight: 600;
-    font-size: 1.5vh;
+    font-size: 1.7vh;
+    padding: 0%;
 }
 
 /*declares common font elements for credential(#test) box*/ 

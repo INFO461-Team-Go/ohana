@@ -48,23 +48,23 @@ export default class SignIn extends React.Component {
                 <Header/>
                 <main>
                     <h2 className="sloganS"><span className="thicker">sign in</span> to manage tasks</h2>
-                    {
-                        this.state.fberror ?
-                            <div className="alert alert-danger">
-                                {this.state.fberror.message}
-                            </div> :
-                            undefined
-                    }
                     <div className="test">
                         <div id="cred">
                             <div id="uhh"></div>
                             <form onSubmit={evt => this.handleSubmit(evt)}>
-                                <h2 id="username">email</h2>
+                                <h2 id="username">amazon email</h2>
                                 <input type="Email" className="textBox form-control form-control-sm" value={this.state.email} 
                                 onInput={evt => this.setState({ email: evt.target.value })}/>
                                 <h2 id="password">password</h2>
                                 <input type="Password" className="textBox form-control form-control-sm" value={this.state.password} 
                                 onInput={evt => this.setState({ password: evt.target.value })}/>
+                                {
+                                    this.state.fberror ?
+                                        <div className="alert alert-danger">
+                                            invalid email or password
+                                        </div> :
+                                        undefined
+                                }
                                 <div className="row mx-auto">
                                     <button className="btn btn-primary" className="signin" type="submit">sign in</button>
                                 </div>
