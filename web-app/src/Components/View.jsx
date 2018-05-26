@@ -121,8 +121,9 @@ export default class View extends React.Component {
                         {this.props.match.params.tabName == 'roommates'?
                             <NameList roommatesRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/")}/>
                             :
-                            <TaskList taskRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + `/taskList/`)}/>
-                            }
+                            <TaskList taskRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + `/taskList/`)}
+                                    hash={this.state.userHash}/>
+                        }
                             {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
 
                         </main>
