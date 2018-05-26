@@ -47,7 +47,7 @@ export default class SignIn extends React.Component {
             <div>
                 <Header/>
                 <main>
-                    <h2 id="slogan"><span id="thicker">sign in</span> to manage tasks</h2>
+                    <h2 className="sloganS"><span className="thicker">sign in</span> to manage tasks</h2>
                     {
                         this.state.fberror ?
                             <div className="alert alert-danger">
@@ -66,7 +66,7 @@ export default class SignIn extends React.Component {
                                 <input type="Password" className="textBox form-control form-control-sm" value={this.state.password} 
                                 onInput={evt => this.setState({ password: evt.target.value })}/>
                                 <div className="row mx-auto">
-                                    <button id="signin" type="submit">sign in</button>
+                                    <button className="btn-default" id="signin" type="submit">sign in</button>
                                 </div>
                                 <h2 id="signup">Don't have an account? <Link to={constants.routes.signup} className="text-white"><u>sign up</u></Link></h2>
                             </form>

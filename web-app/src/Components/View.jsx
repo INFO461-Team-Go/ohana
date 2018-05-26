@@ -71,9 +71,6 @@ export default class View extends React.Component {
                 <header className="">
                     <div className="container-fluid">
                         <div className="row justify-content-between">
-                            <div className="col my-2 align-self-center">
-                                This is the tab view   
-                            </div>
                             <div className="col-1 align-self-center">
                                 <button className="btn btn-outline-danger btn-sm" onClick={this.handleSignOut}>
                                     Sign Out
