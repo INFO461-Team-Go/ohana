@@ -2,6 +2,7 @@ import React from "react";
 import NameCard from "./NameCard";
 import firebase from "firebase/app";
 import Picker from 'react-picker'
+import md5 from "blueimp-md5";
 
 
 let listStyles = {
@@ -21,7 +22,7 @@ export default class TaskList extends React.Component {
     }
 
     async get_firebase_list(){
-        return firebase.database().ref('/roommates/names/').once('value').then(function(snapshot) {
+        return firebase.database().ref(this.props.hash + '/roommates/names/').once('value').then(function(snapshot) {
             var items = [];
             snapshot.forEach(function(childSnapshot) {
               var childKey = childSnapshot.key;
