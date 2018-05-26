@@ -19,9 +19,12 @@
 #ifndef GRPC_CORE_LIB_GPRPP_ORPHANABLE_H
 #define GRPC_CORE_LIB_GPRPP_ORPHANABLE_H
 
+#include <grpc/support/port_platform.h>
+
 #include <grpc/support/log.h>
 #include <grpc/support/sync.h>
 
+#include <cinttypes>
 #include <memory>
 
 #include "src/core/lib/debug/trace.h"
@@ -97,7 +100,7 @@ class InternallyRefCounted : public Orphanable {
 
   void Unref() {
     if (gpr_unref(&refs_)) {
-      Delete(this);
+      Delete(static_cast<Child*>(this));
     }
   }
 
@@ -156,7 +159,7 @@ class InternallyRefCountedWithTracing : public Orphanable {
                            const char* reason) GRPC_MUST_USE_RESULT {
     if (location.Log() && trace_flag_ != nullptr && trace_flag_->enabled()) {
       gpr_atm old_refs = gpr_atm_no_barrier_load(&refs_.count);
-      gpr_log(GPR_DEBUG, "%s:%p %s:%d ref %" PRIdPTR " -> %" PRIdPTR " %s",
+      gpr_log(GPR_INFO, "%s:%p %s:%d ref %" PRIdPTR " -> %" PRIdPTR " %s",
               trace_flag_->name(), this, location.file(), location.line(),
               old_refs, old_refs + 1, reason);
     }
@@ -170,14 +173,14 @@ class InternallyRefCountedWithTracing : public Orphanable {
 
   void Unref() {
     if (gpr_unref(&refs_)) {
-      Delete(this);
+      Delete(static_cast<Child*>(this));
     }
   }
 
   void Unref(const DebugLocation& location, const char* reason) {
     if (location.Log() && trace_flag_ != nullptr && trace_flag_->enabled()) {
       gpr_atm old_refs = gpr_atm_no_barrier_load(&refs_.count);
-      gpr_log(GPR_DEBUG, "%s:%p %s:%d unref %" PRIdPTR " -> %" PRIdPTR " %s",
+      gpr_log(GPR_INFO, "%s:%p %s:%d unref %" PRIdPTR " -> %" PRIdPTR " %s",
               trace_flag_->name(), this, location.file(), location.line(),
               old_refs, old_refs - 1, reason);
     }
