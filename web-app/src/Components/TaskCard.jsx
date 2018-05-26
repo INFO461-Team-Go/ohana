@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export default class NameCard extends React.Component {
+export default class TaskCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
