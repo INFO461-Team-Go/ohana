@@ -126,14 +126,18 @@ export default class View extends React.Component {
                      <div id = "tabContainer">
                         <div id="inactiveTab" onClick={() => this.handleChange()}>
                             <div id="hacking"></div>
-                            <div id="innerInactive"></div>
+                            <div id="innerInactive">
+                                {/*graphics*/}
+                            </div>
                             <div id="tabOverlay"></div>
                         </div>
                         <div id='inactiveText' dangerouslySetInnerHTML={{ __html: this.handleChangeText('') }}></div>
                         <div id='activeText' dangerouslySetInnerHTML={{ __html: this.handleChangeText('main') }}></div>
                         <div id="activeTabBox">
                             <div id="activeTab">
-                                <div id="innerActive"></div>
+                                <div id="innerActive">
+                                    {/*graphics*/}
+                                </div>
                             </div>
                             <div id="activeTabSlogan">
                                 <p className="tabSlogan">.................</p>
@@ -160,7 +164,7 @@ export default class View extends React.Component {
                         </li>
                     </ul>*/}
             
-                        <main>
+                        <main id="maxSize">
                         {this.props.match.params.tabName == 'roommates'?
                             <NameList roommatesRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/")}/>
                             :
