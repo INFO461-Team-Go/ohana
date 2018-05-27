@@ -1,3 +1,40 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 90.9vh;
+}
+
+#tabContainer{
+    height: 65.2vh;
+    width: 43.2vh;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 0;
+    margin-left: 7.8vw;
+    position: relative;
+}
+
+#activeTab{
+    position: absolute;
+    top: 0%;
+    margin: auto;
+    margin-top: 0%;
+    width: 43.2vh;
+    height: 43.2vh;
+    border-radius: 100%;
+    background-color: #595959;
+}
+
+#inactiveTab{
+    margin: auto;
+    margin-top: 36.38vh;
+    width: 28.77vh;
+    height: 28.77vh;
+    border-radius: 100%;
+    background-color: #595959;
+}
+
 .cardBox {
     width: 13rem;
     height: 50px;
