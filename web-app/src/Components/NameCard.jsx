@@ -55,13 +55,21 @@ export default class NameCard extends React.Component {
 
     handleSubmit(evt) {
         evt.preventDefault();
-        if (this.state.toUpdate != null) {
+        this.setState({errMsg: undefined});
+        let trimmedName = this.state.toUpdate.trim();
+        if (trimmedName.length > 15) {
+            this.setState({errMsg: "name must be less than 15 characters"});
+        } else if (!/^[a-zA-Z]+$/.test(trimmedName)) {
+            this.setState({errMsg: "no special characters allowed"});
+        } else {
             let ref = this.props.nameSnap.ref;
             ref.update({name: this.state.toUpdate});
             this.setState({toUpdate: undefined});
+            this.setState({edit: false});
+            this.setState({menu: false});
         } 
-        this.setState({edit: false});
-        this.setState({menu: false});
+        // this.setState({edit: false});
+        // this.setState({menu: false});
     }   
 
     handleMenu() {
@@ -156,6 +164,13 @@ export default class NameCard extends React.Component {
                                 }
                             </div>
                         </form>
+                        {
+                            this.state.errMsg ?
+                            <p className="text-danger">
+                                {this.state.errMsg}
+                            </p> :
+                            <div></div>
+                        }
                     </div> 
                     // <div className="">
                     //     <form className="d-flex" onSubmit={evt => this.handleSubmit(evt)}>
