@@ -16,6 +16,8 @@
  *
  */
 
+#include <grpc/support/port_platform.h>
+
 #include "src/core/lib/iomgr/port.h"
 
 #include <grpc/grpc_posix.h>
@@ -290,7 +292,7 @@ static void pi_add_ref_dbg(polling_island* pi, const char* reason,
                            const char* file, int line) {
   if (grpc_polling_trace.enabled()) {
     gpr_atm old_cnt = gpr_atm_acq_load(&pi->ref_count);
-    gpr_log(GPR_DEBUG,
+    gpr_log(GPR_INFO,
             "Add ref pi: %p, old:%" PRIdPTR " -> new:%" PRIdPTR
             " (%s) - (%s, %d)",
             pi, old_cnt, old_cnt + 1, reason, file, line);
@@ -302,7 +304,7 @@ static void pi_unref_dbg(polling_island* pi, const char* reason,
                          const char* file, int line) {
   if (grpc_polling_trace.enabled()) {
     gpr_atm old_cnt = gpr_atm_acq_load(&pi->ref_count);
-    gpr_log(GPR_DEBUG,
+    gpr_log(GPR_INFO,
             "Unref pi: %p, old:%" PRIdPTR " -> new:%" PRIdPTR
             " (%s) - (%s, %d)",
             pi, old_cnt, (old_cnt - 1), reason, file, line);

@@ -11,6 +11,10 @@ let greyButton = {
     color: "#8B8B8B"
 }
 
+let greyButtonActive = {
+    color: "#31c4f3"
+}
+
 let redButton = {
     color: "#FF4D4D"
 }
@@ -79,12 +83,12 @@ export default class NameList extends React.Component {
         });
 
         return (
-            <div className="container" id="nameList" ref="wrap" style={listStyles}>
+            <div className="container" id="nameList" ref="wrap">
                 {names}
                 {
                     this.state.addActive ?
                         <div className="container">
-                            <div id="formBox" className="mx-auto" onSubmit={evt => this.handleSubmit(evt)}>
+                            <form id="formBox" className="mx-auto" onSubmit={evt => this.handleSubmit(evt)}>
                                 {
                                     this.state.fbError ? 
                                     <div className="alert alert-danger">{this.state.fbError.message}</div> : 
@@ -100,10 +104,15 @@ export default class NameList extends React.Component {
                                 <div className="row mx-auto px-1">
                                     <h4 className="col text-center m-1" id="newCardButton" style={redButton}
                                     onClick={() => this.handleCancelAdd()}>cancel</h4>
-                                    <h4 className="col text-center m-1" id="newCardButton" style={greyButton}
-                                    onClick={(evt) => this.handleSubmit(evt)}>add</h4>
+                                    {
+                                        this.state.name ?
+                                        <h4 className="col text-center m-1" id="newCardButton" style={greyButtonActive}
+                                        onClick={(evt) => this.handleSubmit(evt)}>add</h4>
+                                        :
+                                        <h4 className="col text-center m-1" id="newCardButton" style={greyButton}>add</h4>
+                                    }
                                 </div>
-                            </div>
+                            </form>
                         </div> 
                         :
                         <div className="container d-flex justify-content-center my-3">

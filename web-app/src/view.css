@@ -44,7 +44,22 @@
     border-radius: 8px;
     border-width: 4px;
     border-color: #31C4F3;
+    z-index: 1;
 }
+.overlayBox {
+    width: 13rem;
+    height: 50px;
+    background-color: #FFFFFF;
+    margin: auto;
+    z-index: 10;
+    border-radius: 8px;
+    border-width: 4px;
+    opacity: 0.8;
+    position: absolute;
+    top: 0%;
+}
+
+
 
 #cardFont {
     font-family: 'Nunito', sans-serif;
