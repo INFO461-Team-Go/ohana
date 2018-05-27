@@ -54,11 +54,10 @@
     margin: auto;
     z-index: 10;
     border-radius: 8px;
-    opacity: 0.8;
+    opacity: 0.9;
     position: absolute;
     top: 0%;
 }
-
 
 
 #cardFont {
@@ -81,6 +80,20 @@
     transform: translate(0px, 1px);
     cursor: pointer;
     display: none;
+}
+
+#closeIcon {
+    color: #8b8b8b;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#editIcon{
+    cursor: pointer;
+}
+
+#deleteIcon {
+    cursor: pointer;
 }
 
 .cardBox:hover > #moreIcon {
@@ -108,5 +121,4 @@
     font-family: 'Nunito', sans-serif;
     font-weight: 600;
     font-size: 24px;
-    cursor: pointer;
 }
