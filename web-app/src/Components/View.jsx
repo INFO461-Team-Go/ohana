@@ -100,10 +100,12 @@ export default class View extends React.Component {
                 <div className="container containerView">
                     <div id = "tabContainer">
                         <div id="inactiveTab">
-                            <div></div>
+                            <div id="hacking"></div>
+                            <div id="innerInactive"></div>
+                            <div id="tabOverlay"></div>
                         </div>
                         <div id="activeTab">
-                            <div></div>
+                            <div id="innerActive"></div>
                         </div>
                     </div>
                    {/* <ul className="nav nav-tabs">
