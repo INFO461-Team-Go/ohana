@@ -97,7 +97,7 @@ export default class View extends React.Component {
                         </div>
                     </div> 
                 </header>
-                <div className="container">
+                <div className="container containerView">
                     <div id = "tabContainer">
                         <div id="inactiveTab">
                             <div></div>
