@@ -97,8 +97,16 @@ export default class View extends React.Component {
                         </div>
                     </div> 
                 </header>
-                <div className="container">
-                    <ul className="nav nav-tabs">
+                <div className="container containerView">
+                    <div id = "tabContainer">
+                        <div id="inactiveTab">
+                            <div></div>
+                        </div>
+                        <div id="activeTab">
+                            <div></div>
+                        </div>
+                    </div>
+                   {/* <ul className="nav nav-tabs">
                         <li className = "nav-item">
                         <a 
                             className={this.props.match.params.tabName == 'roommates'?
@@ -115,7 +123,7 @@ export default class View extends React.Component {
                             onClick={() => this.handleChange('tasks')}
                             >Tasks</a>
                         </li>
-                    </ul>
+                    </ul>*/}
             
                         <main>
                         {this.props.match.params.tabName == 'roommates'?

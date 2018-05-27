@@ -1,5 +1,5 @@
 import React from "react";
-import NameCard from "./NameCard";
+import TaskCard from "./TaskCard";
 import firebase from "firebase/app";
 import Picker from 'react-picker'
 import md5 from "blueimp-md5";
@@ -16,10 +16,11 @@ export default class TaskList extends React.Component {
             name: "",
             fbError: undefined,
             taskSnap: undefined,
-            dataSource: [] ,
-            roommate: "" 
+            dataSource: [],
+            roommate: 0
         };
     }
+
 
     async get_firebase_list(){
         return firebase.database().ref(this.props.hash + '/roommates/names/').once('value').then(function(snapshot) {
@@ -63,7 +64,7 @@ export default class TaskList extends React.Component {
         //back to the server
         evt.preventDefault();
 
-        this.props.taskRef.push({name: this.state.name})
+        this.props.taskRef.push({name: this.state.name, roommate: this.state.roommate})
             .then(() => this.setState({name: "", fbError: undefined}))
             .catch(err => this.setState({fbError: err}));
     }
@@ -84,11 +85,9 @@ export default class TaskList extends React.Component {
         //pushing it into an array
         let names = [];
         let rooms = [];
+        let roommatenames = [];
 
-        this.state.taskSnap.forEach(nameSnap => {
-            names.push(<NameCard key={nameSnap.key} nameSnap={nameSnap} taskSnap={this.state.taskSnap}/>)
-        });
-        console.log(names.length);
+        
 
         // console.log(this.state.dataSource)
         // this.state.dataSource.forEach(elem => {
@@ -105,10 +104,16 @@ export default class TaskList extends React.Component {
 
         this.state.dataSource.forEach(element => {
             console.log(element.name);
+            roommatenames.push(element.name);
             rooms.push(<option value={index}>{toTitleCase(element.name)}</option>)
             index++;
             // rooms.push(<Picker.Item label={element.name} value={element.name} />);
         });
+
+        this.state.taskSnap.forEach(nameSnap => {
+            names.push(<TaskCard rooms={rooms} nameList={roommatenames} key={nameSnap.key} nameSnap={nameSnap} taskSnap={this.state.taskSnap}/>)
+        });
+        console.log(names.length);
 
         return (
             <div className="container" id="nameList" ref="wrap" style={listStyles}>
@@ -125,7 +130,7 @@ export default class TaskList extends React.Component {
                         onInput={evt => this.setState({name: evt.target.value})}
                         placeholder="new task here"
                     />
-                    <select>
+                    <select value={this.state.roommate} onChange={evt => this.setState({roommate: evt.target.value})}>
                     {rooms.length == 0?
                     <option disabled selected value> Please Submit a Roommmate to Begin </option>:
                     rooms

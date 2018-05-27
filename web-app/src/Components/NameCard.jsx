@@ -78,13 +78,13 @@ export default class NameCard extends React.Component {
                                 <h4 claasName="m-0 col-8 text-truncate" id="cardFont">{toTitleCase(roommate.name)}</h4>
                             </div>
                             <i className="material-icons col-2" id="moreIcon">more_vert</i>
+                            {
+                                !this.state.menu ?
+                                <div className="overlayBox">
+                                </div> :
+                                <div></div>
+                            }
                         </div> 
-                        {
-                            !this.state.menu ?
-                            <div className="overlayBox my-2">
-                            </div> :
-                            <div></div>
-                        }
                     </div> :
                     <div className="">
                         <form className="d-flex" onSubmit={evt => this.handleSubmit(evt)}>
