@@ -1,12 +1,12 @@
 import React from "react";
+import firebase from "firebase/app";
 
 
 export default class TaskCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            edit: false
-        }
+            edit: false        }
     }
     
     handleDelete() {
@@ -34,7 +34,13 @@ export default class TaskCard extends React.Component {
             this.setState({toUpdate: undefined});
         } 
         this.setState({edit: false});
-    }   
+    }  
+    
+    handleChange(evt) {
+        evt.preventDefault();
+        let ref = this.props.nameSnap.ref;
+        ref.update({roommate: evt.target.value});
+    }
 
     
     render() {
@@ -44,7 +50,8 @@ export default class TaskCard extends React.Component {
             });
         }
 
-        let roommate = this.props.nameSnap.val();
+        let task = this.props.nameSnap.val();
+
         let ref = this.props.nameSnap.ref;
         return (   
             <div>
@@ -60,10 +67,13 @@ export default class TaskCard extends React.Component {
                         </div> */}
                         <div className="cardBox my-2 row">
                             <div className="col-2"/>
-                            <h4 className="m-0 col-8 text-truncate" id="cardFont">{toTitleCase(roommate.name)}</h4>
+                            <h4 className="m-0 col-8 text-truncate" id="cardFont">{toTitleCase(task.name)}</h4>
                             <i className="material-icons col-2" id="moreIcon">more_vert</i>
                             {/* <h4 className="text-center">{roommate.name}</h4> */}
-                        </div>
+                            </div>
+                            <div className="cardBox my-2 row">
+                            <select defaultValue={task.roommate} onChange={evt => this.handleChange(evt)}className="w-100 text-truncate" id="cardFont">{this.props.rooms}</select>
+                            </div>
                         <div className="buttons d-flex flex-column">
                             <button type="button" className="btn btn-sm btn-outline-primary" onClick={() => this.handleEdit()}>Edit</button>
                             <button type="button" className="btn btn-sm btn-outline-primary" onClick={() => this.handleDelete()}>Delete</button>
@@ -73,7 +83,7 @@ export default class TaskCard extends React.Component {
                         <form className="d-flex" onSubmit={evt => this.handleSubmit(evt)}>
                             <div className="card my-3">
                                 <div className="card-body py-0">
-                                    <input className="form-control" type="text" defaultValue={roommate.name} onChange={evt => this.setState({toUpdate: evt.target.value})}/>
+                                    <input className="form-control" type="text" defaultValue={task.name} onChange={evt => this.setState({toUpdate: evt.target.value})}/>
                                 </div>
                             </div>
                             <div className="buttons d-flex flex-column">
