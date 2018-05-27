@@ -72,7 +72,7 @@ export default class TaskCard extends React.Component {
                             {/* <h4 className="text-center">{roommate.name}</h4> */}
                             </div>
                             <div className="cardBox my-2 row">
-                            <select defaultValue={task.roommate} onChange={evt => this.handleChange(evt)}className="w-100 text-truncate" id="cardFont">{this.props.rooms}</select>
+                            <select defaultValue={task.roommate} onChange={evt => this.handleChange}className="w-100 text-truncate" id="cardFont">{this.props.rooms}</select>
                             </div>
                         <div className="buttons d-flex flex-column">
                             <button type="button" className="btn btn-sm btn-outline-primary" onClick={() => this.handleEdit()}>Edit</button>
