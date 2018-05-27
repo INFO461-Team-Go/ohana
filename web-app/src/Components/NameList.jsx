@@ -65,10 +65,17 @@ export default class NameList extends React.Component {
         //so that it doesn't try to post the form data
         //back to the server
         evt.preventDefault();
-
-        this.props.roommatesRef.push({name: this.state.name})
-            .then(() => this.setState({name: "", fbError: undefined, addActive: false}))
-            .catch(err => this.setState({fbError: err}));
+        this.setState({errMsg: undefined});
+        let trimmedName = this.state.name.trim();
+        if (trimmedName.length > 15) {
+            this.setState({errMsg: "name must be less than 15 characters"});
+        } else if (!/^[a-zA-Z]+$/.test(trimmedName)) {
+            this.setState({errMsg: "no special characters allowed"});
+        } else {
+            this.props.roommatesRef.push({name: this.state.name})
+                .then(() => this.setState({name: "", fbError: undefined, addActive: false}))
+                .catch(err => this.setState({fbError: err}));
+        }
     }
 
     handleCancelAdd() {
@@ -116,6 +123,13 @@ export default class NameList extends React.Component {
                                     }
                                 </div>
                             </form>
+                            {
+                                this.state.errMsg ?
+                                <p className="text-danger">
+                                    {this.state.errMsg}
+                                </p> :
+                                <div></div>
+                            }
                         </div> 
                         :
                         <div className="container d-flex justify-content-center my-3">
