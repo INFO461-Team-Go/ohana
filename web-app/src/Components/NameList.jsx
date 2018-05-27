@@ -8,15 +8,18 @@ let listStyles = {
 };
 
 let greyButton = {
-    color: "#8B8B8B"
+    color: "#8B8B8B",
+    cursor: "default"
 }
 
 let greyButtonActive = {
-    color: "#31c4f3"
+    color: "#31c4f3",
+    cursor: "pointer"
 }
 
 let redButton = {
-    color: "#FF4D4D"
+    color: "#FF4D4D",
+    cursor: "pointer"
 }
 
 export default class NameList extends React.Component {

@@ -1,5 +1,20 @@
 import React from "react";
 
+let greyButton = {
+    color: "#8B8B8B",
+    cursor: "default"
+}
+
+let greyButtonActive = {
+    color: "#31c4f3",
+    cursor: "pointer"
+}
+
+let redButton = {
+    color: "#FF4D4D",
+    cursor: "pointer"
+}
+
 
 export default class NameCard extends React.Component {
     constructor(props) {
@@ -26,7 +41,11 @@ export default class NameCard extends React.Component {
     }
 
     handleEdit() {
-        this.setState({edit: true});
+        if (!this.state.edit) {
+            this.setState({edit: true});
+        } else {
+            this.setState({edit: false});
+        }
     }
 
     handleCancel() {
@@ -42,7 +61,20 @@ export default class NameCard extends React.Component {
             this.setState({toUpdate: undefined});
         } 
         this.setState({edit: false});
+        this.setState({menu: false});
     }   
+
+    handleMenu() {
+        if (this.state.menu) {
+            this.setState({menu: false});
+        } else {
+            this.setState({menu: true});
+        }
+    }
+
+    handleCancelAdd() {
+        this.setState({addActive: false});
+    }
 
     
     render() {
@@ -77,34 +109,73 @@ export default class NameCard extends React.Component {
                             <div className="col-8">
                                 <h4 claasName="m-0 col-8 text-truncate" id="cardFont">{toTitleCase(roommate.name)}</h4>
                             </div>
-                            <i className="material-icons col-2" id="moreIcon">more_vert</i>
+                            <i className="material-icons col-2" id="moreIcon" onClick={() => this.handleMenu()}>
+                            more_vert</i>
                             {
-                                !this.state.menu ?
-                                <div className="overlayBox">
+                                this.state.menu ?
+                                <div className="overlayBox container d-flex align-items-center row p-0">
+                                    {/* <div className="row py-0"> */}
+                                        <div className="col-2 p-0"></div>
+                                        <div className="col-8 d-flex align-items-center justify-content-center p-0">
+                                            <i className="material-icons m-2" id="editIcon" onClick={() => this.handleEdit()}>edit</i>
+                                            <i className="material-icons m-2" id="deleteIcon" onClick={() => this.handleDelete()}>delete </i>
+                                        </div>
+                                        <div className="col-2 d-flex align-items-center justify-content-end p-0">
+                                            <i className="material-icons mr-1" id="closeIcon" onClick={() => this.handleMenu()}>
+                                            close</i>
+                                        </div>
+                                    {/* </div> */}
                                 </div> :
                                 <div></div>
                             }
                         </div> 
                     </div> :
-                    <div className="">
-                        <form className="d-flex" onSubmit={evt => this.handleSubmit(evt)}>
-                            <div className="card my-3">
-                                <div className="card-body py-0">
-                                    <input className="form-control" type="text" defaultValue={roommate.name} onChange={evt => this.setState({toUpdate: evt.target.value})}/>
-                                </div>
-                            </div>
-                            <div className="buttons d-flex flex-column">
-                                {   
+                    <div className="container">
+                        <form id="formBox" className="mx-auto" onSubmit={evt => this.handleSubmit(evt)}>
+                            {
+                                this.state.fbError ? 
+                                <div className="alert alert-danger">{this.state.fbError.message}</div> : 
+                                undefined
+                            }
+                            <input type="text" 
+                                className="form-control form-control-sm mx-auto"
+                                id="inputBox"
+                                value={this.state.name}
+                                onChange={evt => this.setState({toUpdate: evt.target.value})}
+                                defaultValue={roommate.name}
+                            />
+                            <div className="row mx-auto px-1">
+                                <h4 className="col text-center m-1" id="newCardButton" style={redButton}
+                                onClick={() => this.handleEdit()}>cancel</h4>
+                                {
                                     this.state.toUpdate ?
-                                    <button type="submit" className="btn btn-outline-primary btn-sm">Submit</button>:
-                                    <button type="button" className="btn btn-outline-primary btn-sm disabled">Submit</button>
-
+                                    <h4 className="col text-center m-1" id="newCardButton" style={greyButtonActive}
+                                    onClick={(evt) => this.handleSubmit(evt)}>add</h4>
+                                    :
+                                    <h4 className="col text-center m-1" id="newCardButton" style={greyButton}>add</h4>
                                 }
-                                <button type="button" className="btn btn-danger btn-sm" onClick={() => this.handleCancel()}>Cancel</button>
                             </div>
-
                         </form>
-                    </div>
+                    </div> 
+                    // <div className="">
+                    //     <form className="d-flex" onSubmit={evt => this.handleSubmit(evt)}>
+                    //         <div className="card my-3">
+                    //             <div className="card-body py-0">
+                    //                 <input className="form-control" type="text" defaultValue={roommate.name} onChange={evt => this.setState({toUpdate: evt.target.value})}/>
+                    //             </div>
+                    //         </div>
+                    //         <div className="buttons d-flex flex-column">
+                    //             {   
+                    //                 this.state.toUpdate ?
+                    //                 <button type="submit" className="btn btn-outline-primary btn-sm">Submit</button>:
+                    //                 <button type="button" className="btn btn-outline-primary btn-sm disabled">Submit</button>
+
+                    //             }
+                    //             <button type="button" className="btn btn-danger btn-sm" onClick={() => this.handleCancel()}>Cancel</button>
+                    //         </div>
+
+                    //     </form>
+                    // </div>
                 }
             </div>
         );
