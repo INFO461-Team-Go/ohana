@@ -15,6 +15,13 @@
     position: relative;
 }
 
+#activeTabBox{
+    position: absolute;
+    top: 0%;
+    width: 50vw;
+    height: 43.2vh;
+}
+
 #activeTab{
     position: absolute;
     top: 0%;
