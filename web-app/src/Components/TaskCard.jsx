@@ -91,7 +91,7 @@ export default class TaskCard extends React.Component {
             <div>
                 {
                     !this.state.edit ?
-                        <div className="d-flex">
+                        <div className="d-flex row mx-0">
                             {/* <div className="card my-3">
                             <div className="card-body py-0">
                                 <div id="content">
@@ -99,20 +99,20 @@ export default class TaskCard extends React.Component {
                                 </div>
                             </div>
                         </div> */}
-                            <div className="cardBox my-2 row">
-                                <div className="col-2" />
-                                <h4 className="m-0 col-8 text-truncate" id="cardFont">{toTitleCase(task.name)}</h4>
-                                <i className="material-icons col-2" id="moreIcon" onClick={() => this.handleMenu()}>more_vert</i>
+                            <div className="p-0 cardBox my-2 row col-8">
+                                <div className="p-0 col-1" />
+                                <h4 className="p-0 m-0 col-10 text-truncate" id="cardFont">{toTitleCase(task.name)}</h4>
+                                <i className="px-0 material-icons col-1" id="moreIcon" onClick={() => this.handleMenu()}>more_vert</i>
                                 {
                                     this.state.menu ?
                                         <div className="overlayBox container d-flex align-items-center row p-0">
                                             {/* <div className="row py-0"> */}
-                                            <div className="col-2 p-0"></div>
-                                            <div className="col-8 d-flex align-items-center justify-content-center p-0">
+                                            <div className="col-1 p-0"></div>
+                                            <div className="col-10 d-flex align-items-center justify-content-center p-0">
                                                 <i className="material-icons m-2" id="editIcon" onClick={() => this.handleEdit()}>edit</i>
                                                 <i className="material-icons m-2" id="deleteIcon" onClick={() => this.handleDelete()}>delete </i>
                                             </div>
-                                            <div className="col-2 d-flex align-items-center justify-content-end p-0">
+                                            <div className="col-1 d-flex align-items-center justify-content-end p-0">
                                                 <i className="material-icons mr-1" id="closeIcon" onClick={() => this.handleMenu()}>
                                                     close</i>
                                             </div>
@@ -122,13 +122,13 @@ export default class TaskCard extends React.Component {
                                 }
                                 {/* <h4 className="text-center">{roommate.name}</h4> */}
                             </div>
-                            <div className="cardBox my-2 row">
-                                <select defaultValue={task.roommate} onChange={evt => this.handleChange} className="w-100 text-truncate" id="cardFont">{this.props.rooms}</select>
+                            <div className="cardBox my-2 row col-4 p-0">
+                                <select defaultValue={task.roommate} onChange={evt => this.handleChange} className="w-100 text-truncate border-0" id="cardFont">{this.props.rooms}</select>
                             </div>
-                            <div className="buttons d-flex flex-column">
+                            {/* <div className="buttons d-flex flex-column">
                                 <button type="button" className="btn btn-sm btn-outline-primary" onClick={() => this.handleEdit()}>Edit</button>
                                 <button type="button" className="btn btn-sm btn-outline-primary" onClick={() => this.handleDelete()}>Delete</button>
-                            </div>
+                            </div> */}
                         </div> :
                         <div></div>
                     // <div className="">
