@@ -20,6 +20,15 @@ body{
     box-shadow: 3px 3px 8px #000000;
 }
 
+.form-group{
+    margin-bottom: 0%;
+    height: 4vh;
+}
+
+.form-control{
+    padding:0%;
+}
+
 #testSignUp{
     height: 50vh;
 }
@@ -65,7 +74,7 @@ h2{
 .inputSignUp{
     font-size: 2.7vh;
     margin-left: 10%;
-    margin-top: 0%;
+    margin-top: 5.5%;
     margin-bottom: 0%;
     text-align: left;
 }
@@ -152,7 +161,7 @@ h2{
 }
 
 #marginCorrection{
-    margin-top: 4.5vh;
+    margin-top: 6vh;
 }
 
 @media (min-width: 100vw){
