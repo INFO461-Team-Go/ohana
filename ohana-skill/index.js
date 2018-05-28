@@ -55,6 +55,7 @@ const GetTaskIntentHandler = {
             console.log(response);
             attributes.email = response.email;
             attributes.hash = MD5(response.email);
+            attributes.getTaskIsActive = true;
             handlerInput.attributesManager.setSessionAttributes(attributes);
             outputSpeech = "Will do! What is your name?";
             let reprompt = "Sorry, I didn't get that. What is your name?";
@@ -98,26 +99,61 @@ const GetNameIntentHandler = {
         const responseBuilder = handlerInput.responseBuilder;
         let attributes = handlerInput.attributesManager.getSessionAttributes();
         let roommate = handlerInput.requestEnvelope.request.intent.slots.name.value;
-        try {
-            // Get user branch from Firebase
-            const userBranch = await Firebase.getUserBranch(attributes.hash);
-            // Get roommate's task
-            const response = Firebase.getTask(userBranch, roommate.toLowerCase());
-            if (!response.found || response.roommateId === -1 || response.task === "") {
-                let error = "Something went wrong. Please try asking for your task again";
+        if (attributes.getTaskIsActive) {
+            try {
+                // Get user branch from Firebase
+                const userBranch = await Firebase.getUserBranch(attributes.hash);
+                // Get roommate's task
+                const response = Firebase.getTask(userBranch, roommate.toLowerCase());
+                if (!response.found || response.roommateId === -1 || response.task === "") {
+                    let error = "Something went wrong. Please try asking for your task again";
+                    return responseBuilder
+                        .speak(error)
+                        .getResponse();
+                }
+                let outputSpeech = roommate + ", you are assigned to " + response.task;
                 return responseBuilder
-                    .speak(error)
+                    .speak(outputSpeech)
+                    .getResponse();
+            } catch (errorObject) {
+                let outputSpeech = 'I am really sorry. I am unable to access part of my memory. Please try again later';
+                return responseBuilder
+                    .speak(outputSpeech)
                     .getResponse();
             }
-            let outputSpeech = roommate + ", you are assigned to " + response.task;
-            return responseBuilder
-                .speak(outputSpeech)
-                .getResponse();
-        } catch (errorObject) {
-            let outputSpeech = 'I am really sorry. I am unable to access part of my memory. Please try again later';
-            return responseBuilder
-                .speak(outputSpeech)
-                .getResponse();
+        } else if (attributes.markAsDoneIsActive) {
+            try {
+                // Get user branch from Firebase
+                const userBranch = await Firebase.getUserBranch(attributes.hash);
+                // Get roommate's task
+                const taskResponse = Firebase.getTask(userBranch, roommate.toLowerCase());
+                if (!taskResponse.found || taskResponse.roommateId === -1 || taskResponse.task === "") {
+                    let error = "Something went wrong. Please try again";
+                    return responseBuilder
+                        .speak(error)
+                        .getResponse();
+                }
+                // Get roommate count and index
+                let count = userBranch.roommates.count;
+                let taskIndex = taskResponse.roommate;
+                // Calculate the new index 
+                let newTaskIndex = 0;
+                if (taskIndex < count - 1) {
+                    newTaskIndex = taskIndex + 1;
+                }
+                // Update new index on firebase
+                Firebase.cycleTaskIndex(taskIndex, newTaskIndex);
+    
+                let outputSpeech = roommate + ", your task " + response.task + "has been marked as done";
+                return responseBuilder
+                    .speak(outputSpeech)
+                    .getResponse();
+            } catch (errorObject) {
+                let outputSpeech = 'I am really sorry. I am unable to access part of my memory. Please try again later';
+                return responseBuilder
+                    .speak(outputSpeech)
+                    .getResponse();
+            }
         }
     }
 }

@@ -8,6 +8,74 @@
 'use strict';
 const Https = require('https');
 
+
+
+/*
+const querystring = require('querystring');                                                                                                                                                                                                
+const https = require('https');
+
+var postData = querystring.stringify({
+    'msg' : 'Hello World!'
+});
+
+var options = {
+  hostname: 'posttestserver.com',
+  port: 443,
+  path: '/post.php',
+  method: 'POST',
+  headers: {
+       'Content-Type': 'application/x-www-form-urlencoded',
+       'Content-Length': postData.length
+     }
+};
+
+var req = https.request(options, (res) => {
+  console.log('statusCode:', res.statusCode);
+  console.log('headers:', res.headers);
+
+  res.on('data', (d) => {
+    process.stdout.write(d);
+  });
+});
+
+req.on('error', (e) => {
+  console.error(e);
+});
+
+req.write(postData);
+req.end();
+*/
+
+const cycleTaskIndex = function (taskID, newIndex) {
+    const accessToken = 'AIzaSyCh7wRFGqzNXGuKBLzPYItxrhz8S-9b2aY';
+    let postData = newIndex;
+    let options = {
+        host: 'ohana-e7233.firebaseio.com',
+        port: '443',
+        path: '/' + encodeURIComponent(hash) + '.json?accessToken=' + encodeURIComponent(accessToken),
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': postData.length
+        }
+    };
+
+    const req = Https.request(options, (res) => {
+        console.log("Inside CycleTask request");
+        res.on('data', (d) => {
+            console.log("CycleTask data recieved");
+        });
+    })
+
+    req.on('error', (e) => {
+        console.log("error in CycleTask api call: " + e);
+    });
+
+    req.write(postData);
+    req.end();
+}
+
+
 /**
  * Uses the user's hash to retrieve their data from Firebase
  * 
@@ -62,6 +130,11 @@ const getTask = function (userBranch, roommate) {
     response = getRoommateIndex(roommatesList, roommate);
     response["task"] = matchTask(tasksList, response.roommateId);
     return response;
+}
+
+
+const getCount = function (userBranch) {
+    
 }
 
 /**
