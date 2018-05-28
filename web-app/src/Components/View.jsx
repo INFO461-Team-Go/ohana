@@ -74,9 +74,17 @@ export default class View extends React.Component {
 
     handleChangeGraphic(tab){
         if(tab == 'main'){
-
+            if(this.state.channel == 'tasks'){
+                return {backgroundImage: 'url(/static/media/task22.df17d0d7.png)'};
+            }else{
+                return {backgroundImage: 'url(/static/media/task22R.b55ed61c.png)'};
+            }
         }else{
-            
+            if(this.state.channel == 'tasks'){
+                return {backgroundImage: 'url(/static/media/task22R.b55ed61c.png)'};
+            }else{
+                return {backgroundImage: 'url(/static/media/task22.df17d0d7.png)'};
+            }
         }
     }
 
@@ -127,16 +135,16 @@ export default class View extends React.Component {
                         <div id="inactiveTab" onClick={() => this.handleChange()}>
                             <div id="hacking"></div>
                             <div id="innerInactive">
-                                {/*graphics*/}
+                                <div id="graphics" style={this.handleChangeGraphic('inactive')}></div>
                             </div>
                             <div id="tabOverlay"></div>
                         </div>
-                        <div id='inactiveText' dangerouslySetInnerHTML={{ __html: this.handleChangeText('') }}></div>
-                        <div id='activeText' dangerouslySetInnerHTML={{ __html: this.handleChangeText('main') }}></div>
+                        <div id="inactiveText" dangerouslySetInnerHTML={{ __html: this.handleChangeText('inactive') }}></div>
+                        <div id="activeText" dangerouslySetInnerHTML={{ __html: this.handleChangeText('main') }}></div>
                         <div id="activeTabBox">
                             <div id="activeTab">
                                 <div id="innerActive">
-                                    {/*graphics*/}
+                                    <div id="graphics" style={this.handleChangeGraphic('main')}></div>
                                 </div>
                             </div>
                             <div id="activeTabSlogan">
