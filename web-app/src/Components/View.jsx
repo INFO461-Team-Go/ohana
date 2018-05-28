@@ -88,6 +88,29 @@ export default class View extends React.Component {
         }
     }
 
+    handleChangeSlogan(num){
+        if(num == 1){
+            if(this.state.channel=='tasks'){
+                return 'what will you do?';
+            }else{
+                return 'who are your roommates?';
+            }
+        }else{
+            if(this.state.channel=='tasks'){
+                return 'who will start the task?';
+            }else{
+                return 'list roommates in order top to bottom';
+            }
+        }
+    }
+
+    handleSloganShrink(){
+        if(this.state.channel != 'tasks'){
+            console.log('in');
+            return {fontSize: '2.1vh'};
+        }
+    }
+
 
     render() {
 
@@ -148,8 +171,8 @@ export default class View extends React.Component {
                                 </div>
                             </div>
                             <div id="activeTabSlogan">
-                                <p className="tabSlogan">.................</p>
-                                <p className="tabSlogan" id="smaller">.............</p>
+                                <p className="tabSlogan" dangerouslySetInnerHTML={{ __html: this.handleChangeSlogan(1) }}></p>
+                                <p className="tabSlogan" style={this.handleSloganShrink()} dangerouslySetInnerHTML={{ __html: this.handleChangeSlogan(2) }}></p>
                             </div>
                         </div>
                     </div>
