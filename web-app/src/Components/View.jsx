@@ -19,7 +19,7 @@ export default class View extends React.Component {
             channel: "roommates",
         }
     }
-    
+
     componentDidMount() {
         console.log("main view mounted!");
         // let currentUser = firebase.auth().currentUser;
@@ -28,9 +28,9 @@ export default class View extends React.Component {
                 console.log("current user is NULL");
                 this.props.history.push(constants.routes.home);
             } else {
-                this.setState({user: currentUser});
+                this.setState({ user: currentUser });
                 let hash = md5(currentUser.email);
-                this.setState({userHash: hash})
+                this.setState({ userHash: hash })
                 // console.log(this.state.user.uid); 
 
             }
@@ -45,7 +45,7 @@ export default class View extends React.Component {
 
     handleSignOut() {
         console.log("user signing off!")
-        firebase.auth().signOut();   
+        firebase.auth().signOut();
     }
 
     handleChange(){
@@ -85,12 +85,12 @@ export default class View extends React.Component {
 
         let ref;
 
-        if(this.props.match.params.tabName == 'roommates'){
+        if (this.props.match.params.tabName == 'roommates') {
             ref = firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/");
             // console.log(this.state.user.uid);
             console.log(this.state.userHash);
         } else {
-            ref = firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + `/taskList/`);
+            ref = firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName);
         }
 
         return (
@@ -120,7 +120,7 @@ export default class View extends React.Component {
                                 Sign Out
                             </button>
                         </div>
-                    </div> 
+                    </div>
                 </header>
                 <div className="container containerView">
                      <div id = "tabContainer">
@@ -154,27 +154,32 @@ export default class View extends React.Component {
                             onClick={() => this.handleChange('roommates')}
                             >Roommates</a>
                         </li>
-                        <li className = "nav-item">
-                        <a 
-                            className={this.props.match.params.tabName == 'tasks'?
-                            "display-4 nav-link active":
-                            "display-4 nav-link"}
-                            onClick={() => this.handleChange('tasks')}
+                        <li className="nav-item">
+                            <a
+                                className={this.props.match.params.tabName == 'tasks' ?
+                                    "display-4 nav-link active" :
+                                    "display-4 nav-link"}
+                                onClick={() => this.handleChange('tasks')}
                             >Tasks</a>
                         </li>
+                    </ul>
+
+                    <main>
+                        {this.props.match.params.tabName == 'roommates' ?
+                            <NameList roommatesRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/")} />
                     </ul>*/}
             
                         <main id="maxSize">
                         {this.props.match.params.tabName == 'roommates'?
                             <NameList roommatesRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/")}/>
                             :
-                            <TaskList taskRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + `/taskList/`)}
-                                    hash={this.state.userHash}/>
+                            <TaskList taskRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName)}
+                                hash={this.state.userHash} />
                         }
-                            {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
+                        {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}
 
-                        </main>
-                    </div>
+                    </main>
+                </div>
             </div>
         )
     }
