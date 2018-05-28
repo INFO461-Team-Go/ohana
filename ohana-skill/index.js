@@ -55,7 +55,6 @@ const GetTaskIntentHandler = {
             console.log(response);
             attributes.email = response.email;
             attributes.hash = MD5(response.email);
-            attributes.getTaskIsActive = true;
             handlerInput.attributesManager.setSessionAttributes(attributes);
             outputSpeech = "Will do! What is your name?";
             let reprompt = "Sorry, I didn't get that. What is your name?";
@@ -72,17 +71,38 @@ const GetTaskIntentHandler = {
     }
 };
 
+/**
+ * MarkAsDoneIntentHandler: Handles user's request to mark one of their tasks as done
+ *      Cycles the marked task to the next roommate
+ */
 const MarkAsDoneIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
             handlerInput.requestEnvelope.request.intent.name === 'MarkAsDoneIntent';
     },
-    handle(handlerInput) {
-        const speakOutput = 'Hello! Welcome to ohana!';
+    async handle(handlerInput) {
+        const user = handlerInput.requestEnvelope.session.user;
+        const attributes = handlerInput.attributesManager.getSessionAttributes();
+        let outputSpeech = '';
         console.log("inside MarkAsDoneIntentHandler");
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .getResponse();
+        try {
+            const response = await httpsGet(user.accessToken);
+            console.log(response);
+            attributes.email = response.email;
+            attributes.hash = MD5(response.email);
+            handlerInput.attributesManager.setSessionAttributes(attributes);
+            outputSpeech = "Will do! What is your name?";
+            let reprompt = "Sorry, I didn't get that. What is your name?";
+            return handlerInput.responseBuilder
+                .speak(outputSpeech)
+                .reprompt(reprompt)
+                .getResponse();
+        } catch (error) {
+            outputSpeech = 'I am really sorry. I am unable to access part of my memory. Please try again later';
+            return handlerInput.responseBuilder
+                .speak(outputSpeech)
+                .getResponse();
+        }
     }
 };
 
