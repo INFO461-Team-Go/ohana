@@ -63,6 +63,7 @@ const GetTaskIntentHandler = {
             attributes.hash = MD5(response.email);
             handlerInput.attributesManager.setSessionAttributes(attributes);
             outputSpeech = "Will do! What is your name?";
+
             return handlerInput.responseBuilder
                 .speak(outputSpeech)
                 .reprompt(outputSpeech)
@@ -218,18 +219,3 @@ exports.handler = async function (event, context) {
     }
     return skill.invoke(event, context);
 }
-
-/*
-const skillBuilder = Alexa.SkillBuilders.custom();
-exports.handler = skillBuilder
-    .addRequestHandlers(
-        LaunchRequestHandler,
-        GetTaskIntentHandler,
-        MarkAsDoneIntentHandler,
-        HelpIntentHandler,
-        CancelAndStopIntentHandler,
-        SessionEndedRequestHandler
-    )
-    .addErrorHandlers(ErrorHandler)
-    .lambda();
-*/
