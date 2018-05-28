@@ -72,11 +72,42 @@ export default class View extends React.Component {
         }
     }
 
-    handleChangeGraphic(tab) {
-        if (tab == 'main') {
+    handleChangeGraphic(tab){
+        if(tab == 'main'){
+            if(this.state.channel == 'tasks'){
+                return {backgroundImage: 'url(/static/media/taskTab.42f108f6.png)'};
+            }else{
+                return {backgroundImage: 'url(/static/media/userTab.88ed72d3.png)'};
+            }
+        }else{
+            if(this.state.channel == 'tasks'){
+                return {backgroundImage: 'url(/static/media/userTab.88ed72d3.png)'};
+            }else{
+                return {backgroundImage: 'url(/static/media/taskTab.42f108f6.png)'};
+            }
+        }
+    }
 
-        } else {
+    handleChangeSlogan(num){
+        if(num == 1){
+            if(this.state.channel=='tasks'){
+                return 'what will you do?';
+            }else{
+                return 'who are your roommates?';
+            }
+        }else{
+            if(this.state.channel=='tasks'){
+                return 'who will start the task?';
+            }else{
+                return 'list roommates in order top to bottom';
+            }
+        }
+    }
 
+    handleSloganShrink(){
+        if(this.state.channel != 'tasks'){
+            console.log('in');
+            return {fontSize: '2.1vh'};
         }
     }
 
@@ -127,21 +158,21 @@ export default class View extends React.Component {
                         <div id="inactiveTab" onClick={() => this.handleChange()}>
                             <div id="hacking"></div>
                             <div id="innerInactive">
-                                {/*graphics*/}
+                                <div id="graphics" style={this.handleChangeGraphic('inactive')}></div>
                             </div>
                             <div id="tabOverlay"></div>
                         </div>
-                        <div id='inactiveText' dangerouslySetInnerHTML={{ __html: this.handleChangeText('') }}></div>
-                        <div id='activeText' dangerouslySetInnerHTML={{ __html: this.handleChangeText('main') }}></div>
+                        <div id="inactiveText" dangerouslySetInnerHTML={{ __html: this.handleChangeText('inactive') }}></div>
+                        <div id="activeText" dangerouslySetInnerHTML={{ __html: this.handleChangeText('main') }}></div>
                         <div id="activeTabBox">
                             <div id="activeTab">
                                 <div id="innerActive">
-                                    {/*graphics*/}
+                                    <div id="graphics" style={this.handleChangeGraphic('main')}></div>
                                 </div>
                             </div>
                             <div id="activeTabSlogan">
-                                <p className="tabSlogan">.................</p>
-                                <p className="tabSlogan" id="smaller">.............</p>
+                                <p className="tabSlogan" dangerouslySetInnerHTML={{ __html: this.handleChangeSlogan(1) }}></p>
+                                <p className="tabSlogan" style={this.handleSloganShrink()} dangerouslySetInnerHTML={{ __html: this.handleChangeSlogan(2) }}></p>
                             </div>
                         </div>
                     </div>
