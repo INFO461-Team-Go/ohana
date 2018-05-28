@@ -18,7 +18,7 @@
 #activeTabBox{
     position: absolute;
     top: 0%;
-    width: 50vw;
+    width: 30vw;
     height: 43.2vh;
 }
 
@@ -30,8 +30,19 @@
     width: 43.2vh;
     height: 43.2vh;
     border-radius: 100%;
-    background-color: #595959;
-    box-shadow: 0px 1.5vh 15px rgba(0,0,0,0.5);
+    background-color: #444444;
+    box-shadow: 0px 3vh 7vh rgba(0,0,0,0.7);
+}
+
+#activeText{
+    position: absolute;
+    top: -13%;
+    width: 100%;
+    text-align: center;
+    color: #444444;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 6.1vh;
 }
 
 #innerActive{
@@ -53,6 +64,16 @@
     background-color: #595959;
 }
 
+#inactiveText{
+    margin-top: 0vh;
+    width: 100%;
+    text-align: center;
+    color: #444444;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 3vh;
+}
+
 #hacking{
     height: 1.6vh;
     width: 1.6vh;
@@ -72,7 +93,7 @@
     position: absolute;
     top: 0%;
     margin-top: 36.38vh;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.6);
     border-radius: 100%;
     width: 28.77vh;
     height: 28.77vh;

@@ -48,11 +48,36 @@ export default class View extends React.Component {
         firebase.auth().signOut();
     }
 
-    handleChange(chan) {
-        this.props.history.push('/view/' + chan);
-        this.setState({
-            channel: chan
-        });
+    handleChange(){
+        if(this.state.channel == 'tasks'){
+            console.log('hey');
+            this.props.history.push('/view/roommates');
+            this.setState({channel: 'rommmates'});
+        }else{
+            console.log('yo');
+            this.props.history.push('/view/tasks');
+            this.setState({channel: 'tasks'});
+        };
+    }
+
+    handleChangeText(tab){
+        if(tab == 'main'){
+            return this.state.channel;
+        }else{
+            if(this.state.channel == 'tasks'){
+                return 'roommates';
+            }else{
+                return 'tasks';
+            }
+        }
+    }
+
+    handleChangeGraphic(tab){
+        if(tab == 'main'){
+
+        }else{
+            
+        }
     }
 
 
@@ -98,29 +123,35 @@ export default class View extends React.Component {
                     </div>
                 </header>
                 <div className="container containerView">
-                    {/* <div id = "tabContainer">
-                        <div id="inactiveTab">
+                     <div id = "tabContainer">
+                        <div id="inactiveTab" onClick={() => this.handleChange()}>
                             <div id="hacking"></div>
-                            <div id="innerInactive"></div>
+                            <div id="innerInactive">
+                                {/*graphics*/}
+                            </div>
                             <div id="tabOverlay"></div>
                         </div>
+                        <div id='inactiveText' dangerouslySetInnerHTML={{ __html: this.handleChangeText('') }}></div>
+                        <div id='activeText' dangerouslySetInnerHTML={{ __html: this.handleChangeText('main') }}></div>
                         <div id="activeTabBox">
                             <div id="activeTab">
-                                <div id="innerActive"></div>
+                                <div id="innerActive">
+                                    {/*graphics*/}
+                                </div>
                             </div>
                             <div id="activeTabSlogan">
                                 <p className="tabSlogan">.................</p>
                                 <p className="tabSlogan" id="smaller">.............</p>
                             </div>
                         </div>
-                    </div> */}
-                    <ul className="nav nav-tabs">
-                        <li className="nav-item">
-                            <a
-                                className={this.props.match.params.tabName == 'roommates' ?
-                                    "display-4 nav-link active" :
-                                    "display-4 nav-link"}
-                                onClick={() => this.handleChange('roommates')}
+                    </div>
+                   {/*<ul className="nav nav-tabs">
+                        <li className = "nav-item">
+                        <a 
+                            className={this.props.match.params.tabName == 'roommates'?
+                            "display-4 nav-link active":
+                            "display-4 nav-link"}
+                            onClick={() => this.handleChange('roommates')}
                             >Roommates</a>
                         </li>
                         <li className="nav-item">
@@ -136,6 +167,11 @@ export default class View extends React.Component {
                     <main>
                         {this.props.match.params.tabName == 'roommates' ?
                             <NameList roommatesRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/")} />
+                    </ul>*/}
+            
+                        <main id="maxSize">
+                        {this.props.match.params.tabName == 'roommates'?
+                            <NameList roommatesRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/")}/>
                             :
                             <TaskList taskRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName)}
                                 hash={this.state.userHash} />

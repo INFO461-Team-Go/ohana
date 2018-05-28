@@ -142,9 +142,15 @@ h5{
 }
 
 #userGraphic{
-    background-image: url('useri.png');
+    background-image: url('userR.png');
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+#userGraphic:hover{
+    background-image: url('user.png');
+    -webkit-transition: background-image 0.5s ease-in-out;
+    transition: background-image 0.5s ease-in-out;
 }
 
 #task{
@@ -157,6 +163,12 @@ h5{
     background-size: contain;
 }
 
+#taskGraphic:hover{
+    background-image: url('task22R.png');
+    -webkit-transition: background-image 0.5s ease-in-out;
+    transition: background-image 0.5s ease-in-out;
+}
+
 #alexa{
     background-color: #4AA987;
 }
@@ -165,6 +177,12 @@ h5{
     background-image: url('alexalogo.png');
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+#alexaGraphic:hover{
+    background-image: url('alexalogoR.png');
+    -webkit-transition: background-image 0.5s ease-in-out;
+    transition: background-image 0.5s ease-in-out;
 }
 
 #startNow{
