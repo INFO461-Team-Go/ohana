@@ -75,15 +75,15 @@ export default class View extends React.Component {
     handleChangeGraphic(tab){
         if(tab == 'main'){
             if(this.state.channel == 'tasks'){
-                return {backgroundImage: 'url(/static/media/task22.df17d0d7.png)'};
+                return {backgroundImage: 'url(/static/media/taskTab.42f108f6.png)'};
             }else{
-                return {backgroundImage: 'url(/static/media/task22R.b55ed61c.png)'};
+                return {backgroundImage: 'url(/static/media/userTab.88ed72d3.png)'};
             }
         }else{
             if(this.state.channel == 'tasks'){
-                return {backgroundImage: 'url(/static/media/task22R.b55ed61c.png)'};
+                return {backgroundImage: 'url(/static/media/userTab.88ed72d3.png)'};
             }else{
-                return {backgroundImage: 'url(/static/media/task22.df17d0d7.png)'};
+                return {backgroundImage: 'url(/static/media/taskTab.42f108f6.png)'};
             }
         }
     }
