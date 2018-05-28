@@ -48,25 +48,25 @@ export default class View extends React.Component {
         firebase.auth().signOut();
     }
 
-    handleChange(){
-        if(this.state.channel == 'tasks'){
+    handleChange() {
+        if (this.state.channel == 'tasks') {
             console.log('hey');
             this.props.history.push('/view/roommates');
-            this.setState({channel: 'rommmates'});
-        }else{
+            this.setState({ channel: 'rommmates' });
+        } else {
             console.log('yo');
             this.props.history.push('/view/tasks');
-            this.setState({channel: 'tasks'});
+            this.setState({ channel: 'tasks' });
         };
     }
 
-    handleChangeText(tab){
-        if(tab == 'main'){
+    handleChangeText(tab) {
+        if (tab == 'main') {
             return this.state.channel;
-        }else{
-            if(this.state.channel == 'tasks'){
+        } else {
+            if (this.state.channel == 'tasks') {
                 return 'roommates';
-            }else{
+            } else {
                 return 'tasks';
             }
         }
@@ -154,7 +154,7 @@ export default class View extends React.Component {
                     </div>
                 </header>
                 <div className="container containerView">
-                     <div id = "tabContainer">
+                    <div id="tabContainer">
                         <div id="inactiveTab" onClick={() => this.handleChange()}>
                             <div id="hacking"></div>
                             <div id="innerInactive">
@@ -176,7 +176,7 @@ export default class View extends React.Component {
                             </div>
                         </div>
                     </div>
-                   {/*<ul className="nav nav-tabs">
+                    {/*<ul className="nav nav-tabs">
                         <li className = "nav-item">
                         <a 
                             className={this.props.match.params.tabName == 'roommates'?
@@ -199,10 +199,10 @@ export default class View extends React.Component {
                         {this.props.match.params.tabName == 'roommates' ?
                             <NameList roommatesRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/")} />
                     </ul>*/}
-            
-                        <main id="maxSize">
-                        {this.props.match.params.tabName == 'roommates'?
-                            <NameList roommatesRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/")}/>
+
+                    <main id="maxSize">
+                        {this.props.match.params.tabName == 'roommates' ?
+                            <NameList roommatesRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/")} />
                             :
                             <TaskList taskRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName)}
                                 hash={this.state.userHash} />

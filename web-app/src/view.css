@@ -210,6 +210,13 @@
     padding-top: 3px;
 }
 
+#taskForm {
+    background-color: #ffff;
+    margin-left: 10rem;
+    border-radius: 8px;
+    padding-top: 3px;
+}
+
 #inputBox {
     width: 12.5rem;
     height: 40px;
