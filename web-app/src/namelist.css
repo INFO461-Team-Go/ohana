@@ -1,9 +1,10 @@
-#maxSize{
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
+/*#maxSize{
+    width: 60%;
+}
+*/
+#roommateBox{
 }
 
-#roommateBox{
-    float: right;
+#nameList{
+    margin-left: 20vw;
 }

@@ -98,7 +98,7 @@ export default class NameList extends React.Component {
                 {
                     this.state.addActive ?
                         <div className="container" id="roommateBox">
-                            <form id="formBox" className="mx-auto" onSubmit={evt => this.handleSubmit(evt)}>
+                            <form id="formBox" onSubmit={evt => this.handleSubmit(evt)}>
                                 {
                                     this.state.fbError ? 
                                     <div className="alert alert-danger">{this.state.fbError.message}</div> : 
