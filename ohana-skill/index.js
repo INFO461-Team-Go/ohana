@@ -43,7 +43,7 @@ const LaunchRequestHandler = {
  */
 const GetTaskIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
             handlerInput.requestEnvelope.request.intent.name === 'GetTaskIntent';
     },
     async handle(handlerInput) {
@@ -52,7 +52,6 @@ const GetTaskIntentHandler = {
         let outputSpeech = '';
         try {
             const response = await httpsGet(user.accessToken);
-            console.log(response);
             attributes.email = response.email;
             attributes.hash = MD5(response.email);
             attributes.getTaskIsActive = true;
@@ -74,15 +73,31 @@ const GetTaskIntentHandler = {
 
 const MarkAsDoneIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
             handlerInput.requestEnvelope.request.intent.name === 'MarkAsDoneIntent';
     },
-    handle(handlerInput) {
-        const speakOutput = 'Hello! Welcome to ohana!';
-        console.log("inside MarkAsDoneIntentHandler");
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .getResponse();
+    async handle(handlerInput) {
+        const user = handlerInput.requestEnvelope.session.user;
+        const attributes = handlerInput.attributesManager.getSessionAttributes();
+        let outputSpeech = '';
+        try {
+            const response = await httpsGet(user.accessToken);
+            attributes.email = response.email;
+            attributes.hash = MD5(response.email);
+            attributes.markAsDoneIsActive = true;
+            handlerInput.attributesManager.setSessionAttributes(attributes);
+            outputSpeech = "Will do! What is your name?";
+            let reprompt = "Sorry, I didn't get that. What is your name?";
+            return handlerInput.responseBuilder
+                .speak(outputSpeech)
+                .reprompt(reprompt)
+                .getResponse();
+        } catch (error) {
+            outputSpeech = 'I am really sorry. I am unable to access part of my memory. Please try again later';
+            return handlerInput.responseBuilder
+                .speak(outputSpeech)
+                .getResponse();
+        }
     }
 };
 
@@ -99,30 +114,37 @@ const GetNameIntentHandler = {
         const responseBuilder = handlerInput.responseBuilder;
         let attributes = handlerInput.attributesManager.getSessionAttributes();
         let roommate = handlerInput.requestEnvelope.request.intent.slots.name.value;
-        if (attributes.getTaskIsActive) {
-            try {
-                // Get user branch from Firebase
-                const userBranch = await Firebase.getUserBranch(attributes.hash);
-                // Get roommate's task
-                const response = Firebase.getTask(userBranch, roommate.toLowerCase());
-                if (!response.found || response.roommateId === -1 || response.task === "") {
-                    let error = "Something went wrong. Please try asking for your task again";
-                    return responseBuilder
-                        .speak(error)
-                        .getResponse();
-                }
-                let outputSpeech = roommate + ", you are assigned to " + response.task;
+        try {
+            // Get user branch from Firebase
+            const userBranch = await Firebase.getUserBranch(attributes.hash);
+            // Get roommate's task
+            const taskResponse = Firebase.getTask(userBranch, roommate.toLowerCase());
+            console.log(taskResponse);
+            if (!taskResponse.found || taskResponse.roommateId === -1 || taskResponse.task === {}) {
+                let error = "Something went wrong. Please try again.";
                 return responseBuilder
-                    .speak(outputSpeech)
-                    .getResponse();
-            } catch (errorObject) {
-                let outputSpeech = 'I am really sorry. I am unable to access part of my memory. Please try again later';
-                return responseBuilder
-                    .speak(outputSpeech)
+                    .speak(error)
                     .getResponse();
             }
-        } else if (attributes.markAsDoneIsActive) {
-            // TODO: Add your code here Robin
+            // if the user asked for their task, tell them their task
+            if (attributes.getTaskIsActive) {
+                let outputSpeech = roommate + ", you are assigned to " + taskResponse.task.name;
+                return responseBuilder
+                    .speak(outputSpeech)
+                    .getResponse();
+            } else if (attributes.markAsDoneIsActive) {
+                // mark as done logic
+                let markedAsDone = await Firebase.markAsDone(hash, userBranch, task);
+                if (markedAsDone) {
+                    let outputSpeech = roommate + ", your task was marked as complete";
+                } else {
+                    let error = "I was not able to mark your task as complete. Please try again.";
+                    return responseBuilder.speak(error).getResponse();
+                }
+            }
+        } catch (errorObject) {
+            let outputSpeech = 'I am really sorry. I am unable to access part of my memory. Please try again later';
+            return responseBuilder.speak(outputSpeech).getResponse();
         }
     }
 }
@@ -153,7 +175,7 @@ const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
             (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent' ||
-            handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
+                handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
         const speakOutput = 'Bye';

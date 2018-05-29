@@ -48,6 +48,36 @@ const getUserBranch = function (hash) {
     }));
 }
 
+
+const cycleTaskIndex = function (taskID, newIndex) {
+    const accessToken = 'AIzaSyCh7wRFGqzNXGuKBLzPYItxrhz8S-9b2aY';
+    let postData = newIndex;
+    let options = {
+        host: 'ohana-e7233.firebaseio.com',
+        port: '443',
+        path: '/' + encodeURIComponent(hash) + '.json?accessToken=' + encodeURIComponent(accessToken),
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': postData.length
+        }
+    };
+
+    const req = Https.request(options, (res) => {
+        console.log("Inside CycleTask request");
+        res.on('data', (d) => {
+            console.log("CycleTask data recieved");
+        });
+    })
+
+    req.on('error', (e) => {
+        console.log("error in CycleTask api call: " + e);
+    });
+
+    req.write(postData);
+    req.end();
+}
+
 /**
  * Retrieve's the roommate's task
  * @param {JSON} userBranch 
@@ -57,11 +87,34 @@ const getUserBranch = function (hash) {
 const getTask = function (userBranch, roommate) {
     let response = {};
     const roommatesList = userBranch.roommates.names;
-    // TODO: Incoming path change
-    const tasksList = userBranch.tasks.taskList;
+    const tasksList = userBranch.tasks;
     response = getRoommateIndex(roommatesList, roommate);
     response["task"] = matchTask(tasksList, response.roommateId);
     return response;
+}
+
+/**
+ * Mark user's task as done on Firebase DB
+ * @param {*} hash 
+ * @param {*} userBranch 
+ * @param {*} task
+ * @returns {boolean}
+ */
+const markAsDone = function(hash, userBranch, task) {
+    let count = userBranch.roommates.count;
+    let roommateId = task.roommateId;
+    if (roommateId < count - 1) {
+        roommateId++;
+    } else if (roommateId == count - 1) {
+        roommateId = 0;
+    }
+    // data to be pushed to firebase
+    let data = {
+        name: task.name,
+        roommate: roommateId
+    };
+    // TODO: change hard-coded return value
+    return true;
 }
 
 /**
@@ -90,16 +143,17 @@ function getRoommateIndex(roommatesList, roommate) {
  * 
  * @param {JSON} tasksList 
  * @param {String} roommateId
- * @returns {String}
+ * @returns {JSON}
  */
 function matchTask(tasksList, roommateId) {
-    let task = "";
+    let task = {};
     if (roommateId != -1) {
         Object.keys(tasksList).forEach((key) => {
             let assignment = tasksList[key];
             // TODO: Potential name & type change coming up
-            if (parseInt(assignment.roommate) === roommateId) {
-                task = assignment.name;
+            if (assignment.roommate === roommateId) {
+                task["id"] = key;
+                task["name"] = assignment.name;
                 return;
             }
         });
@@ -109,5 +163,6 @@ function matchTask(tasksList, roommateId) {
 
 module.exports = {
     getUserBranch,
-    getTask
+    getTask,
+    markAsDone
 }
