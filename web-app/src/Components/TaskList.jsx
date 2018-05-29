@@ -153,7 +153,7 @@ export default class TaskList extends React.Component {
                                         id="inputBox"
                                         value={this.state.name}
                                         onInput={evt => this.setState({ name: evt.target.value })}
-                                        placeholder="new task here"
+                                        placeholder="add Verb Phrase"
                                     />
                                     <select className="col-4" id="inputBox" value={this.state.roommate} onChange={evt => this.setState({ roommate: Number(evt.target.value) })}>
                                         {rooms.length == 0 ?

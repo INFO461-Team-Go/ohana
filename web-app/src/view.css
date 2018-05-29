@@ -241,6 +241,22 @@
     font-size: 2.5vh;
 }
 
+::-webkit-input-placeholder {
+    color:red;
+}
+
+::-moz-placeholder {
+    color:red;
+}
+
+::-ms-placeholder {
+    color:red;
+}
+
+::placeholder {
+    color:red;
+}
+
 .newCardButton {
     font-family: 'Nunito', sans-serif;
     font-weight: 600;
