@@ -32,6 +32,7 @@ exports.handleCountRoommates = functions.database.ref('{hash}/roommates/names')
     // if number of entries before and after are the same, exit function
      else if (change.before.numChildren() === change.after.numChildren()) {
         return null;
+     }
     // } else if (change.after.numChildren() < change.before.numChildren()) {
     //     let roommatesRef = change.after.ref.parent;
     //     let userRef = roommatesRef.parent;
