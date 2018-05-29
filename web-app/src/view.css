@@ -183,6 +183,16 @@
     margin-left: 83%;
 }
 
+#tMoreIcon {
+    color: #31C4F3;
+    padding-top: 8px;
+    transform: translate(0px, 1px);
+    cursor: pointer;
+    display: none;
+    position: relative;
+    margin-left: 0;
+}
+
 #closeIcon {
     color: #8b8b8b;
     font-size: 20px;
@@ -201,6 +211,9 @@
 .cardBox:hover > #moreIcon {
     display: block;
 }
+.cardBox:hover > #tMoreIcon {
+    display: block;
+}
 
 #formBox {
     width: 28vh;
@@ -213,7 +226,7 @@
 }
 
 #taskForm {
-    background-color: #ffff;
+    background-color: #FFFFFF;
     margin-left: 10rem;
     border-radius: 8px;
     padding-top: 3px;
