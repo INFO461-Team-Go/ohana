@@ -32,7 +32,17 @@ exports.handleCountRoommates = functions.database.ref('{hash}/roommates/names')
     // if number of entries before and after are the same, exit function
      else if (change.before.numChildren() === change.after.numChildren()) {
         return null;
-    }
+     }
+    // } else if (change.after.numChildren() < change.before.numChildren()) {
+    //     let roommatesRef = change.after.ref.parent;
+    //     let userRef = roommatesRef.parent;
+    //     let tasksRef = userRef.child('tasks');
+    //     tasksRef.once('value')
+    //         .then(snapshot => snapshot.forEach(taskSnap => {
+    //             taskSnap.ref.update({})
+    //         }))
+    // }   
+
     let parentRef = change.after.ref.parent;
     let namesSnap = change.after;
     let indexCount = 0;
