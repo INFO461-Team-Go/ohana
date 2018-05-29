@@ -6,7 +6,8 @@ import md5 from "blueimp-md5";
 
 
 let listStyles = {
-    maxWidth: "75%"
+    maxWidth: "75%",
+    width: "500px"
 };
 let greyButton = {
     color: "#8B8B8B",
@@ -91,7 +92,7 @@ export default class TaskList extends React.Component {
     }
 
     handleCancelAdd() {
-        this.setState({addActive: false});
+        this.setState({ addActive: false });
     }
 
     render() {
@@ -166,7 +167,7 @@ export default class TaskList extends React.Component {
                                 } */}
                                 <div className="row mx-auto px-1">
                                     <h4 className="col text-center m-1" id="newCardButton" style={redButton}
-                                    onClick={() => this.handleCancelAdd()}>cancel</h4>
+                                        onClick={() => this.handleCancelAdd()}>cancel</h4>
                                     {
                                         rooms.length != 0 && this.state.name.trim() != "" ?
                                         <h4 className="col text-center m-1" className="newCardButton" style={greyButtonActive}
