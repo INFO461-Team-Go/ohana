@@ -101,7 +101,7 @@
     margin: auto;
     width: 25.57vh;
     height: 25.57vh; 
-    background-color: #FFFFFF;
+    background-color: #DFDFDF;
     border-radius: 100%;
     border: 1.6vh solid rgb(108, 213, 248);
     position: relative;
@@ -130,15 +130,16 @@
 
 .cardBox {
     position: relative;
-    width: 13rem;
-    height: 50px;
+    width: 28vh;
+    height: 6vh;
     background-color: #FFFFFF;
     margin: auto;
     border-style: solid;
     border-radius: 8px;
-    border-width: 4px;
+    border-width: 0.8vh;
     border-color: #31C4F3;
     z-index: 1;
+    box-shadow: 0px 0.5vh 1vh rgba(0,0,0,0.8);
 }
 .overlayBox {
     width: 100%;
@@ -155,10 +156,15 @@
 
 #cardFont {
     font-family: 'Nunito', sans-serif;
-    font-weight: 500;
-    font-size: 28px;
-    line-height: 40px;
+    font-weight: 900;
+    font-size: 2.7vh;
+    line-height: 4.5vh;
     text-align: center;
+    color: #444444;
+}
+
+.nameSize{
+    width: 100%;
 }
 
 #addIcon{
@@ -169,15 +175,27 @@
 }
 #moreIcon {
     color: #31C4F3;
+    padding-top: auto;
+    transform: translate(0px, 1px);
+    cursor: pointer;
+    display: none;
+    position: absolute;
+    margin-left: 81%;
+}
+
+#tMoreIcon {
+    color: #31C4F3;
     padding-top: 8px;
     transform: translate(0px, 1px);
     cursor: pointer;
     display: none;
+    position: relative;
+    margin-left: 0;
 }
 
 #closeIcon {
     color: #8b8b8b;
-    font-size: 20px;
+    font-size: 3.8vh;
     cursor: pointer;
 }
 
@@ -187,15 +205,19 @@
 
 #deleteIcon {
     cursor: pointer;
+    color: rgba(0,0,0,10);
 }
 
 .cardBox:hover > #moreIcon {
     display: block;
 }
+.cardBox:hover > #tMoreIcon {
+    display: block;
+}
 
 #formBox {
-    width: 13rem;
-    height: 80px;
+    width: 28vh;
+    height: 10.5vh;
     background-color: #FFFFFF;
     margin-left: auto;
     margin-right: auto;
@@ -203,16 +225,35 @@
     padding-top: 3px;
 }
 
+#taskForm {
+    background-color: #FFFFFF;
+    margin-left: 10rem;
+    border-radius: 8px;
+    padding-top: 3px;
+}
+
 #inputBox {
-    width: 12.5rem;
-    height: 40px;
+    width: 27vh;
+    height: 5.2vh;
     background-color: #bcbcbc;
     border-radius: 8px;
     text-align: center;
+    font-size: 2.5vh;
 }
 
-#newCardButton {
+.newCardButton {
     font-family: 'Nunito', sans-serif;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 3vh;
+    max-width: 50%;
+    margin: auto;
+}
+
+.material-icons{
+    font-size: 3.8vh;
+}
+
+.paddingStyle{
+    padding-top: 0;
+    padding-bottom: 0;
 }

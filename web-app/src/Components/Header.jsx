@@ -7,7 +7,7 @@ import "firebase/auth";
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.state ={
+        this.state = {
             user: undefined
         }
     }
@@ -18,15 +18,15 @@ export default class Header extends React.Component {
                 console.log("current user is NULL");
                 // this.props.history.push(constants.routes.home);
             } else {
-                this.setState({user: currentUser});
+                this.setState({ user: currentUser });
                 // console.log(this.state.user.uid); 
-            } 
+            }
         });
     }
 
     handleSignOut() {
         console.log("user signing off!")
-        firebase.auth().signOut();   
+        firebase.auth().signOut();
     }
 
     render() {

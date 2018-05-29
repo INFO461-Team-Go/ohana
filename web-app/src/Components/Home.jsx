@@ -63,7 +63,7 @@ export default class Home extends React.Component {
                     </div>
                 </div>
                 <div className="container text-center py-3" id="startNow">
-                    <h5><Link to ={constants.routes.signin} className="text-white">Let's get started!: <span id="bolded">sign in</span></Link></h5>
+                    <h5><Link to={constants.routes.signin} className="text-white">Let's get started!: <span id="bolded">sign in</span></Link></h5>
                 </div>
             </div>
         );

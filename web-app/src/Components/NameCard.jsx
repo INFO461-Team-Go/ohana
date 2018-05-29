@@ -113,11 +113,11 @@ export default class NameCard extends React.Component {
                     // </div> 
                     <div className="container" id="nameCard">  
                         <div className="cardBox my-2 row">
-                            <div className="col-2"/>
-                            <div className="col-8">
+                            {/*<div className="col-2"/>*/}
+                            <div className="nameSize">
                                 <h4 claasName="m-0 col-8 text-truncate" id="cardFont">{toTitleCase(roommate.name)}</h4>
                             </div>
-                            <i className="material-icons col-2" id="moreIcon" onClick={() => this.handleMenu()}>
+                            <i className="material-icons col-1" id="moreIcon" onClick={() => this.handleMenu()}>
                             more_vert</i>
                             {
                                 this.state.menu ?
@@ -125,8 +125,8 @@ export default class NameCard extends React.Component {
                                     {/* <div className="row py-0"> */}
                                         <div className="col-2 p-0"></div>
                                         <div className="col-8 d-flex align-items-center justify-content-center p-0">
-                                            <i className="material-icons m-2" id="editIcon" onClick={() => this.handleEdit()}>edit</i>
-                                            <i className="material-icons m-2" id="deleteIcon" onClick={() => this.handleDelete()}>delete </i>
+                                            <i className="material-icons m-auto" id="editIcon" onClick={() => this.handleEdit()}>edit</i>
+                                            <i className="material-icons m-auto" id="deleteIcon" onClick={() => this.handleDelete()}>delete </i>
                                         </div>
                                         <div className="col-2 d-flex align-items-center justify-content-end p-0">
                                             <i className="material-icons mr-1" id="closeIcon" onClick={() => this.handleMenu()}>

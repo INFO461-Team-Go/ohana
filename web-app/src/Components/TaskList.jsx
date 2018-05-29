@@ -6,8 +6,23 @@ import md5 from "blueimp-md5";
 
 
 let listStyles = {
-    maxWidth: "50%"
+    maxWidth: "75%",
+    width: "500px"
 };
+let greyButton = {
+    color: "#8B8B8B",
+    cursor: "default"
+}
+
+let greyButtonActive = {
+    color: "#31c4f3",
+    cursor: "pointer"
+}
+
+let redButton = {
+    color: "#FF4D4D",
+    cursor: "pointer"
+}
 
 export default class TaskList extends React.Component {
     constructor(props) {
@@ -17,7 +32,8 @@ export default class TaskList extends React.Component {
             fbError: undefined,
             taskSnap: undefined,
             dataSource: [],
-            roommate: 0
+            roommate: 0,
+            addActive: false
         };
     }
 
@@ -75,6 +91,10 @@ export default class TaskList extends React.Component {
         }
     }
 
+    handleCancelAdd() {
+        this.setState({ addActive: false });
+    }
+
     render() {
 
         if (!this.state.taskSnap) {
@@ -86,7 +106,6 @@ export default class TaskList extends React.Component {
         let names = [];
         let rooms = [];
         let roommatenames = [];
-
 
 
         // console.log(this.state.dataSource)
@@ -118,29 +137,60 @@ export default class TaskList extends React.Component {
         return (
             <div className="container" id="nameList" ref="wrap" style={listStyles}>
                 {names}
-                <form onKeyPress={this.onKeyPress} onSubmit={evt => { this.handleSubmit(evt); evt.preventDefault(); }}>
-                    {
-                        this.state.fbError ?
-                            <div className="alert alert-danger">{this.state.fbError.message}</div> :
-                            undefined
-                    }
-                    <input type="text"
-                        className="form-control"
-                        value={this.state.name}
-                        onInput={evt => this.setState({ name: evt.target.value })}
-                        placeholder="new task here"
-                    />
-                    <select value={this.state.roommate} onChange={evt => this.setState({ roommate: Number(evt.target.value) })}>
-                        {rooms.length == 0 ?
-                            <option disabled selected value> Please Submit a Roommmate to Begin </option> :
-                            rooms
-                        }
-                    </select>
-                    {rooms.length == 0 || this.state.name.trim() == "" ?
-                        <input type="submit" value="Submit" className="btn btn-primary" disabled /> :
-                        <input type="submit" value="Submit" className="btn btn-primary" />
-                    }
-                </form>
+                {
+                    this.state.addActive ?
+                        <div className="container p-0" id="roommateBox">
+                            <form onKeyPress={this.onKeyPress} id="taskForm" className="d-flex row mx-auto" onSubmit={evt => { this.handleSubmit(evt); evt.preventDefault(); }}>
+                                {
+                                    this.state.fbError ?
+                                        <div className="alert alert-danger">{this.state.fbError.message}</div> :
+                                        undefined
+                                }
+                                <div className="row mx-0 w-100 px-1">
+                                    <input type="text"
+                                        className="form-control form-control-sm mx-auto col-8"
+                                        id="inputBox"
+                                        value={this.state.name}
+                                        onInput={evt => this.setState({ name: evt.target.value })}
+                                        placeholder="new task here"
+                                    />
+                                    <select className="col-4" id="inputBox" value={this.state.roommate} onChange={evt => this.setState({ roommate: Number(evt.target.value) })}>
+                                        {rooms.length == 0 ?
+                                            <option disabled selected value> Please Submit a Roommmate to Begin </option> :
+                                            rooms
+                                        }
+                                    </select>
+                                </div>
+                                {/* {rooms.length == 0 || this.state.name.trim() == "" ?
+                                    <input type="submit" value="Submit" className="btn btn-primary" disabled /> :
+                                    <input type="submit" value="Submit" className="btn btn-primary" />
+                                } */}
+                                <div className="row mx-auto px-1">
+                                    <h4 className="col text-center m-1" id="newCardButton" style={redButton}
+                                        onClick={() => this.handleCancelAdd()}>cancel</h4>
+                                    {
+                                        rooms.length != 0 && this.state.name.trim() != "" ?
+                                        <h4 className="col text-center m-1" className="newCardButton" style={greyButtonActive}
+                                        onClick={(evt) => this.handleSubmit(evt)}>add</h4>
+                                        :
+                                        <h4 className="col text-center m-1" className="newCardButton" style={greyButton}>add</h4>
+                                    }
+                                </div>
+                            </form>
+                            {
+                                this.state.errMsg ?
+                                    <p className="text-danger">
+                                        {this.state.errMsg}
+                                    </p> :
+                                    <div></div>
+                            }
+                        </div>
+                        :
+                        <div className="container d-flex justify-content-center my-3">
+                            <i className="material-icons" id="addIcon"
+                                onClick={() => this.setState({ addActive: true })}> add_circle_outline</i>
+                        </div>
+                }
                 <div ref="listEnd"></div>
             </div>
         );
