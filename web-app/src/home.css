@@ -5,7 +5,8 @@ body{
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-image: url('Frame.png'), linear-gradient(140deg, #73C8A9 15%, #373B44);
+    background-image: url('Frame1.png'), linear-gradient(140deg, #73C8A9 15%, #373B44);
+    opacity: 1; 
     background-repeat: repeat;
 }
 
