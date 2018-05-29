@@ -170,10 +170,10 @@ export default class TaskList extends React.Component {
                                         onClick={() => this.handleCancelAdd()}>cancel</h4>
                                     {
                                         rooms.length != 0 && this.state.name.trim() != "" ?
-                                            <h4 className="col text-center m-1" id="newCardButton" style={greyButtonActive}
-                                                onClick={(evt) => this.handleSubmit(evt)}>add</h4>
-                                            :
-                                            <h4 className="col text-center m-1" id="newCardButton" style={greyButton}>add</h4>
+                                        <h4 className="col text-center m-1" className="newCardButton" style={greyButtonActive}
+                                        onClick={(evt) => this.handleSubmit(evt)}>add</h4>
+                                        :
+                                        <h4 className="col text-center m-1" className="newCardButton" style={greyButton}>add</h4>
                                     }
                                 </div>
                             </form>
