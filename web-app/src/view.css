@@ -217,12 +217,12 @@
 
 #formBox {
     width: 28vh;
-    height: 10.5vh;
+    height: 9.5vh;
     background-color: #FFFFFF;
     margin-left: auto;
     margin-right: auto;
     border-radius: 8px;
-    padding-top: 3px;
+    padding-top: 0.8vh;
 }
 
 #taskForm {
