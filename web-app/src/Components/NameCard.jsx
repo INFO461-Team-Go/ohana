@@ -125,8 +125,8 @@ export default class NameCard extends React.Component {
                                     {/* <div className="row py-0"> */}
                                         <div className="col-2 p-0"></div>
                                         <div className="col-8 d-flex align-items-center justify-content-center p-0">
-                                            <i className="material-icons m-2" id="editIcon" onClick={() => this.handleEdit()}>edit</i>
-                                            <i className="material-icons m-2" id="deleteIcon" onClick={() => this.handleDelete()}>delete </i>
+                                            <i className="material-icons m-auto" id="editIcon" onClick={() => this.handleEdit()}>edit</i>
+                                            <i className="material-icons m-auto" id="deleteIcon" onClick={() => this.handleDelete()}>delete </i>
                                         </div>
                                         <div className="col-2 d-flex align-items-center justify-content-end p-0">
                                             <i className="material-icons mr-1" id="closeIcon" onClick={() => this.handleMenu()}>
