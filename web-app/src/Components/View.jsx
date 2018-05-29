@@ -77,11 +77,11 @@ export default class View extends React.Component {
             if(this.state.channel == 'tasks'){
                 return {backgroundImage: 'url(/static/media/taskTab.42f108f6.png)'};
             }else{
-                return {backgroundImage: 'url(/static/media/userTab.88ed72d3.png)'};
+                return {backgroundImage: 'url(/static/media/userTab.7f56161e.png)'};
             }
         }else{
             if(this.state.channel == 'tasks'){
-                return {backgroundImage: 'url(/static/media/userTab.88ed72d3.png)'};
+                return {backgroundImage: 'url(/static/media/userTab.7f56161e.png)'};
             }else{
                 return {backgroundImage: 'url(/static/media/taskTab.42f108f6.png)'};
             }

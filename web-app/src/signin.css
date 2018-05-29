@@ -1,12 +1,3 @@
-body{
-    background: linear-gradient(to bottom right, #73C8A9, #373B44);
-    margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    width: 100%;
-    height: 100%;
-}
-
 /*this is the container that wraps the sign in credentials from username to sign up button*/
 .test{
     position: relative;
