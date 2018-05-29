@@ -40,6 +40,11 @@ export default class TaskList extends React.Component {
 
     async get_firebase_list() {
         return firebase.database().ref(this.props.hash + '/roommates/names/').once('value').then(function (snapshot) {
+            // if (this.props.hash) {
+            //     console.log(this.props.hash);
+            // } else {
+            //     console.log("hash is undefined");
+            // }
             var items = [];
             snapshot.forEach(function (childSnapshot) {
                 var childKey = childSnapshot.key;
