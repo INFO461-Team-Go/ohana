@@ -119,7 +119,7 @@ export default class SignUp extends React.Component {
                                     onInput={evt => this.setState({ cpw: evt.target.value })}
                                 />
                                 {this.state.cpw !== this.state.pw ?
-                                    <p className="text-danger">
+                                    <p className="text-danger" id="alignE">
                                         Passwords do not match
                                     </p> :
                                     undefined
