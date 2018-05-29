@@ -53,10 +53,10 @@ export default class SignIn extends React.Component {
                             <div id="uhh"></div>
                             <form onSubmit={evt => this.handleSubmit(evt)}>
                                 <h2 id="username">amazon email</h2>
-                                <input type="Email" className="textBox form-control form-control-sm" value={this.state.email} 
+                                <input type="Email" className="textBox form-control form-control-sm p-1" value={this.state.email} 
                                 onInput={evt => this.setState({ email: evt.target.value })}/>
                                 <h2 id="password">password</h2>
-                                <input type="Password" className="textBox form-control form-control-sm" value={this.state.password} 
+                                <input type="Password" className="textBox form-control form-control-sm p-1" value={this.state.password} 
                                 onInput={evt => this.setState({ password: evt.target.value })}/>
                                 {
                                     this.state.fberror ?

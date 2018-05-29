@@ -22,18 +22,26 @@ admin.initializeApp();
 exports.handleCountRoommates = functions.database.ref('{hash}/roommates/names')
 .onWrite((change, context) => {
     if (!change.after.exists()) {
+        return null;
+    }
+    let baseCount = 1;
+    if (change.after.numChildren() === baseCount) {
         return change.after.ref.parent.update({count: 0});
     }
-    // let baseCount = 1;
-    // if (change.after.numChildren() === 0) {
-    //     return change.after.ref.parent.update({count: 0});
-    // }
-
 
     // if number of entries before and after are the same, exit function
      else if (change.before.numChildren() === change.after.numChildren()) {
         return null;
-    }
+    // } else if (change.after.numChildren() < change.before.numChildren()) {
+    //     let roommatesRef = change.after.ref.parent;
+    //     let userRef = roommatesRef.parent;
+    //     let tasksRef = userRef.child('tasks');
+    //     tasksRef.once('value')
+    //         .then(snapshot => snapshot.forEach(taskSnap => {
+    //             taskSnap.ref.update({})
+    //         }))
+    // }   
+
     let parentRef = change.after.ref.parent;
     let namesSnap = change.after;
     let indexCount = 0;
@@ -46,7 +54,7 @@ exports.handleCountRoommates = functions.database.ref('{hash}/roommates/names')
             indexCount++;
         }
     });
-    let toUpdate = {count: change.after.numChildren()};
+    let toUpdate = {count: indexCount};
 
     return change.after.ref.parent.update(toUpdate)
             .then(console.log("write complete!"));

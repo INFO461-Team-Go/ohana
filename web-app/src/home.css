@@ -2,12 +2,10 @@
 body{
     width: 100%;
     height: 100%;
+    background: linear-gradient(to bottom right, #73C8A9, #373B44);
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-image: url('Frame1.png'), linear-gradient(140deg, #73C8A9 15%, #373B44);
-    opacity: 1; 
-    background-repeat: repeat;
 }
 
 
@@ -201,13 +199,11 @@ h5{
 
     /*background gradient value*/
     body{
-        width: 100%;
-        height: 100%;
+        height: fit-content;
+        background: linear-gradient(to bottom right, #73C8A9, #373B44 80%);
         margin: 0;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        background-image: url('Frame.png'), linear-gradient(140deg, #73C8A9 15%, #373B44);
-        background-repeat: repeat;
     }
     
     .slogan{
