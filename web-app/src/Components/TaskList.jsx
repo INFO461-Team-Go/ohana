@@ -52,6 +52,7 @@ export default class TaskList extends React.Component {
     }
 
     async componentWillMount() {
+        console.log("task list will mount")
         this.setState({
             dataSource: await this.get_firebase_list()
         })

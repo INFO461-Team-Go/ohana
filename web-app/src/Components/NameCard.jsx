@@ -115,9 +115,9 @@ export default class NameCard extends React.Component {
                         <div className="cardBox my-2 row">
                             {/*<div className="col-2"/>*/}
                             <div className="nameSize">
-                                <h4  id="cardFont">{toTitleCase(roommate.name)}</h4>
+                                <h4 id="cardFont">{toTitleCase(roommate.name)}</h4>
                             </div>
-                            <i className="material-icons col-1" id="moreIcon" onClick={() => this.handleMenu()}>
+                            <i className="material-icons" id="moreIcon" onClick={() => this.handleMenu()}>
                             more_vert</i>
                             {
                                 this.state.menu ?
