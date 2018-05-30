@@ -86,6 +86,7 @@ export default class TaskCard extends React.Component {
         }
 
         let task = this.props.nameSnap.val();
+        console.log("task: " + task.name + " nameIndex: " + task.roommate);
 
         let ref = this.props.nameSnap.ref;
         return (

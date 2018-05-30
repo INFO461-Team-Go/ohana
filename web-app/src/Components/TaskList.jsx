@@ -38,46 +38,70 @@ export default class TaskList extends React.Component {
     }
 
 
-    async get_firebase_list() {
-        return firebase.database().ref(this.props.hash + '/roommates/names/').once('value').then(function (snapshot) {
-            // if (this.props.hash) {
-            //     console.log(this.props.hash);
-            // } else {
-            //     console.log("hash is undefined");
-            // }
-            var items = [];
-            snapshot.forEach(function (childSnapshot) {
-                var childKey = childSnapshot.key;
-                var childData = childSnapshot.val();
-                items.push(childData);
-            });
-            // console.log("items_load: " + items);
-            return items;
-        });
-    }
+    // async get_firebase_list() {
+    //     return firebase.database().ref(this.props.hash + '/roommates/names/').once('value').then(function (snapshot) {
+    //         // if (this.props.hash) {
+    //         //     console.log(this.props.hash);
+    //         // } else {
+    //         //     console.log("hash is undefined");
+    //         // }
+    //         var items = [];
+    //         snapshot.forEach(function (childSnapshot) {
+    //             var childKey = childSnapshot.key;
+    //             var childData = childSnapshot.val();
+    //             items.push(childData);
+    //         });
+    //         // console.log("items_load: " + items);
+    //         return items;
+    //     });
+    // }
 
-    async componentWillMount() {
-        console.log("task list will mount")
-        this.setState({
-            dataSource: await this.get_firebase_list()
-        })
-        console.log("items: " + this.state.dataSource);
-    }
+    // async componentWillMount() {
+    //     console.log("task list will mount")
+    //     this.setState({
+    //         dataSource: await this.get_firebase_list()
+    //     })
+    //     console.log("items: " + this.state.dataSource);
+    // }
 
     componentWillReceiveProps(nextProps) {
         this.props.taskRef.off("value", this.unlisten);
+        this.props.roommatesRef.off('value', this.unlistenRoommates);
         this.unlisten = nextProps.taskRef.on("value", snapshot => this.setState({
             taskSnap: snapshot
         }));
+        this.unlistenRoommates = nextProps.roommatesRef.on('value', snapshot => {
+            this.setState({roommatesSnap: snapshot});
+            let items = [];
+            snapshot.forEach(childSnap => {
+                let childKey = childSnap.key;
+                items.push(childSnap.val());
+                console.log(childSnap.val());
+            });
+            this.setState({dataSource: items});
+            // console.log("items: " + this.state.dataSource);
+        })
     }
 
     componentDidMount() {
         this.unlisten = this.props.taskRef.on('value',
             snapshot => this.setState({ taskSnap: snapshot }));
+        this.unlistenRoommates = this.props.roommatesRef.on('value', snapshot => {
+            this.setState({roommatesSnap: snapshot});
+            let items = [];
+            snapshot.forEach(childSnap => {
+                let childKey = childSnap.key;
+                items.push(childSnap.val());
+                console.log(childSnap.val());
+            });
+            this.setState({dataSource: items});
+            // console.log("items: " + this.state.dataSource);
+        })
     }
 
     componentWillUnmount() {
         this.props.taskRef.off('value', this.unlisten);
+        this.props.roommatesRef.off('value', this.unlistenRoommates);
     }
 
     handleSubmit(evt) {
@@ -128,7 +152,7 @@ export default class TaskList extends React.Component {
         let index = 0;
 
         this.state.dataSource.forEach(element => {
-            console.log(element.name);
+            console.log("dataSource name: " + element.name);
             roommatenames.push(element.name);
             rooms.push(<option value={index}>{toTitleCase(element.name)}</option>)
             index++;
@@ -137,6 +161,7 @@ export default class TaskList extends React.Component {
 
         this.state.taskSnap.forEach(nameSnap => {
             names.push(<TaskCard rooms={rooms} nameList={roommatenames} key={nameSnap.key} nameSnap={nameSnap} taskSnap={this.state.taskSnap} />)
+            // console.log("nameSnap: " + nameSnap.val().roommate);
         });
         console.log(names.length);
 
