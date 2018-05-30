@@ -64,6 +64,15 @@ export default class TaskList extends React.Component {
     //     console.log("items: " + this.state.dataSource);
     // }
 
+    // async getFirebaseList(snapshot) {
+    //     let items = [];
+    //     snapshot.forEach(childSnap => {
+    //         items.push(childSnap.val());
+    //     });
+    //     await this.setState({dataSource: items});
+    // }
+
+
     componentWillReceiveProps(nextProps) {
         this.props.taskRef.off("value", this.unlisten);
         this.props.roommatesRef.off('value', this.unlistenRoommates);
@@ -74,12 +83,9 @@ export default class TaskList extends React.Component {
             this.setState({roommatesSnap: snapshot});
             let items = [];
             snapshot.forEach(childSnap => {
-                let childKey = childSnap.key;
                 items.push(childSnap.val());
-                console.log(childSnap.val());
             });
             this.setState({dataSource: items});
-            // console.log("items: " + this.state.dataSource);
         })
     }
 
@@ -90,12 +96,9 @@ export default class TaskList extends React.Component {
             this.setState({roommatesSnap: snapshot});
             let items = [];
             snapshot.forEach(childSnap => {
-                let childKey = childSnap.key;
                 items.push(childSnap.val());
-                console.log(childSnap.val());
             });
             this.setState({dataSource: items});
-            // console.log("items: " + this.state.dataSource);
         })
     }
 
