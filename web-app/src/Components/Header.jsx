@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
 import constants from "./Constants";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -33,11 +34,13 @@ export default class Header extends React.Component {
         return (
             <header id="logoBox" className="row m-0">
                 <div className="col">
-                    <div id='logo' className="">
+                <Link to={constants.routes.home} id='logo'>
+                    
                         <div id='logoInner'>
                             <div id='logoInnerInner'></div>
                         </div>
-                    </div>
+                    
+                    </Link>
                 </div>
                 {/* <div className="col d-flex justify-content-end align-items-center">
                     <div id="signOut" className="">
