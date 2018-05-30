@@ -16,7 +16,7 @@ export default class View extends React.Component {
         super(props);
         this.state = {
             user: undefined,
-            channel: "roommates",
+            channel: this.props.match.params.tabName
         }
     }
 
@@ -30,9 +30,7 @@ export default class View extends React.Component {
             } else {
                 this.setState({ user: currentUser });
                 let hash = md5(currentUser.email);
-                this.setState({ userHash: hash })
-                // console.log(this.state.user.uid); 
-
+                this.setState({ userHash: hash }) 
             }
         });
     }
@@ -113,16 +111,16 @@ export default class View extends React.Component {
 
 
     render() {
+        console.log()
+        // let ref;
 
-        let ref;
-
-        if (this.props.match.params.tabName == 'roommates') {
-            ref = firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/");
-            // console.log(this.state.user.uid);
-            console.log(this.state.userHash);
-        } else {
-            ref = firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName);
-        }
+        // if (this.props.match.params.tabName == 'roommates') {
+        //     ref = firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/");
+        //     // console.log(this.state.user.uid);
+        //     console.log(this.state.userHash);
+        // } else {
+        //     ref = firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName);
+        // }
 
         return (
             <div>

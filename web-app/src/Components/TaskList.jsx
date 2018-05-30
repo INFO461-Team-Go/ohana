@@ -32,6 +32,7 @@ export default class TaskList extends React.Component {
             fbError: undefined,
             taskSnap: undefined,
             dataSource: [],
+            recieved: false,
             roommate: 0,
             addActive: false
         };
@@ -53,12 +54,13 @@ export default class TaskList extends React.Component {
 
     async componentWillMount() {
         this.setState({
-            dataSource: await this.get_firebase_list()
+            dataSource: await this.get_firebase_list(),
+            recieved: true
         })
         console.log("items: " + this.state.dataSource);
     }
 
-    componentWillReceiveProps(nextProps) {
+    async componentWillReceiveProps(nextProps) {
         this.props.taskRef.off("value", this.unlisten);
         this.unlisten = nextProps.taskRef.on("value", snapshot => this.setState({
             taskSnap: snapshot
@@ -107,6 +109,7 @@ export default class TaskList extends React.Component {
         let rooms = [];
         let roommatenames = [];
 
+        let poo = this.props;
 
         // console.log(this.state.dataSource)
         // this.state.dataSource.forEach(elem => {
@@ -133,6 +136,9 @@ export default class TaskList extends React.Component {
             names.push(<TaskCard rooms={rooms} nameList={roommatenames} key={nameSnap.key} nameSnap={nameSnap} taskSnap={this.state.taskSnap} />)
         });
         console.log(names.length);
+
+        console.log(this.state.dataSource)
+
 
         return (
             <div className="container" id="nameList" ref="wrap" style={listStyles}>
