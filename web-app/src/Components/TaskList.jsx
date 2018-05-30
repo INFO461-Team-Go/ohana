@@ -156,6 +156,7 @@ export default class TaskList extends React.Component {
             roommatenames.push(element.name);
             rooms.push(<option value={index}>{toTitleCase(element.name)}</option>)
             index++;
+            console.log("index: "+ index);
             // rooms.push(<Picker.Item label={element.name} value={element.name} />);
         });
 
