@@ -23,7 +23,8 @@ export default class TaskCard extends React.Component {
         super(props);
         this.state = {
             edit: false,
-            menu: false
+            menu: false,
+            roommate: this.props.nameSnap.val().roommate
         }
     }
 
@@ -76,16 +77,17 @@ export default class TaskCard extends React.Component {
         ref.update({ roommate: evt.target.value });
     }
 
-
-
     render() {
         function toTitleCase(str) {
             return str.replace(/\w\S*/g, function (txt) {
                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
             });
         }
+        console.log(this.state.roommate)
 
         let task = this.props.nameSnap.val();
+        console.log("task.name: " + task.name + " task.roommate: " + task.roommate + " this.state.roommate: " + this.state.roommate + " this.props.rooms: " + this.props.rooms);
+    
 
         let ref = this.props.nameSnap.ref;
         return (
@@ -124,7 +126,8 @@ export default class TaskCard extends React.Component {
                                 {/* <h4 className="text-center">{roommate.name}</h4> */}
                             </div>
                             <div className="cardBox my-2 row col-4 p-0">
-                                <select defaultValue={task.roommate} value={this.state.roommate} onChange={evt => this.handleChange(evt)} className="w-100 text-truncate border-0" id="cardFont">{this.props.rooms}</select>
+                                {console.log("check" + this.props.rooms[task.roommate])}
+                                <select value={Number(task.roommate)} onChange={evt => this.handleChange(evt)} className="w-100 text-truncate border-0" id="cardFont">{this.props.rooms}</select>
                             </div>
                             {/* <div className="buttons d-flex flex-column">
                                 <button type="button" className="btn btn-sm btn-outline-primary" onClick={() => this.handleEdit()}>Edit</button>
