@@ -93,7 +93,6 @@ export default class NameCard extends React.Component {
         }
 
         let roommate = this.props.nameSnap.val();
-        let ref = this.props.nameSnap.ref;
         return (   
             <div className="">
                 {

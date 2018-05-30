@@ -11,10 +11,6 @@ import "firebase/auth";
 import Header from "./Header";
 
 
-const cardStyle = {
-    width: "18rem"
-}
-
 export default class SignIn extends React.Component {
     constructor(props) {
         super(props);
@@ -66,7 +62,7 @@ export default class SignIn extends React.Component {
                                         undefined
                                 }
                                 <div className="row mx-auto">
-                                    <button className="btn btn-primary" className="signin" type="submit">sign in</button>
+                                    <button className="btn btn-primary signin" type="submit">sign in</button>
                                 </div>
                                 <h2 className="signup">Don't have an account? <Link to={constants.routes.signup} className="text-white"><u>sign up</u></Link></h2>
                             </form>
