@@ -49,10 +49,12 @@ export default class NameList extends React.Component {
                 this.setState({addActive: true});
             }    
         });
+        console.log("name list did mount")
     }
 
     componentWillUnmount() {
         this.props.roommatesRef.off('value', this.unlisten);
+        console.log("name list will unmount")
     }
 
     handleSubmit(evt) {
