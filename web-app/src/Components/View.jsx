@@ -28,7 +28,11 @@ export default class View extends React.Component {
             } else {
                 this.setState({ user: currentUser });
                 let hash = md5(currentUser.email);
-                this.setState({ userHash: hash }) 
+                this.setState({ userHash: hash })
+                let currentChannel = this.props.match.params.tabName;
+                this.setState({channel: currentChannel});
+                console.log("currentChannel: " + currentChannel);
+                console.log("tabName: " + this.props.match.params.tabName);
             }
         });
     }
@@ -46,13 +50,13 @@ export default class View extends React.Component {
 
     handleChange() {
         if (this.state.channel === 'tasks') {
-            console.log('hey');
             this.props.history.push('/view/roommates');
             this.setState({ channel: 'rommmates' });
+            console.log("pushing: roommates");
         } else {
-            console.log('yo');
             this.props.history.push('/view/tasks');
             this.setState({ channel: 'tasks' });
+            console.log("pushing: tasks");
         };
     }
 
@@ -109,7 +113,6 @@ export default class View extends React.Component {
 
 
     render() {
-        console.log()
         // let ref;
 
         // if (this.props.match.params.tabName == 'roommates') {
@@ -135,7 +138,7 @@ export default class View extends React.Component {
                 </header> */}
                 <header id="logoBox" className="row m-0">
                     <div className="col">
-                    <Link to={constants.routes.home} id='logo'>
+                        <Link to={constants.routes.home} id='logo'>
                             <div id='logoInner'>
                                 <div id='logoInnerInner'></div>
                             </div>

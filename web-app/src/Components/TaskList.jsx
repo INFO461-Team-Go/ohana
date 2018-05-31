@@ -78,7 +78,9 @@ export default class TaskList extends React.Component {
                 items.push(childSnap.val());
             });
             this.setState({dataSource: items});
-        })
+        });
+        console.log("task list will receive props");
+        
     }
 
     componentDidMount() {
@@ -91,12 +93,14 @@ export default class TaskList extends React.Component {
                 items.push(childSnap.val());
             });
             this.setState({dataSource: items});
-        })
+        });
+        console.log("task list did mount");
     }
 
     componentWillUnmount() {
         this.props.taskRef.off('value', this.unlisten);
         this.props.roommatesRef.off('value', this.unlistenRoommates);
+        console.log("task list will unmount");
     }
 
     handleSubmit(evt) {
@@ -106,7 +110,7 @@ export default class TaskList extends React.Component {
         evt.preventDefault();
 
         this.props.taskRef.push({ name: this.state.name, roommate: this.state.roommate })
-            .then(() => this.setState({ name: "", fbError: undefined }))
+            .then(() => this.setState({ name: "", fbError: undefined, addActive: false }))
             .catch(err => this.setState({ fbError: err }));
     }
 
@@ -183,7 +187,7 @@ export default class TaskList extends React.Component {
                                         id="inputBox"
                                         value={this.state.name}
                                         onInput={evt => this.setState({ name: evt.target.value })}
-                                        placeholder="add Verb Phrase"
+                                        placeholder="add task"
                                     />
                                     <select className="col-4" id="inputBox" value={this.state.roommate} onChange={evt => this.setState({ roommate: Number(evt.target.value) })}>
                                         {rooms.length == 0 ?
