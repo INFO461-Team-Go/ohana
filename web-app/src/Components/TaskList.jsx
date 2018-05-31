@@ -192,14 +192,14 @@ export default class TaskList extends React.Component {
                                     <input type="submit" value="Submit" className="btn btn-primary" />
                                 } */}
                                 <div className="row mx-auto px-1">
-                                    <h4 className="col text-center m-1" id="newCardButton" style={redButton}
+                                    <h4 className="col text-center m-auto" id="newCardButton" style={redButton}
                                         onClick={() => this.handleCancelAdd()}>cancel</h4>
                                     {
                                         rooms.length != 0 && this.state.name.trim() != "" ?
-                                        <h4 className="col text-center m-1" className="newCardButton" style={greyButtonActive}
+                                        <h4 className="col text-center m-auto" className="newCardButton" style={greyButtonActive}
                                         onClick={(evt) => this.handleSubmit(evt)}>add</h4>
                                         :
-                                        <h4 className="col text-center m-1" className="newCardButton" style={greyButton}>add</h4>
+                                        <h4 className="col text-center m-auto" className="newCardButton" style={greyButton}>add</h4>
                                     }
                                 </div>
                             </form>
