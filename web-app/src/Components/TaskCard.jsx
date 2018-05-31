@@ -54,7 +54,7 @@ export default class TaskCard extends React.Component {
         if (this.state.toUpdate != null) {
             let ref = this.props.nameSnap.ref;
             ref.update({ name: this.state.toUpdate, roommate: Number(this.state.roommate) });
-            this.setState({ toUpdate: undefined });
+            this.setState({ toUpdate: undefined, roommate: undefined });
         }
         this.setState({ edit: false });
         this.setState({ menu: false });
@@ -75,6 +75,7 @@ export default class TaskCard extends React.Component {
         evt.preventDefault();
         let ref = this.props.nameSnap.ref;
         ref.update({ roommate: Number(evt.target.value) });
+        this.setState({ toUpdate: undefined, roommate: undefined });
     }
 
     render() {
@@ -207,7 +208,7 @@ export default class TaskCard extends React.Component {
                                         onChange={evt => this.setState({ toUpdate: evt.target.value })}
                                         defaultValue={task.name}
                                     />
-                                    <select defaultValue={Number(task.roommate)} className="col-4" id="inputBox" value={this.state.roommate} onChange={evt => this.setState({ roommate: Number(evt.target.value) })}>
+                                    <select className="col-4" id="inputBox" onChange={evt => this.setState({ roommate: Number(evt.target.value) })}>
                                         {this.props.rooms.length == 0 ?
                                             <option disabled selected value> Please Submit a Roommmate to Begin </option> :
                                             this.props.rooms

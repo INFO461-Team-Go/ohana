@@ -9,6 +9,7 @@ let listStyles = {
     maxWidth: "75%",
     width: "500px"
 };
+
 let greyButton = {
     color: "#8B8B8B",
     cursor: "default"
@@ -136,7 +137,7 @@ export default class TaskList extends React.Component {
         let rooms = [];
         let roommatenames = [];
 
-        let poo = this.props;
+        //let poo = this.props;
 
         // console.log(this.state.dataSource)
         // this.state.dataSource.forEach(elem => {
