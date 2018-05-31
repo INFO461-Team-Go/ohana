@@ -48,11 +48,9 @@ export default class View extends React.Component {
 
     handleChange() {
         if (this.state.channel === 'tasks') {
-            console.log('hey');
             this.props.history.push('/view/roommates');
             this.setState({ channel: 'rommmates' });
         } else {
-            console.log('yo');
             this.props.history.push('/view/tasks');
             this.setState({ channel: 'tasks' });
         };
@@ -137,7 +135,7 @@ export default class View extends React.Component {
                 </header> */}
                 <header id="logoBox" className="row m-0">
                     <div className="col">
-                    <Link to={constants.routes.home} id='logo'>
+                        <Link to={constants.routes.home} id='logo'>
                             <div id='logoInner'>
                                 <div id='logoInnerInner'></div>
                             </div>
