@@ -7,8 +7,6 @@ import md5 from "blueimp-md5";
 
 import NameList from "./NameList";
 import TaskList from "./TaskList";
-import NewUserForm from "./NewUserForm";
-import Header from "./Header";
 
 
 export default class View extends React.Component {
@@ -47,7 +45,7 @@ export default class View extends React.Component {
     }
 
     handleChange() {
-        if (this.state.channel == 'tasks') {
+        if (this.state.channel === 'tasks') {
             console.log('hey');
             this.props.history.push('/view/roommates');
             this.setState({ channel: 'rommmates' });
@@ -59,10 +57,10 @@ export default class View extends React.Component {
     }
 
     handleChangeText(tab) {
-        if (tab == 'main') {
-            return this.state.channel;
+        if (tab === 'main') {
+            return this.props.match.params.tabName;
         } else {
-            if (this.state.channel == 'tasks') {
+            if (this.props.match.params.tabName === 'tasks') {
                 return 'roommates';
             } else {
                 return 'tasks';
@@ -71,15 +69,15 @@ export default class View extends React.Component {
     }
 
     handleChangeGraphic(tab){
-        if(tab == 'main'){
-            if(this.state.channel == 'tasks'){
+        if(tab === 'main'){
+            if(this.props.match.params.tabName === 'tasks'){
                 return {backgroundImage: 'url(/static/media/taskTab.42f108f6.png)'};
             }else{
-                return {backgroundImage: 'url(/static/media/userTab.88ed72d3.png)'};
+                return {backgroundImage: 'url(/static/media/userTab.7f56161e.png)'};
             }
         }else{
-            if(this.state.channel == 'tasks'){
-                return {backgroundImage: 'url(/static/media/userTab.88ed72d3.png)'};
+            if(this.props.match.params.tabName === 'tasks'){
+                return {backgroundImage: 'url(/static/media/userTab.7f56161e.png)'};
             }else{
                 return {backgroundImage: 'url(/static/media/taskTab.42f108f6.png)'};
             }
@@ -87,14 +85,14 @@ export default class View extends React.Component {
     }
 
     handleChangeSlogan(num){
-        if(num == 1){
-            if(this.state.channel=='tasks'){
+        if(num === 1){
+            if(this.props.match.params.tabName === 'tasks'){
                 return 'what will you do?';
             }else{
                 return 'who are your roommates?';
             }
         }else{
-            if(this.state.channel=='tasks'){
+            if(this.props.match.params.tabName === 'tasks'){
                 return 'who will start the task?';
             }else{
                 return 'list roommates in order top to bottom';
@@ -103,7 +101,7 @@ export default class View extends React.Component {
     }
 
     handleSloganShrink(){
-        if(this.state.channel != 'tasks'){
+        if(this.props.match.params.tabName !== 'tasks'){
             console.log('in');
             return {fontSize: '2.1vh'};
         }
@@ -137,11 +135,11 @@ export default class View extends React.Component {
                 </header> */}
                 <header id="logoBox" className="row m-0">
                     <div className="col">
-                        <div id='logo' className="">
+                    <Link to={constants.routes.home} id='logo'>
                             <div id='logoInner'>
                                 <div id='logoInnerInner'></div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
                         <div id="signOut" className="">
@@ -203,6 +201,7 @@ export default class View extends React.Component {
                             <NameList roommatesRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/")} />
                             :
                             <TaskList taskRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName)}
+                                roommatesRef={firebase.database().ref(this.state.userHash + "/roommates/names/")}
                                 hash={this.state.userHash} />
                         }
                         {/* <NewUserForm roommatesRef={this.state.roommatesRef}/> */}

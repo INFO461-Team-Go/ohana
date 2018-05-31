@@ -11,10 +11,6 @@ import "firebase/auth";
 import Header from "./Header";
 
 
-const cardStyle = {
-    width: "18rem"
-}
-
 export default class SignIn extends React.Component {
     constructor(props) {
         super(props);
@@ -53,10 +49,10 @@ export default class SignIn extends React.Component {
                             <div id="uhh"></div>
                             <form onSubmit={evt => this.handleSubmit(evt)}>
                                 <h2 id="username">amazon email</h2>
-                                <input type="Email" className="textBox form-control form-control-sm" value={this.state.email} 
+                                <input type="Email" className="textBox form-control form-control-sm p-1" value={this.state.email} 
                                 onInput={evt => this.setState({ email: evt.target.value })}/>
                                 <h2 id="password">password</h2>
-                                <input type="Password" className="textBox form-control form-control-sm" value={this.state.password} 
+                                <input type="Password" className="textBox form-control form-control-sm p-1" value={this.state.password} 
                                 onInput={evt => this.setState({ password: evt.target.value })}/>
                                 {
                                     this.state.fberror ?
@@ -66,7 +62,7 @@ export default class SignIn extends React.Component {
                                         undefined
                                 }
                                 <div className="row mx-auto">
-                                    <button className="btn btn-primary" className="signin" type="submit">sign in</button>
+                                    <button className="btn btn-primary signin" type="submit">sign in</button>
                                 </div>
                                 <h2 className="signup">Don't have an account? <Link to={constants.routes.signup} className="text-white"><u>sign up</u></Link></h2>
                             </form>

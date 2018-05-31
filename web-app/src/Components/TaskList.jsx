@@ -39,41 +39,64 @@ export default class TaskList extends React.Component {
     }
 
 
-    async get_firebase_list() {
-        return firebase.database().ref(this.props.hash + '/roommates/names/').once('value').then(function (snapshot) {
-            var items = [];
-            snapshot.forEach(function (childSnapshot) {
-                var childKey = childSnapshot.key;
-                var childData = childSnapshot.val();
-                items.push(childData);
-            });
-            // console.log("items_load: " + items);
-            return items;
-        });
-    }
+    // async get_firebase_list() {
+    //     return firebase.database().ref(this.props.hash + '/roommates/names/').once('value').then(function (snapshot) {
+    //         // if (this.props.hash) {
+    //         //     console.log(this.props.hash);
+    //         // } else {
+    //         //     console.log("hash is undefined");
+    //         // }
+    //         var items = [];
+    //         snapshot.forEach(function (childSnapshot) {
+    //             var childKey = childSnapshot.key;
+    //             var childData = childSnapshot.val();
+    //             items.push(childData);
+    //         });
+    //         // console.log("items_load: " + items);
+    //         return items;
+    //     });
+    // }
 
-    async componentWillMount() {
-        this.setState({
-            dataSource: await this.get_firebase_list(),
-            recieved: true
-        })
-        console.log("items: " + this.state.dataSource);
-    }
+    // async componentWillMount() {
+    //     console.log("task list will mount")
+    //     this.setState({
+    //         dataSource: await this.get_firebase_list()
+    //     })
+    //     console.log("items: " + this.state.dataSource);
+    // }
 
     async componentWillReceiveProps(nextProps) {
         this.props.taskRef.off("value", this.unlisten);
+        this.props.roommatesRef.off('value', this.unlistenRoommates);
         this.unlisten = nextProps.taskRef.on("value", snapshot => this.setState({
             taskSnap: snapshot
         }));
+        this.unlistenRoommates = nextProps.roommatesRef.on('value', snapshot => {
+            this.setState({roommatesSnap: snapshot});
+            let items = [];
+            snapshot.forEach(childSnap => {
+                items.push(childSnap.val());
+            });
+            this.setState({dataSource: items});
+        })
     }
 
     componentDidMount() {
         this.unlisten = this.props.taskRef.on('value',
             snapshot => this.setState({ taskSnap: snapshot }));
+        this.unlistenRoommates = this.props.roommatesRef.on('value', snapshot => {
+            this.setState({roommatesSnap: snapshot});
+            let items = [];
+            snapshot.forEach(childSnap => {
+                items.push(childSnap.val());
+            });
+            this.setState({dataSource: items});
+        })
     }
 
     componentWillUnmount() {
         this.props.taskRef.off('value', this.unlisten);
+        this.props.roommatesRef.off('value', this.unlistenRoommates);
     }
 
     handleSubmit(evt) {
@@ -125,15 +148,17 @@ export default class TaskList extends React.Component {
         let index = 0;
 
         this.state.dataSource.forEach(element => {
-            console.log(element.name);
+            console.log("dataSource name: " + element.name);
             roommatenames.push(element.name);
             rooms.push(<option value={index}>{toTitleCase(element.name)}</option>)
             index++;
+            console.log("index: "+ index);
             // rooms.push(<Picker.Item label={element.name} value={element.name} />);
         });
 
         this.state.taskSnap.forEach(nameSnap => {
             names.push(<TaskCard rooms={rooms} nameList={roommatenames} key={nameSnap.key} nameSnap={nameSnap} taskSnap={this.state.taskSnap} />)
+            // console.log("nameSnap: " + nameSnap.val().roommate);
         });
         console.log(names.length);
 
@@ -158,7 +183,7 @@ export default class TaskList extends React.Component {
                                         id="inputBox"
                                         value={this.state.name}
                                         onInput={evt => this.setState({ name: evt.target.value })}
-                                        placeholder="new task here"
+                                        placeholder="add Verb Phrase"
                                     />
                                     <select className="col-4" id="inputBox" value={this.state.roommate} onChange={evt => this.setState({ roommate: Number(evt.target.value) })}>
                                         {rooms.length == 0 ?
@@ -176,10 +201,10 @@ export default class TaskList extends React.Component {
                                         onClick={() => this.handleCancelAdd()}>cancel</h4>
                                     {
                                         rooms.length != 0 && this.state.name.trim() != "" ?
-                                            <h4 className="col text-center m-1" id="newCardButton" style={greyButtonActive}
-                                                onClick={(evt) => this.handleSubmit(evt)}>add</h4>
-                                            :
-                                            <h4 className="col text-center m-1" id="newCardButton" style={greyButton}>add</h4>
+                                        <h4 className="col text-center m-1" className="newCardButton" style={greyButtonActive}
+                                        onClick={(evt) => this.handleSubmit(evt)}>add</h4>
+                                        :
+                                        <h4 className="col text-center m-1" className="newCardButton" style={greyButton}>add</h4>
                                     }
                                 </div>
                             </form>

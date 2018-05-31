@@ -1,11 +1,6 @@
 import React from "react";
 import NameCard from "./NameCard";
-import NewUserForm from "./NewUserForm";
 import firebase from "firebase/app";
-
-let listStyles = {
-    maxWidth:"50%"
-};
 
 let greyButton = {
     color: "#8B8B8B",
@@ -112,14 +107,14 @@ export default class NameList extends React.Component {
                                     placeholder="new roommate here"
                                 />
                                 <div className="row mx-auto px-1">
-                                    <h4 className="col text-center m-1" id="newCardButton" style={redButton}
+                                    <h4 className="col text-center mx-auto newCardButton" style={redButton}
                                     onClick={() => this.handleCancelAdd()}>cancel</h4>
                                     {
                                         this.state.name ?
-                                        <h4 className="col text-center m-1" id="newCardButton" style={greyButtonActive}
+                                        <h4 className="col text-center mx-auto newCardButton" style={greyButtonActive}
                                         onClick={(evt) => this.handleSubmit(evt)}>add</h4>
                                         :
-                                        <h4 className="col text-center m-1" id="newCardButton" style={greyButton}>add</h4>
+                                        <h4 className="col text-center mx-auto newCardButton" style={greyButton}>add</h4>
                                     }
                                 </div>
                             </form>

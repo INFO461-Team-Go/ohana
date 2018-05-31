@@ -55,7 +55,7 @@
 .tabSlogan{
     color: #444444;
     font-family: 'Nunito', sans-serif;
-    font-weight: 900;
+    font-weight: 800;
     font-size: 3vh;
 }
 
@@ -88,7 +88,7 @@
     text-align: center;
     color: #444444;
     font-family: 'Nunito', sans-serif;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 3vh;
 }
 
@@ -156,7 +156,7 @@
 
 #cardFont {
     font-family: 'Nunito', sans-serif;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 2.7vh;
     line-height: 4.5vh;
     text-align: center;
@@ -175,12 +175,12 @@
 }
 #moreIcon {
     color: #31C4F3;
-    padding-top: 8px;
+    padding-top: auto;
     transform: translate(0px, 1px);
     cursor: pointer;
     display: none;
     position: absolute;
-    margin-left: 83%;
+    margin-left: 87%;
 }
 
 #tMoreIcon {
@@ -195,7 +195,7 @@
 
 #closeIcon {
     color: #8b8b8b;
-    font-size: 20px;
+    font-size: 3.8vh;
     cursor: pointer;
 }
 
@@ -217,12 +217,12 @@
 
 #formBox {
     width: 28vh;
-    height: 10.5vh;
+    height: 9.5vh;
     background-color: #FFFFFF;
     margin-left: auto;
     margin-right: auto;
     border-radius: 8px;
-    padding-top: 3px;
+    padding-top: 0.8vh;
 }
 
 #taskForm {
@@ -233,15 +233,43 @@
 }
 
 #inputBox {
-    width: 12.5rem;
-    height: 40px;
+    width: 27vh;
+    height: 5.2vh;
     background-color: #bcbcbc;
     border-radius: 8px;
     text-align: center;
+    font-size: 2.5vh;
 }
 
-#newCardButton {
+::-webkit-input-placeholder {
+    color:red;
+}
+
+::-moz-placeholder {
+    color:red;
+}
+
+::-ms-placeholder {
+    color:red;
+}
+
+::placeholder {
+    color:red;
+}
+
+.newCardButton {
     font-family: 'Nunito', sans-serif;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 3vh;
+    max-width: 50%;
+    margin: auto;
+}
+
+.material-icons{
+    font-size: 3.8vh;
+}
+
+.paddingStyle{
+    padding-top: 0;
+    padding-bottom: 0;
 }

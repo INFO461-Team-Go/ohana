@@ -119,14 +119,14 @@ export default class SignUp extends React.Component {
                                     onInput={evt => this.setState({ cpw: evt.target.value })}
                                 />
                                 {this.state.cpw !== this.state.pw ?
-                                    <p className="text-danger">
+                                    <p className="text-danger" id="alignE">
                                         Passwords do not match
                                     </p> :
                                     undefined
                                 }
                             </div>
                             <div className="form-group" id="centerMargin">
-                                <button type="submit" className="btn btn-primary" className="signin" id="signinOverRide">sign up</button>
+                                <button type="submit" className="btn btn-primary signin" id="signinOverRide">sign up</button>
                             </div>
                         </form>
                         <h2 className="signup" id="marginCorrection">Already have an account? <Link to={constants.routes.signin} className="text-white">sign in</Link></h2>

@@ -1,16 +1,7 @@
-body{
-    background: linear-gradient(to bottom right, #73C8A9, #373B44);
-    margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    width: 100%;
-    height: 100%;
-}
-
 /*this is the container that wraps the sign in credentials from username to sign up button*/
 .test{
     position: relative;
-    background-color: #2E926F;
+    background-color: rgb(72, 153, 125);
     width: 45vh;
     height: 34.5vh;
     margin: auto;
@@ -37,6 +28,15 @@ h2{
     font-family: 'Nunito', sans-serif;
     font-weight: lighter;
     color: #FFFFFF;
+}
+
+
+#alignE{
+    text-align: center;
+    font-size: 1.7vh;
+    font-family: 'Quicksand';
+    font-weight: 600;
+    color: #BD0D0D;
 }
 
 .alert{
@@ -167,5 +167,9 @@ h2{
 @media (min-width: 100vw){
     .container {
         max-width: 100vw;
+    }
+
+    body{
+        width: 100%;
     }
 }

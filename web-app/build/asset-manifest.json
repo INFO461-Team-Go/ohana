@@ -1,6 +1,14 @@
 {
-  "main.css": "static/css/main.cfb3d581.css",
-  "main.css.map": "static/css/main.cfb3d581.css.map",
-  "main.js": "static/js/main.f292061a.js",
-  "main.js.map": "static/js/main.f292061a.js.map"
+  "main.css": "static/css/main.af79b113.css",
+  "main.css.map": "static/css/main.af79b113.css.map",
+  "main.js": "static/js/main.2d30b797.js",
+  "main.js.map": "static/js/main.2d30b797.js.map",
+  "static/media/alexalogo.png": "static/media/alexalogo.aed46357.png",
+  "static/media/alexalogoR.png": "static/media/alexalogoR.f91b2c73.png",
+  "static/media/task22.png": "static/media/task22.df17d0d7.png",
+  "static/media/task22R.png": "static/media/task22R.b55ed61c.png",
+  "static/media/taskTab.png": "static/media/taskTab.42f108f6.png",
+  "static/media/user.png": "static/media/user.19709ddf.png",
+  "static/media/userR.png": "static/media/userR.eae46206.png",
+  "static/media/userTab.png": "static/media/userTab.7f56161e.png"
 }

@@ -2,7 +2,7 @@
   "name": "web-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://info461-team-go.github.io/ohana/web-app/build",
+  "homepage": "https://ohana-e7233.firebaseapp.com",
   "dependencies": {
     "ajv": "^6.5.0",
     "blueimp-md5": "^2.10.0",
