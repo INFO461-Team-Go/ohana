@@ -177,12 +177,6 @@ export default class View extends React.Component {
                             </div>
                         </div>
                     </div>
-                    {/* {
-                        this.props.match.params.tabName === "roommates" ?
-                        <div id="tabContainer">
-
-                        </div>
-                    } */}
                     {/*<ul className="nav nav-tabs">
                         <li className = "nav-item">
                         <a 
