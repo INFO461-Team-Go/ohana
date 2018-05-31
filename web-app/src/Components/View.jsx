@@ -195,8 +195,9 @@ export default class View extends React.Component {
                                 <div id="innerInactive">
                                     <div id="graphics" style={roommatesGraphic}></div>
                                 </div>
+                                <div id="tabOverlay" onClick={() => this.handleChange()}></div>
                             </div>
-                            <div id="tabOverlay" onClick={() => this.handleChange()}></div>
+                            {/* <div id="tabOverlay" onClick={() => this.handleChange()}></div> */}
                             <div id="inactiveText">roommates</div>
                             <div id="activeText">tasks</div>
                             <div id="activeTabBox">
@@ -217,8 +218,9 @@ export default class View extends React.Component {
                                 <div id="innerInactive">
                                     <div id="graphics" style={tasksGraphic}></div>
                                 </div>
+                                <div id="tabOverlay" onClick={() => this.handleChange()}></div>
                             </div>
-                            <div id="tabOverlay" onClick={() => this.handleChange()}></div>
+                            {/* <div id="tabOverlay" onClick={() => this.handleChange()}></div> */}
                             <div id="inactiveText">tasks</div>
                             <div id="activeText">roommates</div>
                             <div id="activeTabBox">
