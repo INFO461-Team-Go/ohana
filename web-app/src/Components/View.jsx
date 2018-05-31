@@ -29,7 +29,10 @@ export default class View extends React.Component {
                 this.setState({ user: currentUser });
                 let hash = md5(currentUser.email);
                 this.setState({ userHash: hash })
-                // console.log(this.state.user.uid); 
+                let currentChannel = this.props.match.params.tabName;
+                this.setState({channel: currentChannel});
+                console.log("currentChannel: " + currentChannel);
+                console.log("tabName: " + this.props.match.params.tabName);
 
             }
         });
@@ -50,9 +53,11 @@ export default class View extends React.Component {
         if (this.state.channel === 'tasks') {
             this.props.history.push('/view/roommates');
             this.setState({ channel: 'rommmates' });
+            console.log("pushing: roommates");
         } else {
             this.props.history.push('/view/tasks');
             this.setState({ channel: 'tasks' });
+            console.log("pushing: tasks");
         };
     }
 
@@ -110,15 +115,15 @@ export default class View extends React.Component {
 
     render() {
 
-        let ref;
+        // let ref;
 
-        if (this.props.match.params.tabName == 'roommates') {
-            ref = firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/");
-            // console.log(this.state.user.uid);
-            console.log(this.state.userHash);
-        } else {
-            ref = firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName);
-        }
+        // if (this.props.match.params.tabName == 'roommates') {
+        //     ref = firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/");
+        //     // console.log(this.state.user.uid);
+        //     console.log(this.state.userHash);
+        // } else {
+        //     ref = firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName);
+        // }
 
         return (
             <div>
@@ -172,6 +177,12 @@ export default class View extends React.Component {
                             </div>
                         </div>
                     </div>
+                    {/* {
+                        this.props.match.params.tabName === "roommates" ?
+                        <div id="tabContainer">
+
+                        </div>
+                    } */}
                     {/*<ul className="nav nav-tabs">
                         <li className = "nav-item">
                         <a 
