@@ -26,11 +26,7 @@ export default class View extends React.Component {
         super(props);
         this.state = {
             user: undefined,
-<<<<<<< HEAD
-            channel: undefined,
-=======
             channel: this.props.match.params.tabName
->>>>>>> master
         }
     }
 
