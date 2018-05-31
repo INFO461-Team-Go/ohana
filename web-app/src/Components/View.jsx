@@ -8,13 +8,25 @@ import md5 from "blueimp-md5";
 import NameList from "./NameList";
 import TaskList from "./TaskList";
 
+let roommatesGraphic = {
+    backgroundImage: "url(/static/media/userTab.7f56161e.png)"
+}
+
+let tasksGraphic = {
+    backgroundImage: "url(/static/media/taskTab.42f108f6.png)"
+}
+
+let sloganShrink = {
+    fontSize: "2.0vh"
+}
+
 
 export default class View extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             user: undefined,
-            channel: "roommates",
+            channel: undefined,
         }
     }
 
@@ -155,7 +167,7 @@ export default class View extends React.Component {
                     </div>
                 </header>
                 <div className="container containerView">
-                    <div id="tabContainer">
+                    {/* <div id="tabContainer">
                         <div id="inactiveTab" onClick={() => this.handleChange()}>
                             <div id="hacking"></div>
                             <div id="innerInactive">
@@ -176,7 +188,54 @@ export default class View extends React.Component {
                                 <p className="tabSlogan" style={this.handleSloganShrink()} dangerouslySetInnerHTML={{ __html: this.handleChangeSlogan(2) }}></p>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
+                    {
+                        this.props.match.params.tabName === 'tasks' ?
+                        <div id="tabContainer">
+                            <div id="inactiveTab">
+                                <div id="hacking"></div>
+                                <div id="innerInactive">
+                                    <div id="graphics" style={roommatesGraphic}></div>
+                                </div>
+                            </div>
+                            <div id="tabOverlay" onClick={() => this.handleChange()}></div>
+                            <div id="inactiveText">roommates</div>
+                            <div id="activeText">tasks</div>
+                            <div id="activeTabBox">
+                                <div id="activeTab">
+                                    <div id="innerActive">
+                                        <div id="graphics" style={tasksGraphic}></div>
+                                    </div>
+                                </div>
+                                <div id="activeTabSlogan">
+                                    <p className="tabSlogan">what will you do?</p>
+                                    <p className="tabSlogan">who will start the task?</p>
+                                </div>
+                            </div>
+                        </div> :
+                        <div id="tabContainer">
+                            <div id="inactiveTab">
+                                <div id="hacking"></div>
+                                <div id="innerInactive">
+                                    <div id="graphics" style={tasksGraphic}></div>
+                                </div>
+                            </div>
+                            <div id="tabOverlay" onClick={() => this.handleChange()}></div>
+                            <div id="inactiveText">tasks</div>
+                            <div id="activeText">roommates</div>
+                            <div id="activeTabBox">
+                                <div id="activeTab">
+                                    <div id="innerActive">
+                                        <div id="graphics" style={roommatesGraphic}></div>
+                                    </div>
+                                </div>
+                                <div id="activeTabSlogan">
+                                    <p className="tabSlogan">who are your roommates?</p>
+                                    <p className="tabSlogan" style={sloganShrink}>list your roommates in order top to bottom</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
                     {/*<ul className="nav nav-tabs">
                         <li className = "nav-item">
                         <a 
