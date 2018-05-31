@@ -93,7 +93,7 @@ h2, h5{
     width: 35vh;
     background-color: white;
     border-radius: 5vh;
-    box-shadow: 3px 3px 8px #000000;
+    box-shadow: 0.5vh 0.5vh 1.5vh #000000;
     text-align: center;
     color: rgba(255,255,255,0);
     font-size: 2vh;
@@ -211,10 +211,16 @@ h5{
     }
     
     .slogan{
-        text-align: center;
+        text-align: left;
         margin-left: 0px;
         margin-right: 0px;
         font-size: 6vh;
+    }
+
+    #logoImg{
+        width: 21vh;
+        height: 7vh;
+        top: 9.5vh;
     }
 
     #sloganBox{
@@ -261,12 +267,12 @@ h5{
     }
     
     .imageWrapper:hover{
-        margin-top: 7vh;
+        margin-top: 5vh;
         margin-left: -17vw;
         height: 45vw;
         width: 90vw;
-        -webkit-transition: margin-left 1s, width 0.2s color 3s; /* For Safari 3.1 to 6.0 */
-        transition: margin-left 1s, width 0.2s, color 3s;
+        -webkit-transition: margin-left 1s, width 0.25s color 3s; /* For Safari 3.1 to 6.0 */
+        transition: margin-left 1s, width 0.25s, color 3s;
         color: rgba(255,255,255,1);
     }
     

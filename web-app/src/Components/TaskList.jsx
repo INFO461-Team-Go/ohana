@@ -32,6 +32,7 @@ export default class TaskList extends React.Component {
             fbError: undefined,
             taskSnap: undefined,
             dataSource: [],
+            recieved: false,
             roommate: 0,
             addActive: false
         };
@@ -64,7 +65,7 @@ export default class TaskList extends React.Component {
     //     console.log("items: " + this.state.dataSource);
     // }
 
-    componentWillReceiveProps(nextProps) {
+    async componentWillReceiveProps(nextProps) {
         this.props.taskRef.off("value", this.unlisten);
         this.props.roommatesRef.off('value', this.unlistenRoommates);
         this.unlisten = nextProps.taskRef.on("value", snapshot => this.setState({
@@ -135,6 +136,7 @@ export default class TaskList extends React.Component {
         let rooms = [];
         let roommatenames = [];
 
+        let poo = this.props;
 
         // console.log(this.state.dataSource)
         // this.state.dataSource.forEach(elem => {
@@ -163,6 +165,9 @@ export default class TaskList extends React.Component {
             // console.log("nameSnap: " + nameSnap.val().roommate);
         });
         console.log(names.length);
+
+        console.log(this.state.dataSource)
+
 
         return (
             <div className="container" id="nameList" ref="wrap" style={listStyles}>
@@ -196,14 +201,14 @@ export default class TaskList extends React.Component {
                                     <input type="submit" value="Submit" className="btn btn-primary" />
                                 } */}
                                 <div className="row mx-auto px-1">
-                                    <h4 className="col text-center m-1" id="newCardButton" style={redButton}
+                                    <h4 className="col text-center m-auto" id="newCardButton" style={redButton}
                                         onClick={() => this.handleCancelAdd()}>cancel</h4>
                                     {
                                         rooms.length != 0 && this.state.name.trim() != "" ?
-                                        <h4 className="col text-center m-1" className="newCardButton" style={greyButtonActive}
+                                        <h4 className="col text-center m-auto" className="newCardButton" style={greyButtonActive}
                                         onClick={(evt) => this.handleSubmit(evt)}>add</h4>
                                         :
-                                        <h4 className="col text-center m-1" className="newCardButton" style={greyButton}>add</h4>
+                                        <h4 className="col text-center m-auto" className="newCardButton" style={greyButton}>add</h4>
                                     }
                                 </div>
                             </form>
