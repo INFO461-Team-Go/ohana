@@ -24,7 +24,7 @@ export default class TaskCard extends React.Component {
         this.state = {
             edit: false,
             menu: false,
-            roommate: this.props.nameSnap.val().roommate
+            roommate: Number(this.props.nameSnap.val().roommate)
         }
     }
 
@@ -53,7 +53,7 @@ export default class TaskCard extends React.Component {
         evt.preventDefault();
         if (this.state.toUpdate != null) {
             let ref = this.props.nameSnap.ref;
-            ref.update({ name: this.state.toUpdate, roommate: this.state.roommate });
+            ref.update({ name: this.state.toUpdate, roommate: Number(this.state.roommate) });
             this.setState({ toUpdate: undefined });
         }
         this.setState({ edit: false });
@@ -74,7 +74,7 @@ export default class TaskCard extends React.Component {
     handleChange(evt) {
         evt.preventDefault();
         let ref = this.props.nameSnap.ref;
-        ref.update({ roommate: evt.target.value });
+        ref.update({ roommate: Number(evt.target.value) });
     }
 
     render() {
@@ -207,7 +207,7 @@ export default class TaskCard extends React.Component {
                                         onChange={evt => this.setState({ toUpdate: evt.target.value })}
                                         defaultValue={task.name}
                                     />
-                                    <select defaultValue={task.roommate} className="col-4" id="inputBox" value={this.state.roommate} onChange={evt => this.setState({ roommate: Number(evt.target.value) })}>
+                                    <select defaultValue={Number(task.roommate)} className="col-4" id="inputBox" value={this.state.roommate} onChange={evt => this.setState({ roommate: Number(evt.target.value) })}>
                                         {this.props.rooms.length == 0 ?
                                             <option disabled selected value> Please Submit a Roommmate to Begin </option> :
                                             this.props.rooms

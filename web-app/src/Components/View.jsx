@@ -14,7 +14,7 @@ export default class View extends React.Component {
         super(props);
         this.state = {
             user: undefined,
-            channel: "roommates",
+            channel: this.props.match.params.tabName
         }
     }
 
@@ -33,7 +33,6 @@ export default class View extends React.Component {
                 this.setState({channel: currentChannel});
                 console.log("currentChannel: " + currentChannel);
                 console.log("tabName: " + this.props.match.params.tabName);
-
             }
         });
     }
@@ -114,7 +113,6 @@ export default class View extends React.Component {
 
 
     render() {
-
         // let ref;
 
         // if (this.props.match.params.tabName == 'roommates') {
