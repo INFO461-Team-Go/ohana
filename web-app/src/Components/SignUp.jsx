@@ -8,9 +8,9 @@ import constants from "./Constants"
 import firebase from 'firebase/app'
 import 'firebase/auth';
 import 'firebase/database';
-import md5 from 'blueimp-md5';
-
 import Header from "./Header";
+import md5 from "blueimp-md5";
+
 
 export default class SignUp extends React.Component {
 
@@ -55,17 +55,16 @@ export default class SignUp extends React.Component {
         } else {
             let hash = md5(this.state.email);
             let ref = firebase.database().ref(hash + "/roommates/");
-            let toUpdate = {count: 0};
+            let toUpdate = { count: 0 };
             console.log(this.state.photoUrl)
             firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pw)
-                .then(() => ref.update(toUpdate))
-                .then(user => user.updateProfile({
-                    photoURL: this.state.photoUrl,
-                    displayName: this.state.displayName
-                }))
-                .catch(err => this.setState({
-                    errorMessage: err.message
-                }));
+            .then(user => user.updateProfile({
+                photoURL: this.state.photoUrl,
+                displayName: this.state.displayName
+            }))
+            .catch(err => this.setState({
+                errorMessage: err.message
+            }));
         }
     }
 
@@ -73,7 +72,7 @@ export default class SignUp extends React.Component {
         // @TODO: Display warning: Can only sign up through the Alexa App
         return (
             <div>
-                <Header/>
+                <Header />
                 <h2 className='sloganS' id="sloganOverRide"><span className="thicker">sign up</span> with <span className="thicker">Amazon</span> email</h2>
                 <h2 id="subSloganS">alexa will <span className='thickerOverRide'>NOT</span> work if you don't sign up with your <span className='thickerOverRide'>AMAZON</span> email</h2>
                 <div className="test m-auto card" id="testSignUp">
@@ -85,7 +84,7 @@ export default class SignUp extends React.Component {
                             undefined
                         }
                         <form onSubmit={evt => this.handleSubmit(evt)}>
-                        <h2 className="inputSignUp" id="starterMargin">display name</h2>
+                            <h2 className="inputSignUp" id="starterMargin">display name</h2>
                             <div className="form-group">
                                 <input id="dName" className="textBox form-control"
                                     type="text"

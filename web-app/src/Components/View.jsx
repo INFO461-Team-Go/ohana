@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import constants from "./Constants";
 import firebase from "firebase/app";
 import "firebase/auth";
+import 'firebase/database';
 import md5 from "blueimp-md5";
 
 import NameList from "./NameList";
@@ -25,14 +26,13 @@ export default class View extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: undefined,
+            user: null,
             channel: this.props.match.params.tabName
         }
     }
 
     componentDidMount() {
-        console.log("main view mounted!");
-        // let currentUser = firebase.auth().currentUser;
+        //console.log("main view mounted!");
         this.unlistenAuth = firebase.auth().onAuthStateChanged(currentUser => {
             if (currentUser == null) {
                 console.log("current user is NULL");
@@ -43,20 +43,21 @@ export default class View extends React.Component {
                 this.setState({ userHash: hash })
                 let currentChannel = this.props.match.params.tabName;
                 this.setState({channel: currentChannel});
-                console.log("currentChannel: " + currentChannel);
-                console.log("tabName: " + this.props.match.params.tabName);
+                //console.log("currentChannel: " + currentChannel);
+                //console.log("tabName: " + this.props.match.params.tabName);
+                console.log("user display name: " + this.state.user.displayName);
             }
         });
     }
 
     componentWillUnmount() {
         this.unlistenAuth();
-        console.log("main view will unmount");
+        //console.log("main view will unmount");
 
     }
 
     handleSignOut() {
-        console.log("user signing off!")
+        //console.log("user signing off!")
         firebase.auth().signOut();
     }
 
@@ -64,11 +65,11 @@ export default class View extends React.Component {
         if (this.state.channel === 'tasks') {
             this.props.history.push('/view/roommates');
             this.setState({ channel: 'rommmates' });
-            console.log("pushing: roommates");
+            //console.log("pushing: roommates");
         } else {
             this.props.history.push('/view/tasks');
             this.setState({ channel: 'tasks' });
-            console.log("pushing: tasks");
+            //console.log("pushing: tasks");
         };
     }
 
@@ -118,7 +119,7 @@ export default class View extends React.Component {
 
     handleSloganShrink(){
         if(this.props.match.params.tabName !== 'tasks'){
-            console.log('in');
+            //console.log('in');
             return {fontSize: '2.1vh'};
         }
     }
@@ -134,7 +135,9 @@ export default class View extends React.Component {
         // } else {
         //     ref = firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName);
         // }
-
+        //let user = firebase.auth().currentUser;
+        //console.log(user.displayName)
+        //let user = this.state.user;
         return (
             <div>
                 {/* <header className="">
@@ -157,8 +160,13 @@ export default class View extends React.Component {
                         </Link>
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
-                        <div id="signOut" className="">
-                            <button className="btn btn-outline-danger btn-sm" onClick={this.handleSignOut}>
+                        {this.state.user != null?
+                        <p className="dName">Hello {this.state.user.displayName}!</p>
+                        :
+                        <div></div>
+                        }
+                        <div id="signOut" className="mx-3">
+                            <button className="btn btn btn-outline-light btn-sm" onClick={this.handleSignOut}>
                                 Sign Out
                             </button>
                         </div>
