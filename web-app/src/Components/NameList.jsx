@@ -64,19 +64,46 @@ export default class NameList extends React.Component {
         evt.preventDefault();
         this.setState({errMsg: undefined});
         let trimmedName = this.state.name.trim();
-        if (trimmedName.length > 15) {
+        let flag = 0;
+        this.state.roommatesSnap.forEach(childSnap => {
+            let val = childSnap.val();
+            let check = val.name;
+            if (check === trimmedName) {
+                flag++;
+            }
+        });
+        if (flag > 0) {
+            this.setState({errMsg: "name exists in database"}) ;
+        } else if (trimmedName.length > 15) {
             this.setState({errMsg: "name must be less than 15 characters"});
         } else if (!/^[a-zA-Z]+$/.test(trimmedName)) {
             this.setState({errMsg: "no special characters allowed"});
         } else {
-            this.props.roommatesRef.push({name: this.state.name})
+            this.props.roommatesRef.push({name: trimmedName})
                 .then(() => this.setState({name: "", fbError: undefined, addActive: false}))
                 .catch(err => this.setState({fbError: err}));
         }
     }
 
+   async checkDuplicate(snapshot, check) {
+        let array = [];
+        let message = "";
+        let flag = 0;
+        await snapshot.forEach(childSnap => {
+            let val = childSnap.val();
+            array.push(val.name);
+            message = "";
+            if (val.name === check) {
+                flag++;
+            }
+        })
+        console.log("flag: " + flag);
+        return flag;
+        
+    }
+
     handleCancelAdd() {
-        this.setState({addActive: false});
+        this.setState({addActive: false, errMsg: undefined});
     }
 
     render() {
