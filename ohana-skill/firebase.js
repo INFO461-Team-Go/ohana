@@ -7,6 +7,18 @@
 
 'use strict';
 const Https = require('https');
+const FB = require('firebase');
+
+// Used to initializa Firebase app
+const config = {
+    apiKey: "AIzaSyCh7wRFGqzNXGuKBLzPYItxrhz8S-9b2aY",
+    authDomain: "ohana-e7233.firebaseapp.com",
+    databaseURL: "https://ohana-e7233.firebaseio.com",
+    storageBucket: "ohana-e7233.appspot.com",
+};
+FB.initializeApp(config);
+
+const database = FB.database();
 
 /**
  * Uses the user's hash to retrieve their data from Firebase
@@ -16,8 +28,6 @@ const Https = require('https');
  */
 const getUserBranch = function (hash) {
     const accessToken = 'AIzaSyCh7wRFGqzNXGuKBLzPYItxrhz8S-9b2aY';
-    // TODO: Delete the following line of code!
-    hash = '88412251529091bf4491dd0654c25560';
     let options = {
         host: 'ohana-e7233.firebaseio.com',
         port: '443',
@@ -48,36 +58,6 @@ const getUserBranch = function (hash) {
     }));
 }
 
-
-const cycleTaskIndex = function (taskID, newIndex) {
-    const accessToken = 'AIzaSyCh7wRFGqzNXGuKBLzPYItxrhz8S-9b2aY';
-    let postData = newIndex;
-    let options = {
-        host: 'ohana-e7233.firebaseio.com',
-        port: '443',
-        path: '/' + encodeURIComponent(hash) + '.json?accessToken=' + encodeURIComponent(accessToken),
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': postData.length
-        }
-    };
-
-    const req = Https.request(options, (res) => {
-        console.log("Inside CycleTask request");
-        res.on('data', (d) => {
-            console.log("CycleTask data recieved");
-        });
-    })
-
-    req.on('error', (e) => {
-        console.log("error in CycleTask api call: " + e);
-    });
-
-    req.write(postData);
-    req.end();
-}
-
 /**
  * Retrieve's the roommate's task
  * @param {JSON} userBranch 
@@ -95,12 +75,12 @@ const getTask = function (userBranch, roommate) {
 
 /**
  * Mark user's task as done on Firebase DB
- * @param {*} hash 
- * @param {*} userBranch 
- * @param {*} task
- * @returns {boolean}
+ * @param {String} hash 
+ * @param {JSON} userBranch 
+ * @param {JSON} task
+ * @returns {Promise}
  */
-const markAsDone = function(hash, userBranch, task) {
+const markAsDone = function (hash, userBranch, task) {
     let count = userBranch.roommates.count;
     let roommateId = task.roommateId;
     if (roommateId < count - 1) {
@@ -108,13 +88,19 @@ const markAsDone = function(hash, userBranch, task) {
     } else if (roommateId == count - 1) {
         roommateId = 0;
     }
-    // data to be pushed to firebase
-    let data = {
-        name: task.name,
-        roommate: roommateId
-    };
-    // TODO: change hard-coded return value
-    return true;
+    console.log(hash);
+    console.log(task);
+    console.log(roommateId);
+    let ref = database.ref(hash + "/tasks/" + task.id);
+    return new Promise(((resolve, reject) => {
+        ref.update({ roommate: roommateId }).then(() => {
+            console.log("Data was written");
+            resolve(true);
+        }).catch((error) => {
+            console.log(error);
+            reject(error);
+        })
+    }));
 }
 
 /**
@@ -129,7 +115,7 @@ function getRoommateIndex(roommatesList, roommate) {
     let found = false;
     Object.keys(roommatesList).forEach((key) => {
         let person = roommatesList[key];
-        if (person.name.toLowerCase() === roommate) {
+        if (person.name.toLowerCase() === roommate.toLowerCase()) {
             found = true;
             roommateId = person.index;
             return;
@@ -154,6 +140,7 @@ function matchTask(tasksList, roommateId) {
             if (assignment.roommate === roommateId) {
                 task["id"] = key;
                 task["name"] = assignment.name;
+                task["roommateId"] = assignment.roommate;
                 return;
             }
         });
