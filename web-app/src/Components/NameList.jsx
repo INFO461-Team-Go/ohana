@@ -117,6 +117,9 @@ export default class NameList extends React.Component {
                 nameSnap.ref.update({index: indexCount});
                 indexCount++;
             });
+            let parent = snapshot.ref.parent;
+            let numChildren = snapshot.numChildren();
+            parent.update({count: numChildren});
         }
         let names = [];
         this.state.roommatesSnap.forEach(nameSnap => {
