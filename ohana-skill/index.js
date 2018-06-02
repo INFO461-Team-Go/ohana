@@ -9,7 +9,9 @@
 const Alexa = require('ask-sdk-core');
 const Https = require('https');
 const MD5 = require('md5');
-const Firebase = require('./firebase.js')
+const Firebase = require('./firebase.js');
+
+console.log(Firebase);
 
 const amznProfileURL = 'https://api.amazon.com/user/profile?access_token=';
 
@@ -24,14 +26,14 @@ const LaunchRequestHandler = {
     },
     handle(handlerInput) {
         const user = handlerInput.requestEnvelope.session.user;
-        if (user.userId == "amzn1.ask.account.[unique-value-here]" || user.userId == undefined) {
+        if (user.accessToken === undefined) {
             let output = "to start using this skill, please use the companion app to authenticate on Amazon";
             return handlerInput.responseBuilder
                 .speak(output)
                 .withLinkAccountCard()
                 .getResponse();
         }
-        const speakOutput = 'Hello! Welcome to ohana!';
+        let speakOutput = 'Hello, Welcome to ohana!';
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .getResponse();
@@ -43,44 +45,64 @@ const LaunchRequestHandler = {
  */
 const GetTaskIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
             handlerInput.requestEnvelope.request.intent.name === 'GetTaskIntent';
     },
     async handle(handlerInput) {
         const user = handlerInput.requestEnvelope.session.user;
         const attributes = handlerInput.attributesManager.getSessionAttributes();
         let outputSpeech = '';
+        // get user's profile information, output an error message if anything goes wrong
+        let response;
         try {
-            const response = await httpsGet(user.accessToken);
-            console.log(response);
-            attributes.email = response.email;
-            attributes.hash = MD5(response.email);
-            handlerInput.attributesManager.setSessionAttributes(attributes);
-            outputSpeech = "Will do! What is your name?";
-            let reprompt = "Sorry, I didn't get that. What is your name?";
-            return handlerInput.responseBuilder
-                .speak(outputSpeech)
-                .reprompt(reprompt)
-                .getResponse();
+            response = await httpsGet(user.accessToken);
         } catch (error) {
             outputSpeech = 'I am really sorry. I am unable to access part of my memory. Please try again later';
             return handlerInput.responseBuilder
                 .speak(outputSpeech)
                 .getResponse();
         }
+        attributes.email = response.email;
+        attributes.hash = MD5(response.email);
+        attributes.getTaskIsActive = true;
+        handlerInput.attributesManager.setSessionAttributes(attributes);
+        outputSpeech = "Will do! What is your name?";
+        let reprompt = "Sorry, I didn't get that. What is your name?";
+        return handlerInput.responseBuilder
+            .speak(outputSpeech)
+            .reprompt(reprompt)
+            .getResponse();
     }
 };
 
 const MarkAsDoneIntentHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
             handlerInput.requestEnvelope.request.intent.name === 'MarkAsDoneIntent';
     },
-    handle(handlerInput) {
-        const speakOutput = 'Hello! Welcome to ohana!';
-        console.log("inside MarkAsDoneIntentHandler");
+    async handle(handlerInput) {
+        const user = handlerInput.requestEnvelope.session.user;
+        const attributes = handlerInput.attributesManager.getSessionAttributes();
+        let outputSpeech = '';
+        let response;
+        // get user's profile information, output an error message if anything goes wrong
+        try {
+            response = await httpsGet(user.accessToken);
+        } catch (error) {
+            outputSpeech = 'I am really sorry. I am unable to access part of my memory. Please try again later';
+            return handlerInput.responseBuilder
+                .speak(outputSpeech)
+                .getResponse();
+        }
+        attributes.email = response.email;
+        attributes.hash = MD5(response.email);
+        attributes.markAsDoneIsActive = true;
+        handlerInput.attributesManager.setSessionAttributes(attributes);
+        outputSpeech = "Will do! What is your name?";
+        let reprompt = "Sorry, I didn't get that. What is your name?";
         return handlerInput.responseBuilder
-            .speak(speakOutput)
+            .speak(outputSpeech)
+            .reprompt(reprompt)
             .getResponse();
     }
 };
@@ -102,22 +124,38 @@ const GetNameIntentHandler = {
             // Get user branch from Firebase
             const userBranch = await Firebase.getUserBranch(attributes.hash);
             // Get roommate's task
-            const response = Firebase.getTask(userBranch, roommate.toLowerCase());
-            if (!response.found || response.roommateId === -1 || response.task === "") {
-                let error = "Something went wrong. Please try asking for your task again";
-                return responseBuilder
-                    .speak(error)
-                    .getResponse();
+            const taskResponse = Firebase.getTask(userBranch, roommate.toLowerCase());
+            if (!taskResponse.found) {
+                // if the roommate is not found
+                let error = 'Hmm... There is no one with the name ' + roommate;
+                return responseBuilder.speak(error).getResponse();
+            } else if (JSON.stringify(taskResponse.task) === "{}") {
+                // if the roommate does not have a task assigned to them
+                let error = roommate + ' looks like you have nothing assigned to you ' +
+                                'If this looks like a mistake, please check the web app.';
+                return responseBuilder.speak(error).getResponse();
             }
-            let outputSpeech = roommate + ", you are assigned to " + response.task;
-            return responseBuilder
-                .speak(outputSpeech)
-                .getResponse();
+            // if the user asked for their task, tell them their task
+            if (attributes.getTaskIsActive) {
+                let outputSpeech = roommate + ", you are assigned to " + taskResponse.task.name;
+                return responseBuilder
+                    .speak(outputSpeech)
+                    .getResponse();
+            } else if (attributes.markAsDoneIsActive) {
+                // mark as done logic
+                console.log(taskResponse);
+                let markedAsDone = await Firebase.markAsDone(attributes.hash, userBranch, taskResponse.task);
+                if (markedAsDone) {
+                    let outputSpeech = roommate + ", your task was marked as complete";
+                } else {
+                    let error = "I was not able to mark your task as complete, please try again.";
+                    return responseBuilder.speak(error).getResponse();
+                }
+            }
         } catch (errorObject) {
-            let outputSpeech = 'I am really sorry. I am unable to access part of my memory. Please try again later';
-            return responseBuilder
-                .speak(outputSpeech)
-                .getResponse();
+            console.log(errorObject);
+            let outputSpeech = 'I am really sorry, I am unable to access part of my memory. Please try again later';
+            return responseBuilder.speak(outputSpeech).getResponse();
         }
     }
 }
@@ -132,8 +170,15 @@ const HelpIntentHandler = {
             handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Hello! Welcome to ohana!';
-        console.log("inside HelpIntentHandler");
+        let speakOutput = 'Ohana can remind you of your task and you can also mark your task as complete. ';
+        let sampleCommands = ['Alexa, ask ohana to remind me my task',
+                            'Alexa, ask ohana to get my task',
+                            'Alexa, ask ohana what I have to do',
+                            'Alexa, ask ohana to mark my task as complete',
+                            'Alexa, tell ohana I am done with my task'];
+        let random = Math.random(sampleCommands.length);
+        let sampleCommand = sampleCommands[radom];
+        speakOutput += 'Try saying ' + sampleCommand;
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .getResponse();
@@ -141,17 +186,16 @@ const HelpIntentHandler = {
 };
 
 /**
- * CancelAndStopIntentHandler: Ends the skill's session 
- *      TODO: Review this! 
+ * CancelAndStopIntentHandler: Ends the skill's session  
  */
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
             (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent' ||
-            handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
+                handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speakOutput = 'Bye';
+        const speakOutput = 'whatBye';
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .getResponse();
@@ -159,8 +203,7 @@ const CancelAndStopIntentHandler = {
 };
 
 /**
- * CancelAndStopIntentHandler: Ends the skill's session 
- *      TODO: Review this! 
+ * CancelAndStopIntentHandler: Ends the skill's session  
  */
 const SessionEndedRequestHandler = {
     canHandle(handlerInput) {
@@ -181,6 +224,7 @@ const ErrorHandler = {
     },
     handle(handlerInput, error) {
         console.log(`Error handled: ${handlerInput.requestEnvelope.request.type} ${handlerInput.requestEnvelope.request.type === 'IntentRequest' ? `intent: ${handlerInput.requestEnvelope.request.intent.name} ` : ''}${error.message}.`);
+        console.log(error);
         return handlerInput.responseBuilder
             .speak('Sorry, I can\'t understand the command. Please say again.')
             .reprompt('Sorry, I can\'t understand the command. Please say again.')
