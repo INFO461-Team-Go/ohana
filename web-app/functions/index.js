@@ -42,6 +42,7 @@ admin.initializeApp();
 //     //         }))
 //     // }   
 
+
 //     let parentRef = change.after.ref.parent;
 //     let namesSnap = change.after;
 //     let indexCount = 0;
@@ -55,6 +56,7 @@ admin.initializeApp();
 //         }
 //     });
 //     let toUpdate = {count: indexCount};
+
 
 //     return change.after.ref.parent.update(toUpdate)
 //             .then(console.log("write complete!"));
