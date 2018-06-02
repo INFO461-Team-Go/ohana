@@ -48,8 +48,9 @@ exports.handleCountRoommates = functions.database.ref('{hash}/roommates/names')
     namesSnap.forEach(nameSnap => {
         // due to instances of method pushing blank entries, method checks if nameSnap exists. 
         // performs count and update if nameSnap is truthy.
-
-        if (nameSnap.val()) {
+        let val = nameSnap.val();
+        let name = val.name;
+        if (name) {
             nameSnap.ref.update({index: indexCount})
             indexCount++;
         }
