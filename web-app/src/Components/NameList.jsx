@@ -110,6 +110,13 @@ export default class NameList extends React.Component {
 
         if (!this.state.roommatesSnap) {
             return <p>loading...</p>
+        } else {
+            let snapshot = this.state.roommatesSnap;
+            let indexCount = 0;
+            snapshot.forEach(nameSnap => {
+                nameSnap.ref.update({index: indexCount});
+                indexCount++;
+            });
         }
         let names = [];
         this.state.roommatesSnap.forEach(nameSnap => {
