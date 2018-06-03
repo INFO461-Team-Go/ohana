@@ -5,6 +5,12 @@
     height: 90.9vh;
 }
 
+#maxSize{
+    height: 80vh;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
 #tabContainer{
     height: 65.2vh;
     width: 43.2vh;
@@ -128,6 +134,13 @@
     height: 28.77vh;
 }
 
+#nameList{
+    width: 55vh;
+    padding: 0;
+    margin-left: 50vh;
+    align-items: center;
+}
+
 .cardBox {
     position: relative;
     width: 28vh;
@@ -161,6 +174,10 @@
     line-height: 4.5vh;
     text-align: center;
     color: #444444;
+}
+
+.boxSize{
+    max-width: 50%;
 }
 
 .nameSize{
@@ -230,6 +247,8 @@
     margin-left: 10rem;
     border-radius: 8px;
     padding-top: 3px;
+    width: 92%;
+    margin-bottom: 3vh;
 }
 
 #inputBox {
@@ -273,3 +292,96 @@
     padding-top: 0;
     padding-bottom: 0;
 }
+
+@media only screen and (max-aspect-ratio: 1063/634) {
+    #nameList{
+        margin-left: 34.5vh;
+    }
+}
+
+@media only screen and (max-aspect-ratio: 1019/684) {
+    
+    .tabSlogan{
+        width: 0px;
+        font-size: 0px;
+    }
+
+    .tabSlogan[style]{
+        font-size: 0px !important;
+    }
+
+    #activeTabSlogan{
+        width: 0px;
+        height: 0px;
+    }
+
+
+    #nameList{
+        margin-left: 34.5vh;
+    }
+
+    #tabContainer{
+        height: 55vw;
+        width: 100%;
+        margin: 0;
+        margin: 1vh;
+    }
+
+    .containerView{
+        flex-direction: column;
+    }
+
+    #inactiveTab, #tabOverlay{
+        margin-top: 5vh;
+        width: 30vw;
+        height: 30vw;
+    }
+
+    #inactiveTab{
+        margin-left: 51vw;
+    }
+
+    #innerInactive{
+        width: 25vw;
+        height: 25vw;
+        border-width: 2.5vw;
+    }
+
+    #hacking{
+        height: 2.5vw;
+        width: 2.5vw;
+    }
+
+    #inactiveText{
+        margin-left: 50vw;
+        width: 30vw;
+        font-size: 5vw;
+    }
+
+    #nameList{
+        Margin-left: 0px;
+    }
+
+    #activeTab{
+        width: 45vw;
+        height: 45vw;
+        margin-left: 10vw;
+    }
+
+    #innerActive{
+        width: 39vw;
+        height: 39vw;
+    }
+
+    #activeText{
+        top: 45vw;
+        width: 45vw;
+        font-size: 9vw;
+        margin-left: 10vw;
+    }
+
+    #maxSize{
+        height: 55vh;
+        margin-top: 1vh;
+    }
+}   

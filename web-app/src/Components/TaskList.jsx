@@ -4,12 +4,6 @@ import firebase from "firebase/app";
 import Picker from 'react-picker'
 import md5 from "blueimp-md5";
 
-
-let listStyles = {
-    maxWidth: "75%",
-    width: "500px"
-};
-
 let greyButton = {
     color: "#8B8B8B",
     cursor: "default"
@@ -171,7 +165,7 @@ export default class TaskList extends React.Component {
 
 
         return (
-            <div className="container" id="nameList" ref="wrap" style={listStyles}>
+            <div className="container" id="nameList" ref="wrap">
                 {names}
                 {
                     this.state.addActive ?

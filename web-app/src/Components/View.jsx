@@ -152,21 +152,21 @@ export default class View extends React.Component {
                     </div>
                 </header> */}
                 <header id="logoBox" className="row m-0">
-                    <div className="col">
+                    <div id="logoCont">
                         <Link to={constants.routes.home} id='logo'>
                             <div id='logoInner'>
                                 <div id='logoInnerInner'></div>
                             </div>
                         </Link>
                     </div>
-                    <div className="col d-flex justify-content-end align-items-center">
+                    <div className="col d-flex justify-content-end align-items-center" id="ubOverRide">
                         {this.state.user != null?
                         <p className="dName">Hello {this.state.user.displayName}!</p>
                         :
                         <div></div>
                         }
                         <div id="signOut" className="mx-3">
-                            <button className="btn btn btn-outline-light btn-sm" onClick={this.handleSignOut}>
+                            <button className="btn btn btn-outline-light btn-sm" id="buttonSignout" onClick={this.handleSignOut}>
                                 Sign Out
                             </button>
                         </div>
