@@ -172,6 +172,8 @@ export default class TaskList extends React.Component {
             console.log("index: "+ index);
             // rooms.push(<Picker.Item label={element.name} value={element.name} />);
         });
+        
+        // this pushes a blank state to dropdown menu. It should not appear as a selectable option
         rooms.push(<option selected disabled style={emptyOption} value={-1}></option>);
 
         this.state.taskSnap.forEach(nameSnap => {
