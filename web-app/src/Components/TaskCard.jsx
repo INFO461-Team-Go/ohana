@@ -51,10 +51,25 @@ export default class TaskCard extends React.Component {
 
     handleSubmit(evt) {
         evt.preventDefault();
+        this.setState({errMsg: undefined});
         if (this.state.toUpdate != null) {
-            let ref = this.props.nameSnap.ref;
-            ref.update({ name: this.state.toUpdate, roommate: Number(this.state.roommate) });
-            this.setState({ toUpdate: undefined, roommate: undefined });
+            let trimmedTask = this.state.toUpdate.trim();
+            let flag = 0;
+
+            this.props.taskSnap.forEach(childSnap => {
+                let val = childSnap.val();
+                let check = val.name;
+                if (check === trimmedTask) {
+                    flag++;
+                }
+            });
+            if (flag > 0) {
+                this.setState({errMsg: "name exists in database"});
+            } else {
+                let ref = this.props.nameSnap.ref;
+                ref.update({ name: trimmedTask, roommate: Number(this.state.roommate) });
+                this.setState({ toUpdate: undefined, roommate: undefined });
+            }
         }
         this.setState({ edit: false });
         this.setState({ menu: false });

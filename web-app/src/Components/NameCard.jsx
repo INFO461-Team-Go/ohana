@@ -39,6 +39,22 @@ export default class NameCard extends React.Component {
         // this.props.countRef.set({count: number});
  
     }
+    async checkDuplicate(snapshot, check) {
+        let array = [];
+        let message = "";
+        let flag = 0;
+        await snapshot.forEach(childSnap => {
+            let val = childSnap.val();
+            array.push(val.name);
+            message = "";
+            if (val.name === check) {
+                flag++;
+            }
+        })
+        console.log("flag: " + flag);
+        return flag;
+        
+    }
 
     handleEdit() {
         if (!this.state.edit) {
@@ -57,7 +73,17 @@ export default class NameCard extends React.Component {
         evt.preventDefault();
         this.setState({errMsg: undefined});
         let trimmedName = this.state.toUpdate.trim();
-        if (trimmedName.length > 15) {
+        let flag = 0;
+        this.props.roommatesSnap.forEach(childSnap => {
+            let val = childSnap.val();
+            let check = val.name;
+            if (check === trimmedName) {
+                flag++;
+            }
+        });
+        if (flag > 0) {
+            this.setState({errMsg: "name exists in database"}) ;
+        } else if (trimmedName.length > 15) {
             this.setState({errMsg: "name must be less than 15 characters"});
         } else if (!/^[a-zA-Z]+$/.test(trimmedName)) {
             this.setState({errMsg: "no special characters allowed"});
