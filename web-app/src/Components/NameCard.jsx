@@ -73,7 +73,8 @@ export default class NameCard extends React.Component {
         evt.preventDefault();
         this.setState({errMsg: undefined});
         let trimmedName = this.state.toUpdate.trim();
-        this.state.roommatesSnap.forEach(childSnap => {
+        let flag = 0;
+        this.props.roommatesSnap.forEach(childSnap => {
             let val = childSnap.val();
             let check = val.name;
             if (check === trimmedName) {

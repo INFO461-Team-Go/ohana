@@ -103,10 +103,24 @@ export default class TaskList extends React.Component {
         //so that it doesn't try to post the form data
         //back to the server
         evt.preventDefault();
-
-        this.props.taskRef.push({ name: this.state.name, roommate: this.state.roommate })
-            .then(() => this.setState({ name: "", fbError: undefined, addActive: false }))
-            .catch(err => this.setState({ fbError: err }));
+        this.setState({errMsg: undefined});
+        let trimmedTask = this.state.name.trim();
+        let flag = 0;
+        this.state.taskSnap.forEach(childSnap => {
+            let val = childSnap.val();
+            let check = val.name;
+            if (check === trimmedTask) {
+                flag++;
+            }
+        });
+        
+        if (flag > 0) {
+            this.setState({errMsg: "task exists in database"});
+        } else {
+            this.props.taskRef.push({ name: trimmedTask, roommate: this.state.roommate })
+                .then(() => this.setState({ name: "", fbError: undefined, addActive: false }))
+                .catch(err => this.setState({ fbError: err }));
+        }
     }
 
     onKeyPress(event) {
