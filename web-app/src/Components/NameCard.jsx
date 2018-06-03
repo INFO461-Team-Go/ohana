@@ -27,8 +27,18 @@ export default class NameCard extends React.Component {
     
     handleDelete() {
         let toRemove = this.props.nameSnap;
+        let value = toRemove.val()
+        let index = value.index;
         toRemove.ref.remove()
-            .then(() => console.log("remove succeeded"));
+            .then(() => console.log("remove succeeded"))
+            .then(() => {
+                this.props.taskSnap.forEach(childSnap => {
+                    let childVal = childSnap.val();
+                    if (childVal.roommate === index) {
+                        childSnap.ref.update({roommate: -1});
+                    }
+                })
+            });
             // .then(() => console.log("remove succeeded"))
             // .then(() => {
             //     let indexCount = 0;

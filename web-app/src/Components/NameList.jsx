@@ -30,6 +30,7 @@ export default class NameList extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         this.props.roommatesRef.off("value", this.unlisten);
+        this.props.taskRef.off('value', this.unlistenTask);
         this.unlisten = nextProps.roommatesRef.on("value", snapshot => {
             this.setState({roommatesSnap: snapshot});
             if (snapshot.numChildren() > 0) {
@@ -38,6 +39,9 @@ export default class NameList extends React.Component {
                 this.setState({addActive: true});
             }
         });
+        this.unlistenTask = nextProps.taskRef.on('value', snapshot => {
+            this.setState({taskSnap: snapshot});
+        })
     }
 
     componentDidMount() {
@@ -49,11 +53,15 @@ export default class NameList extends React.Component {
                 this.setState({addActive: true});
             }    
         });
+        this.unlistenTask = this.props.taskRef.on('value', snapshot => {
+            this.setState({taskSnap: snapshot});
+        })
         console.log("name list did mount")
     }
 
     componentWillUnmount() {
         this.props.roommatesRef.off('value', this.unlisten);
+        this.props.taskRef.off('value', this.unlistenTask);
         console.log("name list will unmount")
     }
 
@@ -108,7 +116,7 @@ export default class NameList extends React.Component {
 
     render() {
 
-        if (!this.state.roommatesSnap) {
+        if (!this.state.roommatesSnap || !this.state.taskSnap) {
             return <p>loading...</p>
         } else {
             // updates index counter whenever list is rendered. 
@@ -124,7 +132,7 @@ export default class NameList extends React.Component {
         }
         let names = [];
         this.state.roommatesSnap.forEach(nameSnap => {
-            names.push(<NameCard key={nameSnap.key} nameSnap={nameSnap} roommatesSnap={this.state.roommatesSnap}/>)
+            names.push(<NameCard key={nameSnap.key} nameSnap={nameSnap} roommatesSnap={this.state.roommatesSnap} taskSnap={this.state.taskSnap}/>)
         });
 
         return (

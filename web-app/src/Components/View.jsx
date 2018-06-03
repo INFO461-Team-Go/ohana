@@ -270,7 +270,8 @@ export default class View extends React.Component {
 
                     <main id="maxSize">
                         {this.props.match.params.tabName == 'roommates' ?
-                            <NameList roommatesRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/")} />
+                            <NameList roommatesRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName + "/names/")}
+                                taskRef={firebase.database().ref(this.state.userHash + "/tasks/")} />
                             :
                             <TaskList taskRef={firebase.database().ref(this.state.userHash + "/" + this.props.match.params.tabName)}
                                 roommatesRef={firebase.database().ref(this.state.userHash + "/roommates/names/")}

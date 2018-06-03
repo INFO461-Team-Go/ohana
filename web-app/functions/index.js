@@ -64,3 +64,53 @@ admin.initializeApp();
 
 // to assign roommates to tasks
 // set ref to names. then orderByChild("index").equalTo(whatever index that was)
+
+// exports.handleRoommateDelete = functions.database.ref('{hash}/roommates/names').onDelete((snapshot, context) => {
+//     let deletedValue = snapshot.val();
+//     let deletedIndex = deletedValue.index;
+//     console.log("deleted index: " + deletedIndex);
+//     let roommatesRef = snapshot.ref.parent;
+//     let userRef = roommatesRef.parent;
+//     let tasksRef = userRef.child("tasks");
+//     return tasksRef.once("value")
+//         .then((taskSnap => {
+//             return taskSnap.forEach(childSnap => {
+//                 let childVal = childSnap.val();
+//                 console.log("childVal: " + childVal);
+//                 if (childVal.roommate === deletedIndex) {
+//                     childSnap.ref.update({roommate: -1});
+//                 }
+//             });
+//         }));
+
+// })
+
+// exports.handleDelete = functions.database.ref('{hash}/roommates/names/{pushKey}').onWrite((change, context) => {
+//     // exit if item exists
+//     if (change.after.exists()) {
+//         return null;
+//     }
+
+//     let deletedValue = change.before.val();
+//     let deletedIndex = deletedValue.index;
+//     console.log("deleted index: " + deletedIndex);
+//     let roommatesRef = change.before.ref.parent;
+//     let userRef = roommatesRef.parent;
+//     let tasksRef = userRef.child("tasks");
+//     console.log("line 100");
+//     return tasksRef.once("value")
+//         .then((taskSnap => {
+//              return taskSnap.forEach(childSnap => {
+//                 let childVal = childSnap.val();
+//                 console.log("childVal: " + childVal);
+//                 if (childVal.roommate === deletedIndex) {
+//                     console.log("updating index to -1")
+//                     childSnap.ref.update({roommate: -1});
+//                 }
+//             });
+//         }))
+//         .catch(error => {
+//             console.error(error);
+//             console.log("line 114");
+//         })
+// });
