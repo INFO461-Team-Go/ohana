@@ -35,17 +35,18 @@ export default class View extends React.Component {
         //console.log("main view mounted!");
         this.unlistenAuth = firebase.auth().onAuthStateChanged(currentUser => {
             if (currentUser == null) {
-                console.log("current user is NULL");
+                // console.log("current user is NULL");
                 this.props.history.push(constants.routes.home);
             } else {
                 this.setState({ user: currentUser });
+                this.setState({displayName: currentUser.displayName});
                 let hash = md5(currentUser.email);
                 this.setState({ userHash: hash })
                 let currentChannel = this.props.match.params.tabName;
                 this.setState({channel: currentChannel});
                 //console.log("currentChannel: " + currentChannel);
                 //console.log("tabName: " + this.props.match.params.tabName);
-                console.log("user display name: " + this.state.user.displayName);
+                // console.log("user display name: " + this.state.user.displayName);
             }
         });
     }
@@ -161,7 +162,7 @@ export default class View extends React.Component {
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
                         {this.state.user != null?
-                        <p className="dName">Hello {this.state.user.displayName}!</p>
+                        <p className="dName">Hello {this.state.displayName}!</p>
                         :
                         <div></div>
                         }

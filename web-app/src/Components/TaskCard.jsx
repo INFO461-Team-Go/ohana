@@ -99,10 +99,10 @@ export default class TaskCard extends React.Component {
                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
             });
         }
-        console.log(this.state.roommate)
+        // console.log(this.state.roommate)
 
         let task = this.props.nameSnap.val();
-        console.log("task.name: " + task.name + " task.roommate: " + task.roommate + " this.state.roommate: " + this.state.roommate + " this.props.rooms: " + this.props.rooms);
+        // console.log("task.name: " + task.name + " task.roommate: " + task.roommate + " this.state.roommate: " + this.state.roommate + " this.props.rooms: " + this.props.rooms);
     
 
         let ref = this.props.nameSnap.ref;
@@ -142,7 +142,7 @@ export default class TaskCard extends React.Component {
                                 {/* <h4 className="text-center">{roommate.name}</h4> */}
                             </div>
                             <div className="cardBox my-2 row col-4 p-0">
-                                {console.log("check" + this.props.rooms[task.roommate])}
+                                {/* {console.log("check" + this.props.rooms[task.roommate])} */}
                                 <select value={Number(task.roommate)} onChange={evt => this.handleChange(evt)} className="w-100 text-truncate border-0" id="cardFont">{this.props.rooms}</select>
                             </div>
                             {/* <div className="buttons d-flex flex-column">

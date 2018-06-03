@@ -56,13 +56,11 @@ export default class NameList extends React.Component {
         this.unlistenTask = this.props.taskRef.on('value', snapshot => {
             this.setState({taskSnap: snapshot});
         })
-        console.log("name list did mount")
     }
 
     componentWillUnmount() {
         this.props.roommatesRef.off('value', this.unlisten);
         this.props.taskRef.off('value', this.unlistenTask);
-        console.log("name list will unmount")
     }
 
     handleSubmit(evt) {
@@ -105,7 +103,7 @@ export default class NameList extends React.Component {
                 flag++;
             }
         })
-        console.log("flag: " + flag);
+
         return flag;
         
     }

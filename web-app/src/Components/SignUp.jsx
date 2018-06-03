@@ -60,10 +60,9 @@ export default class SignUp extends React.Component {
             let hash = md5(this.state.email);
             let ref = firebase.database().ref(hash + "/roommates/");
             let toUpdate = { count: 0 };
-            console.log(this.state.photoUrl)
+            // console.log(this.state.photoUrl)
             firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pw)
             .then(user => user.updateProfile({
-                photoURL: this.state.photoUrl,
                 displayName: this.state.displayName
             }))
             .catch(err => this.setState({

@@ -30,7 +30,6 @@ export default class NameCard extends React.Component {
         let value = toRemove.val()
         let index = value.index;
         toRemove.ref.remove()
-            .then(() => console.log("remove succeeded"))
             .then(() => {
                 this.props.taskSnap.forEach(childSnap => {
                     let childVal = childSnap.val();
@@ -61,7 +60,7 @@ export default class NameCard extends React.Component {
                 flag++;
             }
         })
-        console.log("flag: " + flag);
+        // console.log("flag: " + flag);
         return flag;
         
     }
