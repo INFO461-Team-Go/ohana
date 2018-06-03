@@ -143,7 +143,6 @@ const GetNameIntentHandler = {
                     .getResponse();
             } else if (attributes.markAsDoneIsActive) {
                 // mark as done logic
-                console.log(taskResponse);
                 let markedAsDone = await Firebase.markAsDone(attributes.hash, userBranch, taskResponse.task);
                 if (markedAsDone) {
                     let outputSpeech = roommate + ", your task was marked as complete";
@@ -170,14 +169,14 @@ const HelpIntentHandler = {
             handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        let speakOutput = 'Ohana can remind you of your task and you can also mark your task as complete. ';
+        let speakOutput = 'Ohana can remind you of your household tasks. ';
         let sampleCommands = ['Alexa, ask ohana to remind me my task',
-                            'Alexa, ask ohana to get my task',
+                            'Alexa, tell ohana I finished my task',
                             'Alexa, ask ohana what I have to do',
-                            'Alexa, ask ohana to mark my task as complete',
+                            'Alexa, ask ohana to mark my task as done',
                             'Alexa, tell ohana I am done with my task'];
-        let random = Math.random(sampleCommands.length);
-        let sampleCommand = sampleCommands[radom];
+        let random = getRandomInt(sampleCommands.length);
+        let sampleCommand = sampleCommands[random];
         speakOutput += 'Try saying ' + sampleCommand;
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -267,6 +266,15 @@ function httpsGet(accessToken) {
         });
         request.end();
     }));
+}
+
+/**
+ * Function to generate a random integer
+ * @param {*} max 
+ * @returns a number between 0 and max value
+ */
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
 }
 
 // Lambda Setup

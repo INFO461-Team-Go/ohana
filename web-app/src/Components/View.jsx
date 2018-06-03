@@ -153,11 +153,11 @@ export default class View extends React.Component {
                 </header> */}
                 <header id="logoBox" className="row m-0">
                     <div className="col">
-                        <Link to={constants.routes.home} id='logo'>
+                        <div id='logo'>
                             <div id='logoInner'>
                                 <div id='logoInnerInner'></div>
                             </div>
-                        </Link>
+                        </div>
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
                         {this.state.user != null?
