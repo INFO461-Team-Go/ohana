@@ -19,6 +19,10 @@ let redButton = {
     cursor: "pointer"
 }
 
+let emptyOption = {
+    display: "none"
+}
+
 export default class TaskList extends React.Component {
     constructor(props) {
         super(props);
@@ -168,6 +172,7 @@ export default class TaskList extends React.Component {
             console.log("index: "+ index);
             // rooms.push(<Picker.Item label={element.name} value={element.name} />);
         });
+        rooms.push(<option selected disabled style={emptyOption} value={-1}></option>);
 
         this.state.taskSnap.forEach(nameSnap => {
             names.push(<TaskCard rooms={rooms} nameList={roommatenames} key={nameSnap.key} nameSnap={nameSnap} taskSnap={this.state.taskSnap} />)
