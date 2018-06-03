@@ -202,12 +202,12 @@
 
 #tMoreIcon {
     color: #31C4F3;
-    padding-top: 8px;
+    padding-top: auto;
     transform: translate(0px, 1px);
     cursor: pointer;
     display: none;
-    position: relative;
-    margin-left: 0;
+    position: absolute;
+    margin-left: 89%;
 }
 
 #closeIcon {
