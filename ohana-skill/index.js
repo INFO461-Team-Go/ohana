@@ -131,7 +131,7 @@ const GetNameIntentHandler = {
                 return responseBuilder.speak(error).getResponse();
             } else if (JSON.stringify(taskResponse.task) === "{}") {
                 // if the roommate does not have a task assigned to them
-                let error = roommate + ' looks like you have nothing assigned to you ' +
+                let error = roommate + ' looks like you have nothing assigned to you... ' +
                                 'If this looks like a mistake, please check the web app.';
                 return responseBuilder.speak(error).getResponse();
             }
@@ -170,7 +170,7 @@ const HelpIntentHandler = {
     },
     handle(handlerInput) {
         let speakOutput = 'Ohana can remind you of your household tasks. ';
-        let sampleCommands = ['Alexa, ask ohana to remind me my task',
+        let sampleCommands = ['Alexa, ask ohana what am I supposed to do',
                             'Alexa, tell ohana I finished my task',
                             'Alexa, ask ohana what I have to do',
                             'Alexa, ask ohana to mark my task as done',
@@ -194,7 +194,7 @@ const CancelAndStopIntentHandler = {
                 handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speakOutput = 'whatBye';
+        const speakOutput = 'Bye';
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .getResponse();
