@@ -103,7 +103,7 @@ export default class TaskCard extends React.Component {
                                 </div>
                             </div>
                         </div> */}
-                            <div className="p-0 cardBox my-2 row col-8">
+                            <div className="p-0 cardBox my-2 row col-8 boxSize">
                                 <div className="p-0 col-1" />
                                 <h4 className="p-0 m-0 col-10 text-truncate" id="cardFont">{toTitleCase(task.name)}</h4>
                                 <i className="p-0 material-icons col-1" id="tMoreIcon" onClick={() => this.handleMenu()}>more_vert</i>
