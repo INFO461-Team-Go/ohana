@@ -88,9 +88,6 @@ const markAsDone = function (hash, userBranch, task) {
     } else if (roommateId == count - 1) {
         roommateId = 0;
     }
-    console.log(hash);
-    console.log(task);
-    console.log(roommateId);
     let ref = database.ref(hash + "/tasks/" + task.id);
     return new Promise(((resolve, reject) => {
         ref.update({ roommate: roommateId }).then(() => {

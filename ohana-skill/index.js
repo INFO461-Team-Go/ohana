@@ -65,6 +65,7 @@ const GetTaskIntentHandler = {
         attributes.email = response.email;
         attributes.hash = MD5(response.email);
         attributes.getTaskIsActive = true;
+        attributes.markAsDoneIsActive = false;
         handlerInput.attributesManager.setSessionAttributes(attributes);
         outputSpeech = "Will do! What is your name?";
         let reprompt = "Sorry, I didn't get that. What is your name?";
@@ -97,6 +98,7 @@ const MarkAsDoneIntentHandler = {
         attributes.email = response.email;
         attributes.hash = MD5(response.email);
         attributes.markAsDoneIsActive = true;
+        attributes.getTaskIsActive = false;
         handlerInput.attributesManager.setSessionAttributes(attributes);
         outputSpeech = "Will do! What is your name?";
         let reprompt = "Sorry, I didn't get that. What is your name?";
@@ -131,21 +133,22 @@ const GetNameIntentHandler = {
                 return responseBuilder.speak(error).getResponse();
             } else if (JSON.stringify(taskResponse.task) === "{}") {
                 // if the roommate does not have a task assigned to them
-                let error = roommate + ' looks like you have nothing assigned to you ' +
+                let error = roommate + ' looks like you have nothing assigned to you... ' +
                                 'If this looks like a mistake, please check the web app.';
                 return responseBuilder.speak(error).getResponse();
             }
             // if the user asked for their task, tell them their task
-            if (attributes.getTaskIsActive) {
+            if (attributes.getTaskIsActive && !attributes.markAsDoneIsActive) {
                 let outputSpeech = roommate + ", you are assigned to " + taskResponse.task.name;
                 return responseBuilder
                     .speak(outputSpeech)
                     .getResponse();
-            } else if (attributes.markAsDoneIsActive) {
+            } else if (attributes.markAsDoneIsActive && !attributes.getTaskIsActive) {
                 // mark as done logic
                 let markedAsDone = await Firebase.markAsDone(attributes.hash, userBranch, taskResponse.task);
                 if (markedAsDone) {
                     let outputSpeech = roommate + ", your task was marked as complete";
+                    return responseBuilder.speak(outputSpeech).getResponse();
                 } else {
                     let error = "I was not able to mark your task as complete, please try again.";
                     return responseBuilder.speak(error).getResponse();
@@ -170,7 +173,7 @@ const HelpIntentHandler = {
     },
     handle(handlerInput) {
         let speakOutput = 'Ohana can remind you of your household tasks. ';
-        let sampleCommands = ['Alexa, ask ohana to remind me my task',
+        let sampleCommands = ['Alexa, ask ohana what am I supposed to do',
                             'Alexa, tell ohana I finished my task',
                             'Alexa, ask ohana what I have to do',
                             'Alexa, ask ohana to mark my task as done',
@@ -194,7 +197,7 @@ const CancelAndStopIntentHandler = {
                 handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speakOutput = 'whatBye';
+        const speakOutput = 'Bye';
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .getResponse();
@@ -210,6 +213,10 @@ const SessionEndedRequestHandler = {
     },
     handle(handlerInput) {
         // clean up logic (if any)
+        const attributes = handlerInput.attributesManager.getSessionAttributes();
+        attributes.getTaskIsActive = false;
+        attributes.markAsDoneIsActive = false;
+        handlerInput.attributesManager.setSessionAttributes(attributes);
         return handlerInput.responseBuilder.getResponse();
     }
 };
