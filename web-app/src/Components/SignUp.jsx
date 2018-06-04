@@ -47,9 +47,9 @@ export default class SignUp extends React.Component {
                 errorMessage: "Enter Display Name"
             });
             return;
-        } else if (!/^[a-zA-Z]+$/.test(this.state.displayName.trim())) {
+        } else if (this.state.displayName.trim().length > 15) {
             this.setState({
-                errorMessage: "No special characters allowed for display name"
+                errorMessage: "Display name must be less than 15 characters"
             });
         } else if (this.state.pw.length < 6) {
             this.setState({

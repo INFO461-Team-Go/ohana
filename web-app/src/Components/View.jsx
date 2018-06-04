@@ -37,7 +37,11 @@ export default class View extends React.Component {
             if (currentUser == null) {
                 // console.log("current user is NULL");
                 this.props.history.push(constants.routes.home);
-            } else {
+            }
+            //  else if (!currentUser.displayName) {
+            //     this.props.history.push(constants.routes.signin);
+            // }
+            else {
                 this.setState({ user: currentUser });
                 this.setState({displayName: currentUser.displayName});
                 let hash = md5(currentUser.email);

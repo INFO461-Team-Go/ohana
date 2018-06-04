@@ -9,11 +9,11 @@ export default class Home extends React.Component {
     }
 
     componentDidMount() {
-        console.log("home page did mount");
+        // console.log("home page did mount");
     }
 
     componentWillUnmount() {
-        console.log("home page will unmount");
+        // console.log("home page will unmount");
     }
 
     render() {
