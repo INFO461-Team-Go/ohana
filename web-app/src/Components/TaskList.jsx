@@ -108,8 +108,9 @@ export default class TaskList extends React.Component {
         //back to the server
         evt.preventDefault();
         this.setState({errMsg: undefined});
-        let trimmedTask = this.state.name.trim();
+        let trim = this.state.name.trim();
         let flag = 0;
+        let trimmedTask = this.toTitleCase(trim);
         this.state.taskSnap.forEach(childSnap => {
             let val = childSnap.val();
             let check = val.name;
@@ -120,6 +121,8 @@ export default class TaskList extends React.Component {
         
         if (flag > 0) {
             this.setState({errMsg: "task exists in database"});
+        } else if (this.state.roommates < 0) {
+            this.setState({errMsg: "Please select a roommate"});
         } else {
             this.props.taskRef.push({ name: trimmedTask, roommate: this.state.roommate })
                 .then(() => this.setState({ name: "", fbError: undefined, addActive: false }))
@@ -135,6 +138,12 @@ export default class TaskList extends React.Component {
 
     handleCancelAdd() {
         this.setState({ addActive: false });
+    }
+
+    toTitleCase(str) {
+        return str.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
     }
 
     render() {

@@ -69,8 +69,9 @@ export default class NameList extends React.Component {
         //back to the server
         evt.preventDefault();
         this.setState({errMsg: undefined});
-        let trimmedName = this.state.name.trim();
+        let trim = this.state.name.trim();
         let flag = 0;
+        let trimmedName = this.toTitleCase(trim);
         this.state.roommatesSnap.forEach(childSnap => {
             let val = childSnap.val();
             let check = val.name;
@@ -106,6 +107,12 @@ export default class NameList extends React.Component {
 
         return flag;
         
+    }
+
+    toTitleCase(str) {
+        return str.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
     }
 
     handleCancelAdd() {

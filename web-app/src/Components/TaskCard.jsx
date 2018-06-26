@@ -53,8 +53,9 @@ export default class TaskCard extends React.Component {
         evt.preventDefault();
         this.setState({errMsg: undefined});
         if (this.state.toUpdate != null) {
-            let trimmedTask = this.state.toUpdate.trim();
+            let trim = this.state.toUpdate.trim();
             let flag = 0;
+            let trimmedTask = this.toTitleCase(trim);
 
             this.props.taskSnap.forEach(childSnap => {
                 let val = childSnap.val();
@@ -64,15 +65,19 @@ export default class TaskCard extends React.Component {
                 }
             });
             if (flag > 0) {
-                this.setState({errMsg: "name exists in database"});
+                this.setState({errMsg: "task exists in database"});
+            } else if (this.state.roommate < 0) {
+                this.setState({errMsg: "Please select a roommate"});
             } else {
                 let ref = this.props.nameSnap.ref;
                 ref.update({ name: trimmedTask, roommate: Number(this.state.roommate) });
                 this.setState({ toUpdate: undefined, roommate: undefined });
+                this.setState({ edit: false });
+                this.setState({ menu: false });
             }
         }
-        this.setState({ edit: false });
-        this.setState({ menu: false });
+        // this.setState({ edit: false });
+        // this.setState({ menu: false });
     }
     handleMenu() {
         if (this.state.menu) {
@@ -84,6 +89,7 @@ export default class TaskCard extends React.Component {
 
     handleCancelAdd() {
         this.setState({ addActive: false });
+        this.setState({menu: false});
     }
 
     handleChange(evt) {
@@ -91,6 +97,12 @@ export default class TaskCard extends React.Component {
         let ref = this.props.nameSnap.ref;
         ref.update({ roommate: Number(evt.target.value) });
         this.setState({ toUpdate: undefined, roommate: undefined });
+    }
+
+    toTitleCase(str) {
+        return str.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
     }
 
     render() {
