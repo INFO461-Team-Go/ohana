@@ -126,6 +126,7 @@
 
 #tabOverlay{
     position: absolute;
+    cursor: pointer;
     top: 0%;
     margin-top: 36.38vh;
     background-color: rgba(0,0,0,0.6);

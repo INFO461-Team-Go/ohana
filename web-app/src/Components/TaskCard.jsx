@@ -53,8 +53,9 @@ export default class TaskCard extends React.Component {
         evt.preventDefault();
         this.setState({errMsg: undefined});
         if (this.state.toUpdate != null) {
-            let trimmedTask = this.state.toUpdate.trim();
+            let trim = this.state.toUpdate.trim();
             let flag = 0;
+            let trimmedTask = this.toTitleCase(trim);
 
             this.props.taskSnap.forEach(childSnap => {
                 let val = childSnap.val();
@@ -64,15 +65,19 @@ export default class TaskCard extends React.Component {
                 }
             });
             if (flag > 0) {
-                this.setState({errMsg: "name exists in database"});
+                this.setState({errMsg: "task exists in database"});
+            } else if (this.state.roommate < 0) {
+                this.setState({errMsg: "Please select a roommate"});
             } else {
                 let ref = this.props.nameSnap.ref;
                 ref.update({ name: trimmedTask, roommate: Number(this.state.roommate) });
                 this.setState({ toUpdate: undefined, roommate: undefined });
+                this.setState({ edit: false });
+                this.setState({ menu: false });
             }
         }
-        this.setState({ edit: false });
-        this.setState({ menu: false });
+        // this.setState({ edit: false });
+        // this.setState({ menu: false });
     }
     handleMenu() {
         if (this.state.menu) {
@@ -84,6 +89,7 @@ export default class TaskCard extends React.Component {
 
     handleCancelAdd() {
         this.setState({ addActive: false });
+        this.setState({menu: false});
     }
 
     handleChange(evt) {
@@ -93,16 +99,22 @@ export default class TaskCard extends React.Component {
         this.setState({ toUpdate: undefined, roommate: undefined });
     }
 
+    toTitleCase(str) {
+        return str.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+    }
+
     render() {
         function toTitleCase(str) {
             return str.replace(/\w\S*/g, function (txt) {
                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
             });
         }
-        console.log(this.state.roommate)
+        // console.log(this.state.roommate)
 
         let task = this.props.nameSnap.val();
-        console.log("task.name: " + task.name + " task.roommate: " + task.roommate + " this.state.roommate: " + this.state.roommate + " this.props.rooms: " + this.props.rooms);
+        // console.log("task.name: " + task.name + " task.roommate: " + task.roommate + " this.state.roommate: " + this.state.roommate + " this.props.rooms: " + this.props.rooms);
     
 
         let ref = this.props.nameSnap.ref;
@@ -142,7 +154,7 @@ export default class TaskCard extends React.Component {
                                 {/* <h4 className="text-center">{roommate.name}</h4> */}
                             </div>
                             <div className="cardBox my-2 row col-4 p-0">
-                                {console.log("check" + this.props.rooms[task.roommate])}
+                                {/* {console.log("check" + this.props.rooms[task.roommate])} */}
                                 <select value={Number(task.roommate)} onChange={evt => this.handleChange(evt)} className="w-100 text-truncate border-0" id="cardFont">{this.props.rooms}</select>
                             </div>
                             {/* <div className="buttons d-flex flex-column">

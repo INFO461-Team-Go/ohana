@@ -16,7 +16,7 @@ export default class Header extends React.Component {
     componentDidMount() {
         this.unlistenAuth = firebase.auth().onAuthStateChanged(currentUser => {
             if (currentUser == null) {
-                console.log("current user is NULL");
+                // console.log("current user is NULL");
                 // this.props.history.push(constants.routes.home);
             } else {
                 this.setState({ user: currentUser });

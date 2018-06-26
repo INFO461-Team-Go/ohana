@@ -78,7 +78,7 @@ export default class TaskList extends React.Component {
             });
             this.setState({dataSource: items});
         });
-        console.log("task list will receive props");
+        // console.log("task list will receive props");
         
     }
 
@@ -93,13 +93,13 @@ export default class TaskList extends React.Component {
             });
             this.setState({dataSource: items});
         });
-        console.log("task list did mount");
+        // console.log("task list did mount");
     }
 
     componentWillUnmount() {
         this.props.taskRef.off('value', this.unlisten);
         this.props.roommatesRef.off('value', this.unlistenRoommates);
-        console.log("task list will unmount");
+        // console.log("task list will unmount");
     }
 
     handleSubmit(evt) {
@@ -108,8 +108,9 @@ export default class TaskList extends React.Component {
         //back to the server
         evt.preventDefault();
         this.setState({errMsg: undefined});
-        let trimmedTask = this.state.name.trim();
+        let trim = this.state.name.trim();
         let flag = 0;
+        let trimmedTask = this.toTitleCase(trim);
         this.state.taskSnap.forEach(childSnap => {
             let val = childSnap.val();
             let check = val.name;
@@ -120,6 +121,8 @@ export default class TaskList extends React.Component {
         
         if (flag > 0) {
             this.setState({errMsg: "task exists in database"});
+        } else if (this.state.roommates < 0) {
+            this.setState({errMsg: "Please select a roommate"});
         } else {
             this.props.taskRef.push({ name: trimmedTask, roommate: this.state.roommate })
                 .then(() => this.setState({ name: "", fbError: undefined, addActive: false }))
@@ -135,6 +138,12 @@ export default class TaskList extends React.Component {
 
     handleCancelAdd() {
         this.setState({ addActive: false });
+    }
+
+    toTitleCase(str) {
+        return str.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
     }
 
     render() {
@@ -165,11 +174,11 @@ export default class TaskList extends React.Component {
         let index = 0;
 
         this.state.dataSource.forEach(element => {
-            console.log("dataSource name: " + element.name);
+            // console.log("dataSource name: " + element.name);
             roommatenames.push(element.name);
             rooms.push(<option value={index}>{toTitleCase(element.name)}</option>)
             index++;
-            console.log("index: "+ index);
+            // console.log("index: "+ index);
             // rooms.push(<Picker.Item label={element.name} value={element.name} />);
         });
         
@@ -180,9 +189,9 @@ export default class TaskList extends React.Component {
             names.push(<TaskCard rooms={rooms} nameList={roommatenames} key={nameSnap.key} nameSnap={nameSnap} taskSnap={this.state.taskSnap} />)
             // console.log("nameSnap: " + nameSnap.val().roommate);
         });
-        console.log(names.length);
+        // console.log(names.length);
 
-        console.log(this.state.dataSource)
+        // console.log(this.state.dataSource)
 
 
         return (

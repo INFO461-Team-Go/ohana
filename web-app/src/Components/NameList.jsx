@@ -56,13 +56,11 @@ export default class NameList extends React.Component {
         this.unlistenTask = this.props.taskRef.on('value', snapshot => {
             this.setState({taskSnap: snapshot});
         })
-        console.log("name list did mount")
     }
 
     componentWillUnmount() {
         this.props.roommatesRef.off('value', this.unlisten);
         this.props.taskRef.off('value', this.unlistenTask);
-        console.log("name list will unmount")
     }
 
     handleSubmit(evt) {
@@ -71,8 +69,9 @@ export default class NameList extends React.Component {
         //back to the server
         evt.preventDefault();
         this.setState({errMsg: undefined});
-        let trimmedName = this.state.name.trim();
+        let trim = this.state.name.trim();
         let flag = 0;
+        let trimmedName = this.toTitleCase(trim);
         this.state.roommatesSnap.forEach(childSnap => {
             let val = childSnap.val();
             let check = val.name;
@@ -105,9 +104,15 @@ export default class NameList extends React.Component {
                 flag++;
             }
         })
-        console.log("flag: " + flag);
+
         return flag;
         
+    }
+
+    toTitleCase(str) {
+        return str.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
     }
 
     handleCancelAdd() {

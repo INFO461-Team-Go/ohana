@@ -30,7 +30,6 @@ export default class NameCard extends React.Component {
         let value = toRemove.val()
         let index = value.index;
         toRemove.ref.remove()
-            .then(() => console.log("remove succeeded"))
             .then(() => {
                 this.props.taskSnap.forEach(childSnap => {
                     let childVal = childSnap.val();
@@ -61,7 +60,7 @@ export default class NameCard extends React.Component {
                 flag++;
             }
         })
-        console.log("flag: " + flag);
+        // console.log("flag: " + flag);
         return flag;
         
     }
@@ -82,8 +81,9 @@ export default class NameCard extends React.Component {
     handleSubmit(evt) {
         evt.preventDefault();
         this.setState({errMsg: undefined});
-        let trimmedName = this.state.toUpdate.trim();
+        let trim = this.state.toUpdate.trim();
         let flag = 0;
+        let trimmedName = this.toTitleCase(trim);
         this.props.roommatesSnap.forEach(childSnap => {
             let val = childSnap.val();
             let check = val.name;
@@ -118,6 +118,13 @@ export default class NameCard extends React.Component {
 
     handleCancelAdd() {
         this.setState({addActive: false});
+        this.setState({menu: false});
+    }
+
+    toTitleCase(str) {
+        return str.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
     }
 
     

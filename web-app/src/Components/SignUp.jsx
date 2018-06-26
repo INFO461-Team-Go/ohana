@@ -47,9 +47,9 @@ export default class SignUp extends React.Component {
                 errorMessage: "Enter Display Name"
             });
             return;
-        } else if (!/^[a-zA-Z]+$/.test(this.state.displayName.trim())) {
+        } else if (this.state.displayName.trim().length > 15) {
             this.setState({
-                errorMessage: "No special characters allowed for display name"
+                errorMessage: "Display name must be less than 15 characters"
             });
         } else if (this.state.pw.length < 6) {
             this.setState({
@@ -60,10 +60,9 @@ export default class SignUp extends React.Component {
             let hash = md5(this.state.email);
             let ref = firebase.database().ref(hash + "/roommates/");
             let toUpdate = { count: 0 };
-            console.log(this.state.photoUrl)
+            // console.log(this.state.photoUrl)
             firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pw)
             .then(user => user.updateProfile({
-                photoURL: this.state.photoUrl,
                 displayName: this.state.displayName
             }))
             .catch(err => this.setState({
